@@ -39,6 +39,7 @@
 			<div class="form-group">
 				<label>Chief Hymn:</label>
 				<select name="chief_hymn" class="form-control" required>
+					<option value="default">Use Lectionary Hymn</option>
 					<?php
 						foreach ($hymns as $key => $hymn) {
 							echo '<option value="' . $key . '">' . $hymn['title'] . '</option>';
