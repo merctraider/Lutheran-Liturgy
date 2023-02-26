@@ -1,0 +1,130 @@
+[
+    {
+        "morning": [],
+        "evening": []
+    },
+    {
+        "morning": [1,2,3,4],
+        "evening": [5,6,7,8]
+    },
+    {
+        "morning": [9,10,11],
+        "evening": [12,13,14,15,16,17]
+    },
+    {
+        "morning": [18],
+        "evening": [19,20,21,22]
+    },
+    {
+        "morning": [23,24,25],
+        "evening": [26,27,28,29,30]
+    },
+    {
+        "morning": [31,32],
+        "evening": [33,34]
+    },
+    {
+        "morning": [35],
+        "evening": [36,37]
+    },
+    {
+        "morning": [38],
+        "evening": [39,40,41]
+    },
+    {
+        "morning": [42,43,44],
+        "evening": [45,46,47,48]
+    },
+    {
+        "morning": [49],
+        "evening": [50,51]
+    },
+    {
+        "morning": [52,53,54],
+        "evening": [55,56,57]
+    },
+    {
+        "morning": [58,59],
+        "evening": [60,61,62,63]
+    },
+    {
+        "morning": [64,65],
+        "evening": [66,67,68]
+    },
+    {
+        "morning": [69],
+        "evening": [70,71,72]
+    },
+    {
+        "morning": [73],
+        "evening": [74,75,76]
+    },
+    {
+        "morning": [77],
+        "evening": [78]
+    },
+    {
+        "morning": [79,80],
+        "evening": [81,82,83]
+    },
+    {
+        "morning": [84,85],
+        "evening": [86,87,88]
+    },
+    {
+        "morning": [89],
+        "evening": [90,91,92]
+    },
+    {
+        "morning": [93,94,95],
+        "evening": [96,97,98,99,100]
+    },
+    {
+        "morning": [101,102],
+        "evening": [103,104]
+    },
+    {
+        "morning": [105],
+        "evening": [106]
+    },
+    {
+        "morning": [107],
+        "evening": [108,109,110,111]
+    },
+    {
+        "morning": [112,113,114,115],
+        "evening": [116,117,118]
+    },
+    {
+        "morning": ["Psalm 119:1-40"],
+        "evening": ["Psalm 119:41-88"]
+    },
+    {
+        "morning": ["Psalm 119:89-128"],
+        "evening": ["Psalm 119:129-176"]
+    },
+    {
+        "morning": [120,121,122,123,124,125],
+        "evening": [126,127,128,129,130,131,132]
+    },
+    {
+        "morning": [133,134,135],
+        "evening": [136,137,138,139]
+    },
+    {
+        "morning": [140,141],
+        "evening": [142,143]
+    },
+    {
+        "morning": [144],
+        "evening": [145]
+    },
+    {
+        "morning": [146],
+        "evening": [147]
+    },
+    {
+        "morning": [148],
+        "evening": [149,150]
+    }
+]

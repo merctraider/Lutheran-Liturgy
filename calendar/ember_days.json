@@ -1,0 +1,156 @@
+{
+    "advent": {
+        "Wednesday": {
+            "introit":"<p>DROP DOWN, || ye heavens, from above, and let the skies pour down |right- |eous- | ness:<br />&nbsp; &nbsp; let the earth open, and let them bring forth salvation, and let righteousness spring up together; I the Lord have | cre | at- | ed| it<br />||The heavens declare the glor- |y| of | God:<br />&nbsp; &nbsp; and the firmament sheweth | his | hand- | y- | work.</p>",
+            "collect":"Grant, we beseech Thee, almighty God, that with the coming solemnity of our Lord's birth to accomplish our redemption, through Thy holy Word and Sacraments Thou would strength our faith in Christ Jesus, who liveth and reigneth with Thee and the Holy Ghost, ever One God, world without end. Amen.",
+            "gradual":"<p>||Lift up your heads, O ye gates; and be ye lift up, ye ever- | last- | ing | doors:<br />&nbsp; &nbsp; and the King of glor- | y | shall | come | in.&nbsp;<br />|| Who shall ascend into the hill | of | the | Lord?<br />&nbsp; &nbsp; or who shall stand in | His | ho- | ly | place?<br />|| He that hath clean hands, and | a | pure | heart;<br />&nbsp; &nbsp; who hath not lifted up his soul unto vanity, nor sworn | de- | ceit- | ful- |ly.&nbsp;&nbsp;</p>",
+            "readings":{
+                "epistle":"Isaiah 2:2-5",
+                "gospel":"Luke 1:26-38"
+            },
+            "psalm": {
+                "matins": "Psalm 132",
+                "vespers": "Psalm 98"
+            }
+        },
+        "Friday": {
+            "introit":"<p>THOU ART || near, O Lord; and all thy command- | ments | are | truth:<br />&nbsp; &nbsp; Concerning thy testimonies, I have known of old that thou hast founded | them | for | ev- | er<br />|| Blessed are the undefiled | in | the | way:<br />&nbsp; &nbsp; who walk in the | law | of | the | Lord.</p>",
+            "collect":"Stir up Thy might, we beseech Thee, O Lord and come, that they who trust in Thy loving kindness may be the more speedily freed from all adversity, Who livest and reignest, with the Father and the Holy Ghost, ever One God, world without end. Amen.",
+            "gradual":"<p>|| Shew us Thy mercy, O Lord, and grant us Thy salvation, Lord, Thou hast been favourable un- | to | Thy | land:<br />&nbsp; &nbsp; Thou hast brought back the captivi- |ty | of | Ja- | cob.</p>",
+            "readings":{
+                "epistle":"Isaiah 11:1-5",
+                "gospel":"Luke 1:39-47"
+            },
+            "psalm": {
+                "matins": "Psalm 132",
+                "vespers": "Psalm 98"
+            }
+        },
+        "Saturday": {
+            "introit":"<p>TURN US || again, O God of hosts, cause Thy | face | to | shine: <br />&nbsp; &nbsp; and | we | shall | be | saved.<br />||Give ear, O Shepherd of | Is- | ra | el:<br />&nbsp; &nbsp; Thou that leadest Jo- | seph | like | a | flock.</p>",
+            "collect":"O God, who seest that we are afflicted because of our iniquity, mercifully grant that we be comforted by Thy visitation, Who livest and reignest with the Father and the Holy Ghost, ever One God, world without end. Amen.",
+            "gradual":"<p>|| His going forth is from the end of | the | heav- | en:<br />&nbsp; &nbsp; and his circuit unto | the | ends | of | it.<br />|| The heavens declare the glor- | y | of | God:<br />&nbsp; &nbsp; and the firmament sheweth | His | hand- | y | work.</p>",
+            "readings":{
+                "epistle":"2 Thessalonians 2:1-8",
+                "gospel":"Luke 3:1-6"
+            },
+            "psalm": {
+                "matins": "Psalm 132",
+                "vespers": "Psalm 98"
+            }
+        }
+    },
+    "lententide": {
+        "Wednesday": {
+            "introit":"<p>RE-MEM- || ber, O Lord, thy tender mercies and thy loving | kind&middot;ness- | es:&nbsp;<br>&nbsp; &nbsp; for they have been ev- | er | of | old.<br>|| Unto Thee, O Lord, do I lift up my soul. O my God, I trust in | Thee | -:&nbsp;<br>&nbsp; &nbsp; let me not be ashamed, let not mine enemies triumph | ov- | er | me.</p>",
+            "collect":"Mercifully hear our prayers, we beseech Thee, O Lord, and stretch forth the right hand of Thy Majesty against all our enemies, through Jesus Christ, Thy Son, our Lord, who liveth and reigneth with Thee and the Holy Ghost, ever one God, world without end. Amen.",
+            "gradual":"<p>|| O Lord, the troubles of my heart are en- | larged |-:<br>&nbsp; &nbsp; &nbsp;O bring thou me out of my dis- | tress- | es.<br>|| Look upon mine affliction and | my | pain:<br>&nbsp; &nbsp; and forgive | all | my sins.</p>",
+            "readings":{
+                "epistle":"Exodus 24:12-18",
+                "gospel":"Matthew 12:38-50"
+            },
+            "psalm": {
+                "matins": "Psalm 111",
+                "vespers": "Psalm 27"
+            }
+        },
+        "Friday": {
+            "introit":"<p>RE-MEM- || ber, O Lord, thy tender mercies and thy loving | kind&middot;ness- | es:&nbsp;<br>&nbsp; &nbsp; for they have been ev- | er | of | old.<br>|| Unto Thee, O Lord, do I lift up my soul. O my God, I trust in | Thee | -:&nbsp;<br>&nbsp; &nbsp; let me not be ashamed, let not mine enemies triumph | ov- | er | me.</p>",
+            "collect":"O Lord, be gracious to Thy people. and as Thou makest them devoted to Thee, in Thy mercy comfort them with Thy kind assistance, through our Lord Jesus Christ, who liveth and reigneth with Thee and the Holy Ghost, ever One God, world without end. Amen.",
+            "gradual":"<p>|| Give ear, O Lord, unto my prayer; and attend to the voice of my suppli- | ca- | tions:<br>&nbsp; &nbsp; O Thou my God, save Thy servant that trust- | eth | in | Thee.</p>",
+            "readings":{
+                "epistle":"Ezekiel 18:20-28",
+                "gospel":"John 5:1-15"
+            }, 
+            "psalm": {
+                "matins": "Psalm 111",
+                "vespers": "Psalm 27"
+            }
+        },
+        "Saturday": {
+            "introit":"<p>RE-MEM- || ber, O Lord, thy tender mercies and thy loving | kind&middot;ness- | es:&nbsp;<br>&nbsp; &nbsp; for they have been ev- | er | of | old.<br>|| Unto Thee, O Lord, do I lift up my soul. O my God, I trust in | Thee | -:&nbsp;<br>&nbsp; &nbsp; let me not be ashamed, let not mine enemies triumph | ov- | er | me.</p>",
+            "collect":"O Lord, we beseech Thee, look down graciously upon Thy people, and mercifully turn away from them the scourges of Thy wrath, through our Lord, Jesus Christ, who liveth and reigneth with Thee and the Holy Ghost, ever One God, world without end. Amen.",
+            "gradual":"<p>|| O remember not against us former in- | iqui- | ties:&nbsp;<br>&nbsp; &nbsp; let Thy tender mercies speedily prevent us: for we are brought | ver- | y | low.<br>|| Help us, O God of our salvation, for the glory of | Thy | name:&nbsp;<br>&nbsp; &nbsp; and deliver us, and purge away our sins, for | Thy | name&apos;s | sake.<br>Wherefore should the heathen | say | -:<br>&nbsp; &nbsp; Where | is | their | God?</p>",
+            "readings":{
+                "epistle":"Deuteronomy 26:12-19",
+                "gospel":"1 Thessalonians 5:14-23"
+            },
+            "psalm": {
+                "matins": "Psalm 111",
+                "vespers": "Psalm 27"
+            }
+        }
+        
+    },
+    "easter":{
+        "Monday":{
+            "introit":"<p>A-RISE || O | Lord | -:<br>&nbsp; &nbsp; help us and deliver us | for | Thy | Name&apos;s | sake.&nbsp;<br>|| We have heard, O God, with | our | ears,&nbsp;<br>&nbsp; &nbsp; our fath- | ers | have | told | us</p>",
+            "collect":"Grant, we beseech Thee, O almighty God, that we who in our affliction put our trust in Thy mercy, may ever be defended by Thy protection against all adversity. Through our Lord Jesus Christ, Thy Son, who liveth and reigneth with Thee and the Holy Ghost, ever One God, world without end. Amen.",
+            "gradual":"<p>&nbsp;|| O Lord, Thou hast saved us from our | ene- | mies:<br>&nbsp; &nbsp; and hast put them to shame | that | hat- | ed | us.<br>|| In God we boast all the day | long | -:<br>&nbsp; &nbsp; and praise Thy | name | for | ev- | er.<br>|| Hallelujah. Hallelujah. Help us, O God of our salvation, for the glory of | Thy | Name:<br>&nbsp; &nbsp; and deliver us, and purge away our sins, for Thy name&apos;s sake. Wherefore should the heathen say, Where is their God? | Hal- | le- | lu- | jah.</p>",
+            "readings":{
+                "epistle":"James 5:16-20",
+                "gospel":"Luke 11:5-13"
+            },
+            "psalm": {
+                "matins": "Psalm 70",
+                "vespers": "Psalm 70"
+            }
+        },
+        "Tuesday":{
+            "introit":"<p>A-RISE || O | Lord | -:<br>&nbsp; &nbsp; help us and deliver us | for | Thy | Name&apos;s | sake.&nbsp;<br>|| We have heard, O God, with | our | ears,&nbsp;<br>&nbsp; &nbsp; our fath- | ers | have | told | us</p>",
+            "collect":"Grant, we beseech Thee, O almighty God, that we who in our affliction put our trust in Thy mercy, may ever be defended by Thy protection against all adversity. Through our Lord Jesus Christ, Thy Son, who liveth and reigneth with Thee and the Holy Ghost, ever One God, world without end. Amen.",
+            "gradual":"<p>&nbsp;|| O Lord, Thou hast saved us from our | ene- | mies:<br>&nbsp; &nbsp; and hast put them to shame | that | hat- | ed | us.<br>|| In God we boast all the day | long | -:<br>&nbsp; &nbsp; and praise Thy | name | for | ev- | er.<br>|| Hallelujah. Hallelujah. Help us, O God of our salvation, for the glory of | Thy | Name:<br>&nbsp; &nbsp; and deliver us, and purge away our sins, for Thy name&apos;s sake. Wherefore should the heathen say, Where is their God? | Hal- | le- | lu- | jah.</p>",
+            "readings":{
+                "epistle":"James 5:16-20",
+                "gospel":"Luke 11:5-13"
+            },
+            "psalm": {
+                "matins": "Psalm 70",
+                "vespers": "Psalm 70"
+            }
+        },
+        "Wednesday":{
+            "introit":"<p>A-RISE || O | Lord | -:<br>&nbsp; &nbsp; help us and deliver us | for | Thy | Name&apos;s | sake.&nbsp;<br>|| We have heard, O God, with | our | ears,&nbsp;<br>&nbsp; &nbsp; our fath- | ers | have | told | us</p>",
+            "collect":"Grant, we beseech Thee, O almighty God, that we who in our affliction put our trust in Thy mercy, may ever be defended by Thy protection against all adversity. Through our Lord Jesus Christ, Thy Son, who liveth and reigneth with Thee and the Holy Ghost, ever One God, world without end. Amen.",
+            "gradual":"<p>&nbsp;|| O Lord, Thou hast saved us from our | ene- | mies:<br>&nbsp; &nbsp; and hast put them to shame | that | hat- | ed | us.<br>|| In God we boast all the day | long | -:<br>&nbsp; &nbsp; and praise Thy | name | for | ev- | er.<br>|| Hallelujah. Hallelujah. Help us, O God of our salvation, for the glory of | Thy | Name:<br>&nbsp; &nbsp; and deliver us, and purge away our sins, for Thy name&apos;s sake. Wherefore should the heathen say, Where is their God? | Hal- | le- | lu- | jah.</p>",
+            "readings":{
+                "epistle":"James 5:16-20",
+                "gospel":"Luke 11:5-13"
+            },
+            "psalm": {
+                "matins": "Psalm 70",
+                "vespers": "Psalm 70"
+            }
+        }
+    },
+    "ordinary_time": {
+        "Wednesday": {
+            "introit":"<p>O GOD, || when Thou wentest forth before Thy | peo- | ple:<br>&nbsp; &nbsp; when thou didst march through | the | wil- | der- | ness.<br>|| The earth shook, the heavens also dropped at the presence of &nbsp;| God | :-&nbsp;<br>&nbsp; &nbsp; even Sinai itself was moved at the presence of God, the God | of &nbsp;| Is- | ra- | el.<br>|| Let God arise, let His enemies be | scat- | tered:&nbsp;<br>&nbsp; &nbsp; let them also that hate Him | flee | be- | fore | Him.</p>",
+            "collect":"O Lord, may the Comforter, who proceedeth from Thee, enlighten our minds, we beseech Thee, and guide us into all truth, even as Thy Son hath promised, through Jesus Christ our Lord, who liveth and reigneth with Thee, in the unity of the same Spirit, one God, now and for ever. Amen.",
+            "gradual":"<p><em>In place of a Gradual, the Sequence hymn for Pentecost,&nbsp;</em><strong>Veni, Sancte Spiritus</strong></p>",
+            "readings":{
+                "epistle":"Acts 2:14-21",
+                "gospel":"John 6:44-52"
+            }
+        },
+        "Friday": {
+            "introit":"<p>LET MY || mouth be filled with thy praise and with thy honour all the day, Hal- | le- | lu- | jah:<br>&nbsp; &nbsp; My lips shall greatly rejoice when I sing unto thee; and my soul, which thou hast redeemed. Hal- | le- | lu- | jah.||&nbsp;<br>In thee, O Lord, do I put my trust: let me never be put to con- | fu- | sion:<br>&nbsp; &nbsp; Deliver me in Thy righteousness, and cause me to escape: incline Thine ear unto | me, | and | save | me.</p>",
+            "collect":"O merciful God, we beseech Thee that Thy church, which was gathered together by the Holy Ghost, may nowise be troubled by hostile attack, through Jesus Christ, Thy Son our Lord, who liveth and reigneth with Thee, in the unity of the same Spirit, one God, now and for ever. Amen",
+            "gradual":"<p><em>In place of a Gradual, the Sequence hymn for Pentecost,&nbsp;</em><strong>Veni, Sancte Spiritus</strong></p>",
+            "readings":{
+                "epistle":"Joel 2:23-27",
+                "gospel":"Luke 5:17-26"
+            }
+        },
+        "Saturday": {
+            "introit":"<p>And hope maketh not ashamed, Halle- | lu | jah:&nbsp;<br>&nbsp; &nbsp; because the love of God is shed abroad in our hearts by the Holy Ghost which is given unto us. | Hal- | le- | lu- | jah.&nbsp;<br>Bless the Lord, O | my | soul:&nbsp;<br>&nbsp; &nbsp; and all that is within me, bless | His | ho- | ly | name.</p>",
+            "collect":"O Lord, we beseech Thee, deign to pour forth into our minds, the Holy Ghost, by whose wisdom we were created, and by whose providence we are guided, through Jesus Christ, Thy Son our Lord, who liveth and reigneth with Thee, in the unity of the same Spirit, one God, now and for ever. Amen.",
+            "gradual":"<p><em>In place of a Gradual, the Sequence hymn for Pentecost,&nbsp;</em><strong>Veni, Sancte Spiritus</strong></p>",
+            "readings":{
+                "epistle":"Joel 2:28-32",
+                "gospel":"Luke 4:38-44"
+            }
+        }
+    }
+    
+}

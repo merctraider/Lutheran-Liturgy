@@ -1,0 +1,84 @@
+[
+    {
+        "title": "Hymn",
+        "content": "A Hymn of Invocation of the Holy Ghost, or another Hymn, may be sung."
+    },
+    {
+        "title": "Versicles",
+        "content": "Then, all standing to the end of the Psalmody, shall be sung or said responsively the Versicles here following, with the Gloria Patri. During the Penitential Seasons the Alleluia shall be omitted.\n℣: O Lord, open Thou my lips.\n℟: And my mouth shall show forth Thy praise.\n℣: Make haste, O God, to deliver me.\n℟: Make hast to help me, O Lord.\nGlory be to the Father and to the Son and to the Holy Ghost:\nAs it was in the beginning, is now, and ever shall be, world without end. Amen.\nAlleluia.",
+        "audio": [
+            "matins-versicle.mp3",
+            "matins-gloria-patri.mp3"
+        ]
+    },
+    {
+        "title": "Psalmody",
+        "content": "The Psalmody.\nAt the end of each Psalm the Gloria Patri shall be sung or said. An Antiphon may be used with each Psalm."
+    },
+    {
+        "title": "Lection",
+        "content": "Then shall be read\nThe Lection.\nAfter each Lesson may be sung or said:\n℣: But Thou, O Lord, have mercy upon us.\n℟: Thanks be to Thee, O Lord!",
+        "audio": "matins-lection-response.mp3"
+    },
+    {
+        "title": "Responsory or Hymn",
+        "content": "After the Lection a Responsory may be sung, or a Hymn."
+    },
+    {
+        "title": "Sermon",
+        "content": "Then may follow a Sermon, after which the Offerings may be gathered."
+    },
+    {
+        "title": "Hymn",
+        "content": "Then shall be sung\nThe Hymn."
+    },
+    {
+        "title": "Versicle",
+        "content": "Then, all standing, may be sung or said this Versicle. On Feast Days a special Versicle may be used.\n℣: Let my prayer be set before Thee as incense:\n℟: And the lifting up of my hands as the evening sacrifice."
+    },
+    {
+        "title": "Canticle",
+        "content": "Then shall be sung or said\nThe Canticle.\nAn Antiphon may be sung or said with the Canticle.\nThe Magnificat\nOr\nThe Nunc Dimittis"
+    },
+    {
+        "title": "Prayers",
+        "content": "Then shall be said the Prayers here following, or the Suffrages, the Litany, or other prayers."
+    },
+    {
+        "title": "Kyrie",
+        "content": "All shall sing or say\nThe Kyrie.\nLord, have mercy upon us.\nChrist, have mercy upon us.\nLord, have mercy upon us.",
+        "audio": "matins-kyrie.mp3"
+    },
+    {
+        "title": "Lord's Prayer",
+        "content": "Then all shall sing or say\nThe Lord’s Prayer.\nOur Father who art in heaven, hallowed be Thy name; Thy kingdom come; Thy will be done on earth as it is in heaven; give us this day our daily bread; and forgive us our trespasses as we forgive those who trespass against us; and lead us not into temptation; but deliver us from evil; for Thine is the kingdom and the power and the glory forever and ever. Amen."
+    },
+    {
+        "title": "Salutation",
+        "content": "Then shall be sung or said\nThe Salutation.\n℣: The Lord be with you.\n℟: And with thy spirit.",
+        "audio": "matins-salutation.mp3"
+    },
+    {
+        "title": "Collect for the Day",
+        "content": "Let us pray.\n\nThen shall be sung or said the Collect for the Day. The Collect for the Sunday is used throughout the week following until Friday, but on Saturday the Collect for the following Sunday is used. Then may be sung or said any other Collects. A Versicle may be used with each Collect. After each Collect the Congregation shall sing or say: Amen.",
+        "audio": "matins-collect-amen.mp3"
+    },
+    {
+        "title": "Collect for Peace",
+        "content": "Then shall be sung or said\nThe Collect for Peace.\nO God, from whom all holy desires, all good counsels, and all just works do proceed, give unto Thy servants that peace which the world cannot give, that our hearts may be set to obey Thy commandments, and also that we, being defended by Thee from the fear of our enemies, may pass our time in peace and quietness; through the merits of Jesus Christ, our Savior, who liveth and reigneth with Thee and the Holy Ghost, ever one God, world without end.\n\n℟: Amen."
+    },
+    {
+        "title": "Benedicamus",
+        "content": "Then may be sung or said\nThe Benedicamus.\n℣: Bless we the Lord.\n℟: Thanks be to God.",
+        "audio": "matins-benedicamus.mp3"
+    },
+    {
+        "title": "Closing Hymn or Benediction",
+        "content": "The Service may end with the Benedicamus, or a Closing Hymn may be sung, after which may be said\nThe Benediction.\n℣: The grace of the Lord ✠ Jesus Christ, and the love of God, and the communion of the Holy Ghost, be with you all.\n℟: Amen.",
+        "audio": "matins-benediction.mp3"
+    },
+    {
+        "title": "Silent Prayer",
+        "content": "At the close of the Service silent prayer should be offered."
+    }
+]
