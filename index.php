@@ -18,8 +18,8 @@
 			<div class="form-group">
 				<label>Order of Service:</label>
 				<select name="order_of_service" class="form-control" required>
-					<option value="Matins">Matins</option>
-					<option value="Vespers">Vespers</option>
+					<option value="matins">Matins</option>
+					<option value="vespers">Vespers</option>
 				</select>
 			</div>
 
