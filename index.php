@@ -53,7 +53,7 @@
 				<select name="canticle" class="form-control" required>
 					<option value="Magnificat">Magnificat</option>
 					<option value="Nunc Dimittis">Nunc Dimittis</option>
-					<option value="Te Deum">Te Deum</option>
+					<option value="te_deum">Te Deum</option>
 					<option value="Benedictus">Benedictus</option>
 				</select>
 			</div>
@@ -61,6 +61,18 @@
 			<div class="form-check">
 				<input type="checkbox" class="form-check-input" id="replace_psalm" name="replace_psalm">
 				<label class="form-check-label" for="replace_psalm">Replace Psalm with Introit</label>
+			</div>
+
+			<div class="form-group">
+				<label>Prayers</label>
+				<select name="override_prayers" class="form-control" required>
+					<option value="default">Default (According to the Order)</option>
+					<option value="litany">Litany</option>
+					<option value="suffrages">Suffrages</option>
+					<option value="morning_suffrages">Morning Suffrages</option>
+					<option value="evening_suffrages">Evening Suffrages</option>
+					<option value="bidding">Bidding Prayer</option>
+				</select>
 			</div>
 
 			<input type="submit" value="Submit" class="btn btn-primary">

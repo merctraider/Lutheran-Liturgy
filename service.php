@@ -6,9 +6,10 @@ $opening_hymn = $_POST['opening_hymn'];
 $chief_hymn = $_POST['chief_hymn'];
 $canticle = $_POST['canticle'];
 $replace_psalm = isset($_POST['replace_psalm']) && $_POST['replace_psalm'] === 'on';
-$title = ucfirst($order_of_service) . ' for ' ; 
+$title = ucfirst($order_of_service) . ' for ' . date_format(date_create($date), 'M d Y');
+$prayers = $_POST['override_prayers']; 
 require_once 'class-ServiceBuilder.php'; 
-$service = ServiceBuilder::BuildService(new \DateTime($date), $order_of_service, $canticle, [$opening_hymn, $chief_hymn], $replace_psalm);
+$service = ServiceBuilder::BuildService(new \DateTime($date), $order_of_service, $canticle, [$opening_hymn, $chief_hymn], $replace_psalm, $prayers);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +22,7 @@ $service = ServiceBuilder::BuildService(new \DateTime($date), $order_of_service,
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container mt-5">
+    <div class="container mt-5 w-50">
     <?php
     echo '<h1>'. $title . '</h1>';
     

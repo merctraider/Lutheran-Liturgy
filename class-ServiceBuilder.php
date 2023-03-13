@@ -1,65 +1,119 @@
-<?php 
+<?php
 
-class ServiceBuilder{
-    public static function BuildService($date, $order, $canticle, $hymns = [], $replace_with_introit = true){
+use Lutherald\BibleGateway;
+
+class ServiceBuilder
+{
+    public static function BuildService($date, $order, $canticle, $hymns = [], $replace_with_introit = true, $prayers='default')
+    {
         require_once __DIR__ . '/calendar/class-lutherald-ChurchYear.php';
-        $calendar = \Lutherald\ChurchYear::create_church_year($date); 
-        $day_info = $calendar->retrieve_day_info($date);   
+        require_once __DIR__ . '/class-lutherald-BibleGateway.php'; 
+        $calendar = \Lutherald\ChurchYear::create_church_year($date);
+        $day_info = $calendar->retrieve_day_info($date);
         var_dump($day_info);
         $order_data =  json_decode(file_get_contents(__DIR__ . '/calendar/ordo/' . $order . '.json'));
         $hymnal = json_decode(file_get_contents('tlh.json'), true);
-        $output = '';
-        foreach($order_data as $section){
+        $output = '<h2>' . $day_info['display'] . '</h2>';
+        foreach ($order_data as $section) {
             $additional_content = '';
-            switch($section->title){
+            switch ($section->title) {
                 case 'Psalmody':
-                    if($replace_with_introit && array_key_exists('introit', $day_info)){
+                    if ($replace_with_introit && array_key_exists('introit', $day_info)) {
                         $introit = $day_info['introit'];
                         $additional_content .= "<h3>Introit</h3> <p>$introit</p>";
-                        break; 
+                        break;
                     }
 
                     $psalm = $day_info['psalm'][$order];
                     $additional_content .= "<h4>$psalm</h4>";
-                    break; 
+                    $additional_content .= BibleGateway::get_verse($psalm); 
+                    break;
 
                 case 'Hymn':
-                    $opening_hymn_data = $hymnal[$hymns[0]]; 
-                    $additional_content .= '<h4>'. $opening_hymn_data['title'] . '</h4>';
-                    foreach($opening_hymn_data['lyrics'] as $stanza){
-                        $additional_content .= '<p>' . nl2br($stanza). '</p>';
+                    $opening_hymn_data = $hymnal[$hymns[0]];
+                    $additional_content .= self::load_tlh_hymn($opening_hymn_data);
+                    break;
+                case 'Lection':
+                    $readings = $day_info['readings'];
+                    foreach($readings as $r){
+                        $additional_content .= "<h4>$r</h4>";
+                        $additional_content .= '<p>' .BibleGateway::get_verse($r) . '</p>';
+                    }
+                    break;
+                case 'Responsory or Hymn':
+                    $chief_hymn = $hymns[1]; 
+                    $hymn_to_load = array_key_exists($chief_hymn, $hymnal) ? $hymnal[$chief_hymn] : '';
+                    if($chief_hymn === 'default'){
+                        if(array_key_exists('hymn', $day_info)){
+                            $hymn_to_load = BibleGateway::get_hymn($day_info['hymn']);
+                        } else {
+                            $hymn_to_load = '';
+                        }
+                    } else {
+                        $hymn_to_load = self::load_tlh_hymn($hymn_to_load);
+                    }
+                    
+                    $additional_content .= $hymn_to_load;  
+                    break;  
+                case 'Collect for the Day':
+                    $additional_content .= '<h4>Collect</h4><p>' . $day_info['collect'] . '</p>';
+                    break; 
+                case 'Prayers':
+                    if($prayers !== 'default'){
+                        $output .= self::render_order_section($section);
+                        $prayer_book = json_decode(file_get_contents(__DIR__ . '/calendar/ordo/prayers.json'), true);
+                        $section_to_override = $prayer_book[$prayers]; 
+                        $output .= '<h3>The ' . $section_to_override['title'] . '</h3>';
+                        $output .= $section_to_override['content']; 
+                        if($prayers === 'suffrages'){
+                            $output .= $section_to_override[$order]; 
+                            $output .= $section_to_override['end'];
+                        }
+                        
+                        break 2; 
                     }
                     break; 
-            }
-            $output .= self::render_order_section($section, $additional_content); 
+            } 
+            $output .= self::render_order_section($section, $additional_content);
         }
-        return $output; 
-
+        return $output;
     }
 
-    public static function render_order_section($section, $additional_content = ''){
-        ob_start(); 
-        ?> 
-        <div>
-        <h3>The <?php echo $section->title ?></h3>
-        <p><?php echo  nl2br($section->content);  ?></p>
+    public static function load_tlh_hymn($hymn_data){
         
-        <?php
-        echo $additional_content;
-        if(property_exists($section, 'audio')){
-            $audio = $section->audio; 
-            $audio_arr = is_array($audio) ? $audio : [$audio]; 
-            foreach($audio_arr as $a){
-                ?>
-                <audio src=<?php echo '/calendar/audio/' . $a ?> controls>
-                </audio>
-                <?php
-            }
-        }?> 
-        </div> <?php 
-        return ob_get_clean();
+        $output = '<h4>' . $hymn_data['title'] . '</h4>';
+        foreach ($hymn_data['lyrics'] as $stanza) {
+            $output .= '<p>' . nl2br($stanza) . '</p>';
+        }
+        return $output;
     }
 
+    public static function render_order_section($section, $additional_content = '')
+    {
+        $content = property_exists($section, 'content') ? $section->content : ''; 
+        $content = preg_replace('/(℟:)(.*)/', '$1<strong>$2</strong>', $content);
+        //$content = preg_replace('/^([^\n]*[^℣:℟:\n][^\n]*)$/m', '<em>$0</em>', $content); // italicize lines without '℣:' or '℟:'
+        $instruction = property_exists($section, 'instruction') ? $section->instruction : '';
+        ob_start();
+?>
+        <div>
+            <h3>The <?php echo $section->title ?></h3>
+            <p><em><?php echo nl2br($instruction);  ?></em></p>
+            <p><?php echo nl2br($content);  ?></p>
 
-
-}   
+            <?php
+            echo $additional_content;
+            if (property_exists($section, 'audio')) {
+                $audio = $section->audio;
+                $audio_arr = is_array($audio) ? $audio : [$audio];
+                foreach ($audio_arr as $a) {
+            ?>
+                    <audio src=<?php echo '/calendar/audio/' . $a ?> controls>
+                    </audio>
+            <?php
+                }
+            } ?>
+        </div> <?php
+                return ob_get_clean();
+            }
+        }
