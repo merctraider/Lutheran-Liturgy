@@ -51,10 +51,10 @@
 			<div class="form-group">
 				<label>Canticle:</label>
 				<select name="canticle" class="form-control" required>
-					<option value="Magnificat">Magnificat</option>
-					<option value="Nunc Dimittis">Nunc Dimittis</option>
+					<option value="magnificat">Magnificat</option>
+					<option value="nunc_dimittis">Nunc Dimittis</option>
 					<option value="te_deum">Te Deum</option>
-					<option value="Benedictus">Benedictus</option>
+					<option value="benedictus">Benedictus</option>
 				</select>
 			</div>
 

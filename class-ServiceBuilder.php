@@ -10,7 +10,6 @@ class ServiceBuilder
         require_once __DIR__ . '/class-lutherald-BibleGateway.php'; 
         $calendar = \Lutherald\ChurchYear::create_church_year($date);
         $day_info = $calendar->retrieve_day_info($date);
-        var_dump($day_info);
         $order_data =  json_decode(file_get_contents(__DIR__ . '/calendar/ordo/' . $order . '.json'));
         $hymnal = json_decode(file_get_contents('tlh.json'), true);
         $output = '<h2>' . $day_info['display'] . '</h2>';
@@ -73,6 +72,11 @@ class ServiceBuilder
                         break 2; 
                     }
                     break; 
+                case 'Canticle':
+                    $canticles_data = json_decode(file_get_contents(__DIR__ . '/calendar/ordo/canticle.json'), true);
+                    $canticle_to_load = $canticles_data[$canticle]; 
+                    $additional_content .= '<h4>The '. $canticle_to_load['title'] . '</h4><p>' . nl2br($canticle_to_load['content']) . '</p>';
+                    break; 
             } 
             $output .= self::render_order_section($section, $additional_content);
         }
@@ -82,6 +86,11 @@ class ServiceBuilder
     public static function load_tlh_hymn($hymn_data){
         
         $output = '<h4>' . $hymn_data['title'] . '</h4>';
+
+        if(key_exists('audiofile', $hymn_data)){
+            $output .= '<audio src="'. $hymn_data['audiofile'] .'" controls></audio>';
+        }
+
         foreach ($hymn_data['lyrics'] as $stanza) {
             $output .= '<p>' . nl2br($stanza) . '</p>';
         }
