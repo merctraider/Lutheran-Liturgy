@@ -4,8 +4,14 @@ use Lutherald\BibleGateway;
 
 class ServiceBuilder
 {
-    public static function BuildService($date, $order, $canticle, $hymns = [], $replace_with_introit = true, $prayers='default')
+    public static function BuildService($date, $order, $canticle, $hymns = [], $replace_with_introit = true, $prayers='default', $section_classes=[])
     {
+        $default_section_classes = array(
+            "section_class" => "",
+            "section_title_class" => "",
+            "section_body_class" => ""
+        );
+        $section_classes = array_merge($default_section_classes, $section_classes);
         require_once __DIR__ . '/calendar/class-lutherald-ChurchYear.php';
         require_once __DIR__ . '/class-lutherald-BibleGateway.php'; 
         $calendar = \Lutherald\ChurchYear::create_church_year($date);
@@ -78,7 +84,7 @@ class ServiceBuilder
                     $additional_content .= '<h4>The '. $canticle_to_load['title'] . '</h4><p>' . nl2br($canticle_to_load['content']) . '</p>';
                     break; 
             } 
-            $output .= self::render_order_section($section, $additional_content);
+            $output .= self::render_order_section($section, $additional_content, $section_classes);
         }
         return $output;
     }
@@ -97,16 +103,18 @@ class ServiceBuilder
         return $output;
     }
 
-    public static function render_order_section($section, $additional_content = '')
+    public static function render_order_section($section, $additional_content = '', $section_classes=[])
     {
+        extract($section_classes); 
         $content = property_exists($section, 'content') ? $section->content : ''; 
         $content = preg_replace('/(℟:)(.*)/', '$1<strong>$2</strong>', $content);
         //$content = preg_replace('/^([^\n]*[^℣:℟:\n][^\n]*)$/m', '<em>$0</em>', $content); // italicize lines without '℣:' or '℟:'
         $instruction = property_exists($section, 'instruction') ? $section->instruction : '';
         ob_start();
 ?>
-        <div>
-            <h3>The <?php echo $section->title ?></h3>
+        <div class="<?php echo isset($section_class)? $section_class : ''?>">
+            <h3 class="<?php echo isset($section_title_class)? $section_title_class : ''?>">The <?php echo $section->title ?></h3>
+            <div class="<?php echo isset($section_body_class)? $section_body_class : ''?>">
             <p><em><?php echo nl2br($instruction);  ?></em></p>
             <p><?php echo nl2br($content);  ?></p>
 
@@ -122,6 +130,7 @@ class ServiceBuilder
             <?php
                 }
             } ?>
+            </div>
         </div> <?php
                 return ob_get_clean();
             }
