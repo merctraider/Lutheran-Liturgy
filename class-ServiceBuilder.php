@@ -93,8 +93,16 @@ class ServiceBuilder
         
         $output = '<h4>' . $hymn_data['title'] . '</h4>';
 
+        $url = $hymn_data['audiofile']; 
+
+        //Check if hymn dir exists
+        if(is_dir('hymns')){
+            $hymn_file = basename($url);
+            $url = "/hymns/$hymn_file";
+        }
+
         if(key_exists('audiofile', $hymn_data)){
-            $output .= '<audio src="'. $hymn_data['audiofile'] .'" controls></audio>';
+            $output .= '<audio src="'. $url .'" controls></audio>';
         }
 
         foreach ($hymn_data['lyrics'] as $stanza) {
