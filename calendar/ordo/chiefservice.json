@@ -2,5 +2,11 @@
     {
         "title": "Hymn",
         "instruction": "A Hymn of Invocation of the Holy Ghost, or another Hymn, may be sung."
+    },
+    {
+        "title":"Invocation",
+        "instruction":"The Congregation shall rise, and the Minister, facing the Altar, shall say:",
+        "content":"In the name of ✠ the Father, and of the Son, and of the Holy Ghost. \n℟: Amen.",
+        "audio":""
     }
 ]
