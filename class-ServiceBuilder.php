@@ -50,7 +50,17 @@ class ServiceBuilder
                     $hymn_to_load = array_key_exists($chief_hymn, $hymnal) ? $hymnal[$chief_hymn] : '';
                     if($chief_hymn === 'default'){
                         if(array_key_exists('hymn', $day_info)){
-                            $hymn_to_load = BibleGateway::get_hymn($day_info['hymn']);
+                            $lectionary_hymn = $day_info['hymn'];
+                            //Validate hymn parameter
+                            if(array_key_exists('hymnal', $lectionary_hymn) && array_key_exists('index', $lectionary_hymn)){
+                                //Get the hymnal id 
+                                $hymnal_id = $lectionary_hymn['hymnal'];
+                                $hymn_index = $lectionary_hymn['index'];
+                                
+                                $hymn_to_load = ($hymnal_id === 'TLH') ? self::load_tlh_hymn( $hymnal["hymn$hymn_index"]): BibleGateway::get_hymn($lectionary_hymn);
+                            }
+                           
+                            
                         } else {
                             $hymn_to_load = '';
                         }
