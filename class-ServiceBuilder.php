@@ -30,6 +30,13 @@ class ServiceBuilder
                     }
 
                     $psalm = $day_info['psalm'][$order];
+                    if( is_array($psalm) ){
+                        foreach($psalm as $p){
+                            $additional_content .= "<h4>$p</h4>";
+                            $additional_content .= BibleGateway::get_verse($p); 
+                        }
+                        break; 
+                    }
                     $additional_content .= "<h4>$psalm</h4>";
                     $additional_content .= BibleGateway::get_verse($psalm); 
                     break;
