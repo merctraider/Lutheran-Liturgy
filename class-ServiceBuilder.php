@@ -98,7 +98,13 @@ class ServiceBuilder
                 case 'Canticle':
                     $canticles_data = json_decode(file_get_contents(__DIR__ . '/calendar/ordo/canticle.json'), true);
                     $canticle_to_load = $canticles_data[$canticle]; 
-                    $additional_content .= '<h4>The '. $canticle_to_load['title'] . '</h4><p>' . nl2br($canticle_to_load['content']) . '</p>';
+                    $additional_content .= '<h4>The '. $canticle_to_load['title'] . '</h4>';
+                    if(key_exists('audio', $canticle_to_load)){
+                        $audio_file = $canticle_to_load['audio'];
+                        $additional_content .= "<audio src='/calendar/audio/$audio_file' controls></audio>";
+                    }
+                    $additional_content .= '<p>' . nl2br($canticle_to_load['content']) . '</p>';
+                    
                     break; 
             } 
             $output .= self::render_order_section($section, $additional_content, $section_classes);
