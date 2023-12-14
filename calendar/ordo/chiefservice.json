@@ -7,6 +7,23 @@
         "title":"Invocation",
         "instruction":"The Congregation shall rise, and the Minister, facing the Altar, shall say:",
         "content":"In the name of ✠ the Father, and of the Son, and of the Holy Ghost. \n℟: Amen.",
-        "audio":""
+        "audio":"tlh-divine-service-1-amen-i.mp3"
+    }, 
+    {
+        "title": "The Confession of Sins",
+        "instruction": "Then shall be said",
+        "content":"Beloved in the Lord! Let us draw near with a true heart and confess our sins unto God, our Father, beseeching Him in the name of our Lord Jesus Christ to grant us forgiveness."
+    }, 
+    {
+        "instruction": "Here the Minister shall kneel, and say:",
+        "content":"℣:Our help is in the name of the Lord, \n℟: Who made heaven and earth.\n ℣: I said, I will confess my transgressions unto the Lord.\n ℟: And Thou forgavest the iniquity of my sin.",
+        "audio":[
+            "tlh-divine-service-2-qui-facet-caelum.mp3",
+            "tlh-divine-service-3-et-tu-remisisti.mp3"
+        ]
+    },
+    {
+        "content":"Minister: Almighty God, our Maker and Redeemer, we poor sinners confess unto Thee that we are by nature sinful and unclean and that we have sinned against Thee by thought, word, and deed. Wherefore we flee for refuge to Thine infinite mercy, seeking and imploring Thy grace for the sake of our Lord Jesus Christ\n Congregation and Minister: O most merciful God, who hast given Thine only begotten Son to die for us, have mercy upon us and for His sake grant us remission of all our sins; and by Thy Holy Spirit increase in us true knowledge of Thee and of Thy will and true obedience to Thy Word, to the end that by Thy grace we may come to everlasting life; through Jesus Christ, our Lord. Amen.\nMinister: Almighty God, our heavenly Father, hath had mercy upon us and hath given His only Son ’to die for us and for His sake forgiveth us all our sins. To them that believe on His name He giveth power to become the sons of God and hath promised them His Holy Spirit. He that believeth and is baptized shall be saved. Grant this, Lord, unto us all.\nCongregation: Amen.",
+        "audio":"tlh-divine-service-4-amen-ii.mp3"
     }
 ]

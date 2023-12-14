@@ -93,7 +93,7 @@ class EmberDays{
         if($date instanceof \DateTime ){
             $date->modify('next ' . $day_of_the_week);
         } else {
-            throw new Exception('Date validation failed');
+            throw new \Exception('Date validation failed');
         }
 
         return $date->format('Y-m-d');
