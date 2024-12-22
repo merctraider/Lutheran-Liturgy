@@ -3,9 +3,9 @@ if (!defined('ABSPATH')) wp_die('Cannot access this file directly.');
 
 $json = file_get_contents(dirname(__FILE__) ."/moveable_feasts.json");
 $array = json_decode($json, true);
-if(!empty($_POST)){
+if(!empty($_GET)){
     //Get into each season's weeks array
-    foreach($_POST as $season=>$weeks){
+    foreach($_GET as $season=>$weeks){
         //Get into the week array
         foreach($weeks as $week_id=>$week_info){
             foreach($week_info as $key => $value){

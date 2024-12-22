@@ -1,29 +1,207 @@
 [
     {
         "title": "Hymn",
-        "instruction": "A Hymn of Invocation of the Holy Ghost, or another Hymn, may be sung."
+        "instruction": "A Hymn of Invocation of the Holy Ghost may be sung."
     },
     {
-        "title":"Invocation",
-        "instruction":"The Congregation shall rise, and the Minister, facing the Altar, shall say:",
-        "content":"In the name of ✠ the Father, and of the Son, and of the Holy Ghost. \n℟: Amen.",
-        "audio":"tlh-divine-service-1-amen-i.mp3"
-    }, 
+        "title": "Invocation",
+        "instruction": "The Congregation shall rise, and the Minister, facing the Altar, shall say:",
+        "content": "In the name of ✠ the Father, and of the Son, and of the Holy Ghost.\n℟: Amen.",
+        "audio": "tlh-divine-service-1-amen-i.mp3"
+    },
     {
-        "title": "The Confession of Sins",
-        "instruction": "Then shall be said",
-        "content":"Beloved in the Lord! Let us draw near with a true heart and confess our sins unto God, our Father, beseeching Him in the name of our Lord Jesus Christ to grant us forgiveness."
-    }, 
+        "title": "Confession of Sins",
+        "instruction": "Then shall be said, as here followeth,\nThe Confession of Sins.",
+        "content": "Beloved in the Lord! Let us draw near with a true heart, and confess our sins unto God, our Father, beseeching Him in the name of our Lord Jesus Christ to grant us forgiveness."
+    },
     {
-        "instruction": "Here the Minister shall kneel, and say:",
-        "content":"℣:Our help is in the name of the Lord, \n℟: Who made heaven and earth.\n ℣: I said, I will confess my transgressions unto the Lord.\n ℟: And Thou forgavest the iniquity of my sin.",
-        "audio":[
-            "tlh-divine-service-2-qui-facet-caelum.mp3",
-            "tlh-divine-service-3-et-tu-remisisti.mp3"
+        "instruction": "Then, all kneeling or standing, shall be chanted or said:",
+        "content": "℣: Our help is in the name of the Lord.\n℟: Who made heaven and earth.\n\n℣: I said, I will confess my transgressions unto the Lord.\n℟: And Thou forgavest the iniquity of my sin.",
+        "audio": "tlh-divine-service-2-qui-facet-caelum.mp3"
+    },
+    {
+        "title": "First Form of Confession",
+        "instruction": "Then shall the Congregation say with the Minister:",
+        "content": "O almighty God, merciful Father, I, a poor, miserable sinner, confess unto Thee all my sins and iniquities with which I have ever offended Thee, and justly deserved Thy temporal and eternal punishment. But I am heartily sorry for them, and sincerely repent of them, and I pray Thee, of Thy boundless mercy and for the sake of the holy, innocent, bitter sufferings and death of Thy beloved Son, Jesus Christ, to be gracious and merciful to me, a poor, sinful being. Amen.",
+        "audio": "tlh-divine-service-3-et-tu-remisisti.mp3"
+    },
+    {
+        "instruction": "Then the Minister, standing, shall say:",
+        "content": "Upon this your confession, I, by virtue of my office, as a called and ordained servant of the Word, announce the grace of God unto all of you who do heartily repent of your sins, believe in Jesus Christ, and sincerely and earnestly intend by the help of God the Holy Ghost henceforth to amend your sinful lives, and in the stead and by the command of my Lord Jesus Christ I forgive you all your sins, in the name of ✠ the Father, and of the Son, and of the Holy Ghost.\n\n℟: Amen.",
+        "audio": "tlh-divine-service-4-amen-ii.mp3"
+    },
+    {
+        "title": "Introit",
+        "instruction": "Then, all standing, shall be said or chanted\nThe Introit.\nThe Introit with the Gloria Patri may be chanted by the Choir; or the Introit may be chanted or said by the Minister, and the Gloria Patri chanted or said by the Congregation. Instead of the Introit a Psalm or Hymn may be used."
+    },
+    {
+        "title": "Gloria Patri",
+        "content": "Glory be to the Father, and to the Son, and to the Holy Ghost: as it was in the beginning, is now, and ever shall be, even unto the ages of the ages. Amen.",
+        "audio": "tlh-divine-service-5-gloria-patri.mp3"
+    },
+    {
+        "title": "Kyrie",
+        "instruction": "Then shall be said or chanted by the Minister and Congregation",
+        "content": "Lord, have mercy upon us.\nChrist, have mercy upon us.\nLord, have mercy upon us.",
+        "audio": "tlh-divine-service-6-kyrie.mp3"
+    },
+    {
+        "title": "Gloria in Excelsis",
+        "instruction": "Then may be sung the hymn \"All Glory Be to God on High\" or another suitable Hymn of Praise, or there shall be said or chanted",
+        "content": "℣: Glory be to God on high!\n\n℟: And on earth peace, good will toward men. We praise Thee, we bless Thee, we worship Thee, we glorify Thee, we give thanks to Thee for Thy great glory. O Lord God, heavenly King, God the Father Almighty.\nO Lord, the only-begotten Son, Jesus Christ; O Lord God, Lamb of God, Son of the Father, that takest away the sin of the world, have mercy upon us. Thou that takest away the sin of the world, receive our prayer. Thou that sittest at the right hand of God the Father, have mercy upon us.\nFor Thou only art holy; Thou only art the Lord; Thou only, O Christ, with the Holy Ghost, art most high in the glory of God the Father. Amen.",
+        "audio": "tlh-divine-service-7-gloria-in-excelsis.mp3"
+    },
+    {
+        "title": "Salutation",
+        "content": "℣: The Lord be with you.\n℟: And with thy spirit.\n\n℣: Let us pray.",
+        "audio": "tlh-divine-service-8-et-cum-spiritus.mp3"
+    },
+    {
+        "title": "Collect",
+        "instruction": "Then shall the minister chant or say\nThe Collect.",
+        "content": "℟: Amen.",
+        "audio": "tlh-divine-service-9-amen-iii.mp3"
+    },
+    {
+        "title": "Scripture Readings",
+        "instruction": "Then shall the Minister read the Epistle for the Day. Other Scripture Lessons may be read before the Epistle, but the Epistle and Gospel for the Day shall always be read. The Minister shall announce the Epistle, saying:",
+        "content": "The Epistle for (here shall he name the day) is written in the — chapter of —, beginning at the — verse."
+    },
+    {
+        "title": "Alleluia",
+        "instruction": "Then shall be chanted or said, except in the Passion Season",
+        "content": "Alleluia!",
+        "audio": [
+            "tlh-divine-service-10-single-hallelujah.mp3",
+            "tlh-divine-service-11-triple-hallelujah-a.mp3",
+            "tlh-divine-service-12-triple-hallelujah-b.mp3"
         ]
     },
     {
-        "content":"Minister: Almighty God, our Maker and Redeemer, we poor sinners confess unto Thee that we are by nature sinful and unclean and that we have sinned against Thee by thought, word, and deed. Wherefore we flee for refuge to Thine infinite mercy, seeking and imploring Thy grace for the sake of our Lord Jesus Christ\n Congregation and Minister: O most merciful God, who hast given Thine only begotten Son to die for us, have mercy upon us and for His sake grant us remission of all our sins; and by Thy Holy Spirit increase in us true knowledge of Thee and of Thy will and true obedience to Thy Word, to the end that by Thy grace we may come to everlasting life; through Jesus Christ, our Lord. Amen.\nMinister: Almighty God, our heavenly Father, hath had mercy upon us and hath given His only Son ’to die for us and for His sake forgiveth us all our sins. To them that believe on His name He giveth power to become the sons of God and hath promised them His Holy Spirit. He that believeth and is baptized shall be saved. Grant this, Lord, unto us all.\nCongregation: Amen.",
-        "audio":"tlh-divine-service-4-amen-ii.mp3"
+        "title": "Gospel",
+        "instruction": "Then shall the minister announce the Gospel for the Day, saying:",
+        "content": "The Holy Gospel is written in the — chapter of St. —, beginning at the — verse.\n\n℟: Glory be to Thee, O Lord.",
+        "audio": "tlh-divine-service-13-gospel-acclamation.mp3"
+    },
+    {
+        "instruction": "The Gospel ended, the Minister shall say:",
+        "content": "Here endeth the Gospel.\n\n℟: Praise be to Thee, O Christ.",
+        "audio": "tlh-divine-service-14-gospel-response.mp3"
+    },
+    {
+        "title": "The Nicene Creed",
+        "instruction": "Then shall be said or chanted the Nicene Creed.",
+        "content": "I believe in one God, the Father Almighty, Maker of heaven and earth, and of all things visible and invisible.\nAnd in one Lord Jesus Christ, the only-begotten Son of God, begotten of His Father before all worlds, God of God, Light of Light, Very God of Very God, begotten, not made, being of one substance with God the Father, by whom all things were made; who for us men and for our salvation came down from heaven and was incarnate by the Holy Ghost of the Virgin Mary and was made man; and was crucified also for us under Pontius Pilate. He suffered and was buried; and the third day He rose again, according to the Scripture; and ascended into heaven, and sitteth on the right hand of the Father; and He shall come again with glory to judge both the quick and the dead; whose kingdom shall have no end.\nAnd I believe in the Holy Ghost, the Lord and Giver of Life, who proceedeth from the Father and the Son, who with the Father and the Son together is worshiped and glorified, who spake by the prophets. And I believe on holy Christian and Apostolic Church. I acknowledge one Baptism for the remission of sins; and I look for the resurrection of the dead, and the life of the world to come. Amen."
+    },
+    {
+        "title": "Sermon",
+        "instruction": "Then may a Hymn be sung, and the Minister shall go into the pulpit. After the Hymn shall follow\nThe Sermon.\nThe Sermon ended, the Congregation shall rise, and the Minister shall say:",
+        "content": "The peace of God, which passeth all understanding, keep your hearts and minds through Christ Jesus."
+    },
+    {
+        "title": "Offertory",
+        "instruction": "The Offertory shall then be chanted. One of the Offertories here following, or any other suitable Offertory, may be used.",
+        "content": "Create in me a clean heart, O God: and renew a right spirit within me.\nCast me not away from Thy presence: and take not Thy Holy Spirit from me.\nRestore unto me the joy of Thy salvation: and uphold me with Thy free Spirit.",
+        "audio": "tlh-divine-service-15-offertory.mp3"
+    },
+    {
+        "title": "Collection",
+        "instruction": "The Congregation shall be seated, and the Offerings shall be gathered and brought to the Minister, who shall place them on the Altar."
+    },
+    {
+        "title": "Prayers",
+        "instruction": "Then shall the Minister make mention of any special petitions, intercessions, or thanksgivings which may have been requested. He may also make mention of the death of any member of the Congregation.\nThen shall follow the General Prayer. The prayer here following may be used, or, if there be no Communion, the Litany, or a selection from the Collects and Prayers, or any other suitable prayer."
+    },
+    {
+        "title": "Lord's Prayer",
+        "instruction": "Then shall the Minister, and the Congregation with him, say",
+        "content": "Our Father, who art in heaven; hallowed be Thy name; Thy kingdom come; Thy will be done on earth as it is in heaven; Give us this day our daily bread; and forgive us our trespasses, as we forgive those who trespass against us; and lead us not into temptation; but deliver us from evil. For Thine is the kingdom and the power and the glory forever and ever. Amen.",
+        "audio": "tlh-divine-service-20-lord_s-prayer-doxology.mp3"
+    },
+    {
+        "title": "Communion Service",
+        "instruction": "If there be no Communion, a Doxology may be sung, and the Service shall conclude with the Benediction.\nWhile the Hymn is sung, the Minister shall go to the Altar, make ready the Communion vessels, and prepare for the administration of the Holy Communion.\nThe Hymn ended, the Congregation shall rise."
+    },
+    {
+        "title": "Preface",
+        "content": "℣: The Lord be with you.\n℟: And with thy spirit.\n\n℣: Lift up your hearts.\n℟: We lift them up unto the Lord.\n\n℣: Let us give thanks unto the Lord, our God.\n℟: It is meet and right so to do.\n\nIt is truly meet, right, and salutary that we should at all times and in all places give thanks unto Thee, O Lord, Holy Father, Almighty, Everlasting God:",
+        "audio": [
+            "tlh-divine-service-16-preface-i.mp3",
+            "tlh-divine-service-17-preface-ii.mp3",
+            "tlh-divine-service-18-preface-iii.mp3"
+        ]
+    },
+    {
+        "title": "Proper Preface",
+        "instruction": "Here shall follow the Proper Preface, according to the time, if there be any specially appointed, or else immediately shall follow,",
+        "content": "Therefore with angels and archangels and with all the company of heaven we laud and magnify Thy glorious name, evermore praising Thee and saying:"
+    },
+    {
+        "title": "Sanctus",
+        "content": "Holy, holy, holy, Lord God of Sabaoth! Heaven and earth are full of Thy glory. Hosanna in the highest!\nBlessed is He that cometh in the name of the Lord.\nHosanna in the highest!",
+        "audio": "tlh-divine-service-19-sanctus.mp3"
+    },
+    {
+        "title": "Words of Institution",
+        "instruction": "Then the Minister, turning to the Altar, shall chant or say:",
+        "content": "Our Lord Jesus Christ, the same night in which He was betrayed, took bread; (Here he shall take the Plate with the Bread in his hand.) and when He had given thanks, He brake it and gave it to His disciples, saying, Take, eat; this is My body, which is given for you. This do in remembrance of Me.\nAfter the same manner also He took the cup (Here he shall take the Cup in his hand.) when He had supped, and when He had given thanks, He gave it to them, saying, Drink ye all of it; this cup is the new testament in My blood, which is shed for you for the remission of sins. This do, as oft as ye drink it, in remembrance of Me."
+    },
+    {
+        "title": "Pax Domini",
+        "content": "℣: The peace of the Lord be with you always.\n℟: Amen.",
+        "audio": "tlh-divine-service-21-amen-iv-(pax-domini).mp3"
+    },
+    {
+        "title": "Agnus Dei",
+        "instruction": "Then shall the Distribution begin, and the Congregation shall chant or say",
+        "content": "O Christ, Thou Lamb of God, that takest away the sin of the world, have mercy upon us!\nO Christ, Thou Lamb of God, that takest away the sin of the world, have mercy upon us!\nO Christ, Thou Lamb of God, that takest away the sin of the world, grant us Thy peace! Amen.",
+        "audio": "tlh-divine-service-22-agnus-dei.mp3"
+    },
+    {
+        "title": "Distribution",
+        "instruction": "When the Minister giveth the Bread, he shall say:",
+        "content": "Take and eat; this is the true body of our Lord Jesus Christ, given into death for thy sins. This strengthen and preserve thee in the true faith unto life eternal. Amen."
+    },
+    {
+        "instruction": "When he giveth the Cup, he shall say:",
+        "content": "Take and drink; this is the true blood of our Lord Jesus Christ, shed for the remission of thy sins. This strengthen and preserve thee in the true faith unto life eternal. Amen."
+    }, 
+    {
+        "instruction": "In dismissing the Communicants, the Minister may say:",
+        "content": "Depart in peace."
+    },
+    {
+        "instruction": "If the consecrated bread or wine be spent before all have communed, the Minister shall consecrate more, saying aloud, so much of the words of institution as pertaineth to the element to be consecrated.\nWhen all have communed, the Minister shall reverently cover what remaineth of the bread and wine."
+    },
+    {
+        "title": "Nunc Dimittis",
+        "instruction": "Then, all standing, the Congregation may chant or say",
+        "content": "Lord, now lettest Thou Thy servant depart in peace according to Thy Word;\nFor mine eyes have seen Thy salvation, which Thou hast prepared before the face of all people.\nA light to lighten the Gentiles; and the glory of Thy people Israel.\nGlory be to the Father and to the Son and to the Holy Ghost;\nAs it was in the beginning, is now, and ever shall be, even unto the ages of the ages. Amen.",
+        "audio": "tlh-divine-service-23-nunc-dimittis.mp3"
+    },
+    {
+        "title": "Thanksgiving",
+        "instruction": "Then shall be chanted or said",
+        "content": "℣: O give thanks unto the Lord, for He is good.\n℟: And His mercy endureth forever.\n\nWe give thanks to Thee, Almighty God, that Thou hast refreshed us through this salutary gift; and we beseech Thee that of Thy mercy Thou wouldst strengthen us through the same in faith toward Thee and in fervent love toward one another; through Jesus Christ, Thy dear Son, our Lord, who liveth and reigneth with Thee and the Holy Ghost, ever one God, even unto the ages of the ages.\n\n℟: Amen.",
+        "audio": "tlh-divine-service-24-thanksgiving.mp3"
+    },
+    {
+        "title": "Benedicamus",
+        "instruction": "Then may be chanted or said",
+        "content": "℣: The Lord be with you.\n℟: And with thy spirit.\n\n℣: Bless we the Lord.\n℟: Thanks be to God.",
+        "audio": [
+            "tlh-divine-service-26-salutation-(et-cum-spiritus).mp3",
+            "tlh-divine-service-27-benedicamus.mp3"
+        ]
+    },
+    {
+        "title": "Benediction",
+        "instruction": "Then shall the Minister say the words 2 Cor. 13:14, or",
+        "content": "The Lord bless thee and keep thee.\nThe Lord make His face shine upon thee and be gracious unto thee.\nThe Lord lift up His countenance upon thee and give thee peace.\n\n℟: Amen.",
+        "audio": "tlh-divine-service-28-benediction.mp3"
+    },
+    {
+        "title": "Silent Prayer",
+        "instruction": "After the Benediction, the Congregation should offer silent prayer."
     }
 ]

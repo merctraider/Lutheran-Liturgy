@@ -9,7 +9,7 @@
 	<div class="container mt-5">
 		<h1>Service Builder</h1>
 
-		<form method="POST" action="service.php">
+		<form method="GET" action="service.php">
 			<div class="form-group">
 				<label>Date:</label>
 				<input type="date" name="date" class="form-control" value="<?php echo date('Y-m-d'); ?>" required>

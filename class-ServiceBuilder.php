@@ -4,7 +4,14 @@ use Lutherald\BibleGateway;
 
 class ServiceBuilder
 {
-    public static function BuildService($date, $order, $canticle, $hymns = [], $replace_with_introit = true, $prayers='default', $section_classes=[])
+    public static function BuildService(
+        $date, 
+        $order, 
+        $canticle, 
+        $hymns = [], 
+        $replace_with_introit = true, 
+        $prayers='default', 
+        $section_classes=[])
     {
         $default_section_classes = array(
             "section_class" => "",
