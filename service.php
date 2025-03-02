@@ -4,9 +4,9 @@ $date = $_GET['date'];
 $order_of_service = $_GET['order_of_service'];
 $opening_hymn = $_GET['opening_hymn'];
 $chief_hymn = $_GET['chief_hymn'];
-$canticle = $_GET['canticle'];
+$canticle = isset($_GET['canticle']) ? $_GET['canticle'] : 'magnificat';
 $replace_psalm = isset($_GET['replace_psalm']) && $_GET['replace_psalm'] === 'on';
-$title = ucfirst($order_of_service) . ' for ' . date_format(date_create($date), 'M d Y');
+$title = ucfirst(str_replace('_', ' ', $order_of_service)) . ' for ' . date_format(date_create($date), 'M d Y');
 $prayers = $_GET['override_prayers']; 
 
 $section_classes = [

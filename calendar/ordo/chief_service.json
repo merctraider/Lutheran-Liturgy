@@ -17,13 +17,12 @@
     {
         "instruction": "Then, all kneeling or standing, shall be chanted or said:",
         "content": "℣: Our help is in the name of the Lord.\n℟: Who made heaven and earth.\n\n℣: I said, I will confess my transgressions unto the Lord.\n℟: And Thou forgavest the iniquity of my sin.",
-        "audio": "tlh-divine-service-2-qui-facet-caelum.mp3"
+        "audio": ["tlh-divine-service-2-qui-facet-caelum.mp3", "tlh-divine-service-3-et-tu-remisisti.mp3"]
     },
     {
         "title": "First Form of Confession",
         "instruction": "Then shall the Congregation say with the Minister:",
-        "content": "O almighty God, merciful Father, I, a poor, miserable sinner, confess unto Thee all my sins and iniquities with which I have ever offended Thee, and justly deserved Thy temporal and eternal punishment. But I am heartily sorry for them, and sincerely repent of them, and I pray Thee, of Thy boundless mercy and for the sake of the holy, innocent, bitter sufferings and death of Thy beloved Son, Jesus Christ, to be gracious and merciful to me, a poor, sinful being. Amen.",
-        "audio": "tlh-divine-service-3-et-tu-remisisti.mp3"
+        "content": "O almighty God, merciful Father, I, a poor, miserable sinner, confess unto Thee all my sins and iniquities with which I have ever offended Thee, and justly deserved Thy temporal and eternal punishment. But I am heartily sorry for them, and sincerely repent of them, and I pray Thee, of Thy boundless mercy and for the sake of the holy, innocent, bitter sufferings and death of Thy beloved Son, Jesus Christ, to be gracious and merciful to me, a poor, sinful being. Amen."
     },
     {
         "instruction": "Then the Minister, standing, shall say:",
@@ -63,7 +62,7 @@
         "audio": "tlh-divine-service-9-amen-iii.mp3"
     },
     {
-        "title": "Scripture Readings",
+        "title": "Lection",
         "instruction": "Then shall the Minister read the Epistle for the Day. Other Scripture Lessons may be read before the Epistle, but the Epistle and Gospel for the Day shall always be read. The Minister shall announce the Epistle, saying:",
         "content": "The Epistle for (here shall he name the day) is written in the — chapter of —, beginning at the — verse."
     },
