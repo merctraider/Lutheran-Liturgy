@@ -1,0 +1,117 @@
+{
+  "metadata":{
+    "name": "Matins", 
+    "description":"The Order of Matins from The Lutheran Hymnal (1941)"
+  }, 
+  "sections":[
+    {
+      "id": "opening_hymn",
+      "type": "hymn",
+      "title": "Hymn",
+      "instruction": "A Hymn of Invocation of the Holy Ghost, or another Hymn, may be sung.",
+      "required": false
+    }, 
+    {
+      "id": "versicles",
+      "type": "versicles",
+      "title": "Versicles",
+      "instruction": "Then, all standing to the end of the Psalmody, shall be sung or said responsively the Versicles here following, with the Gloria Patri. During the Penitential Seasons the Alleluia shall be omitted.",
+      "content": {
+        "normal": "℣: O Lord, open Thou my lips.\n℟: And my mouth shall show forth Thy praise.\n℣: Make haste, O God, to deliver me.\n℟: Make haste to help me, O Lord.\nGlory be to the Father and to the Son and to the Holy Ghost:\nAs it was in the beginning, is now, and ever shall be, world without end. Amen.\nAlleluia.",
+        "penitential": "℣: O Lord, open Thou my lips.\n℟: And my mouth shall show forth Thy praise.\n℣: Make haste, O God, to deliver me.\n℟: Make haste to help me, O Lord.\nGlory be to the Father and to the Son and to the Holy Ghost:\nAs it was in the beginning, is now, and ever shall be, world without end. Amen."
+      },
+      "audio": {
+        "versicle": "matins-versicle.mp3",
+        "gloria": "matins-gloria-patri.mp3"
+      }
+    },
+    {
+      "id":"invitatory",
+      "type":"invitatory",
+      "title":"Invitatory",
+      "content": "℣: Oh, come, let us worship the Lord:\n℟: For He is our Maker.",
+      "audio": "matins-invitatory.mp3"
+    },
+    {
+      "id":"venite",
+      "type":"canticle",
+      "title":"Venite",
+      "content": "O come let us sing unto the Lord\n Let us make a joyful noise to the Rock of our salvation.\n Let us come before His presence with thanksgiving;\n And make a joyful noise unto Him with psalms.\n For the Lord is a great God\n And a great King above all gods.\n In His hand are the deep places of the earth;\n The strength of the hills is His also\n The sea is His, and He made it;\n And His hands formed the dry land.\n Oh, come let us worship and bow down;\n Let us kneel before the Lord our maker\n For He is our God And we are the people of His pasture\n And the sheep of His hand.\n Glory be to the Father and to the Son\n And to the Holy Ghost\n As it was in the beginning, is now,\n And ever shall be; world without end. Amen.",
+      "audio": "matins-venite.mp3"
+    },
+    {
+      "id": "psalmody",
+      "type": "psalmody",
+      "title": "Psalmody",
+      "instruction": "At the end of each Psalm the Gloria Patri shall be sung or said. An Antiphon may be used with each Psalm.",
+      "options": {
+        "type": "dynamic",
+        "source": "daily_psalter",
+        "allow_introit_substitution": true
+      }
+    },
+    {
+      "id": "lection",
+      "type": "lection",
+      "title": "Lection",
+      "instruction": "Then shall be read\nThe Lection.\nAfter each Lesson may be sung or said:",
+      "content": "℣: But Thou, O Lord, have mercy upon us.\n℟: Thanks be to Thee, O Lord!",
+      "audio": "matins-lection-response.mp3"
+    },
+    {
+      "id":"responsory_hymn",
+      "type":"hymn",
+      "title":"Responsory or Hymn",
+      "instruction":"After the Lection a Responsory may be sung, or a Hymn.",
+      "required": false
+    },
+    {
+      "id":"sermon",
+      "type":"sermon",
+      "title":"Sermon",
+      "instruction":"Then may follow a Sermon, after which the Offerings may be gathered."
+    },
+    {
+      "id":"canticle",
+      "type":"canticle",
+      "title":"Canticle",
+      "instruction":"Then shall be sung or said\nThe Canticle. The Te Deum Laudamus or the Benedictus may be used on Sundays. Other Canticles may be used on other days",
+      "options": {
+        "type": "select",
+        "choices": [
+          {"id": "te_deum", "label": "Te Deum Laudamus", "days": ["sunday"]},
+          {"id": "benedictus", "label": "Benedictus", "days": ["sunday"]},
+          {"id": "magnificat", "label": "Magnificat", "days": ["weekday"]},
+          {"id": "nunc_dimittis", "label": "Nunc Dimittis", "days": ["weekday"]}
+        ],
+        "default": {
+          "sunday": "te_deum",
+          "weekday": "benedictus"
+        }
+      }
+    },
+    {
+      "id":"prayers",
+      "type":"prayers",
+      "title":"Prayers",
+      "instruction":"Then shall be said the Prayers here following, or the Suffrages, the Litany, or other prayers."
+    },
+    {
+      "id":"kyrie",
+      "type":"kyrie",
+      "title":"Kyrie",
+      "instruction": "All shall sing or say\nThe Kyrie.",
+      "content": [
+        {
+          "normal": [
+            {"text": ["Lord, have mercy upon us."]},
+            {"text": ["Christ, have mercy upon us."]},
+            {"text": ["Lord, have mercy upon us."]}
+          ]
+        }
+      ],
+      "audio": ["mat"]
+    }
+  
+  ]
+}
