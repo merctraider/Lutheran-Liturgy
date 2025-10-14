@@ -47,7 +47,7 @@ class ServiceBuilder
             // Hymns
             'opening_hymn' => self::prepareHymn($hymns[0], $hymnal),
             'chief_hymn' => self::prepareChiefHymn($hymns[1], $day_info, $hymnal),
-            'closing_hymn' => null, // Can be added if needed
+            'closing_hymn' => isset($hymns[2])? self::prepareHymn($hymns[0], $hymnal) : null,
             
             // Psalmody
             'introit' => isset($day_info['introit']) ? $day_info['introit'] : null,
@@ -104,9 +104,20 @@ class ServiceBuilder
     {
         // If "default", use lectionary hymn
         if ($hymn_number === 'default' && isset($day_info['hymn'])) {
-            $hymn_number = $day_info['hymn'];
+            $lect_hymn = $day_info['hymn'];
+            if (is_array($lect_hymn)) {
+                if($lect_hymn['hymnal'] !== 'TLH'){
+                    return $lect_hymn['hymnal'] . ' ' . $lect_hymn['index']; 
+                } else {
+                    $hymn_number = "hymn" . $lect_hymn['index'];
+                    
+                }
+            } else {
+                $hymn_number = $day_info['hymn'];
+            }
         }
-        
+
+
         if (empty($hymn_number) || !isset($hymnal[$hymn_number])) {
             return null;
         }
