@@ -1,0 +1,403 @@
+/* Common Missal Styling for Service Builder and Generated Services */
+
+/* ============================================
+   TYPOGRAPHY & BASE COLORS
+   ============================================ */
+body {
+	background: #e8e6dc;
+	font-family: 'Garamond', 'Georgia', serif;
+	color: #2c2416;
+	line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Garamond', 'Georgia', serif;
+	font-weight: normal;
+	color: #1a1a1a;
+}
+
+h1 {
+	font-size: 2.2rem;
+	text-align: center;
+	margin-bottom: 15px;
+	letter-spacing: 3px;
+	text-transform: uppercase;
+	font-weight: 500;
+	line-height: 1.3;
+}
+
+h2 {
+	font-size: 1.5rem;
+	text-align: center;
+	margin-bottom: 30px;
+	padding-bottom: 15px;
+	border-bottom: 2px solid #1a1a1a;
+	font-weight: normal;
+	line-height: 1.4;
+}
+
+/* ============================================
+   CONTAINER & PAGE LAYOUT
+   ============================================ */
+.container {
+	max-width: 900px;
+	background: #fefdfb;
+	padding: 50px 60px;
+	box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+	border: 1px solid #d4c5a9;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+@media (min-width: 1200px) {
+	.container {
+		max-width: 850px;
+		padding: 60px 80px;
+	}
+}
+
+/* ============================================
+   SECTION STYLING (Form & Service)
+   ============================================ */
+.form-section,
+.card-body {
+	margin-bottom: 40px;
+	padding: 30px;
+	background: #fefdfb;
+	border: 2px solid #1a1a1a;
+	border-left: 5px solid #1a1a1a;
+	position: relative;
+}
+
+.form-section h4,
+.card-title {
+	font-family: 'Garamond', 'Georgia', serif;
+	font-weight: bold;
+	font-size: 1.2rem;
+	color: #1a1a1a;
+	margin-bottom: 25px;
+	text-transform: uppercase;
+	letter-spacing: 1.5px;
+	border-bottom: 1px solid #d4c5a9;
+	padding-bottom: 12px;
+}
+
+.card-text {
+	font-family: 'Garamond', 'Georgia', serif;
+	font-size: 1.15rem;
+	line-height: 1.9;
+	color: #2c2416;
+}
+
+.card-text p {
+	margin-bottom: 1.2rem;
+}
+
+/* ============================================
+   SERVICE OUTPUT LAYOUT
+   ============================================ */
+.card-body-centered {
+	margin: 0 auto;
+	max-width: 100%;
+}
+
+@media (min-width: 992px) {
+	.card-body-centered {
+		max-width: 85%;
+	}
+}
+
+/* ============================================
+   RUBRICS (Red Text for Instructions)
+   ============================================ */
+.rubric,
+em,
+i {
+	color: #8b1a1a;
+	font-style: italic;
+	font-size: 1.05rem;
+}
+
+strong {
+	color: #1a1a1a;
+	font-weight: bold;
+}
+
+/* ============================================
+   FORM CONTROLS
+   ============================================ */
+.form-control {
+	border: 1px solid #1a1a1a;
+	border-radius: 0;
+	background: #fefdfb;
+	font-family: 'Garamond', 'Georgia', serif;
+	color: #2c2416;
+	padding: 12px;
+	font-size: 1.05rem;
+}
+
+.form-control:focus {
+	border-color: #1a1a1a;
+	box-shadow: 0 0 0 0.2rem rgba(26, 26, 26, 0.15);
+	background: #fff;
+}
+
+label {
+	font-family: 'Garamond', 'Georgia', serif;
+	font-weight: bold;
+	color: #2c2416;
+	font-size: 1.05rem;
+	margin-bottom: 10px;
+}
+
+/* ============================================
+   SELECT2 CUSTOMIZATION
+   ============================================ */
+.select2-container--default .select2-selection--single {
+	border: 1px solid #1a1a1a;
+	border-radius: 0;
+	background: #fefdfb;
+	height: auto;
+	padding: 5px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+	font-family: 'Garamond', 'Georgia', serif;
+	color: #2c2416;
+	padding-left: 10px;
+	font-size: 1.05rem;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--single {
+	border-color: #1a1a1a;
+}
+
+.select2-dropdown {
+	border: 1px solid #1a1a1a;
+	border-radius: 0;
+	background: #fefdfb;
+}
+
+.select2-results__option {
+	font-family: 'Garamond', 'Georgia', serif;
+}
+
+/* ============================================
+   DAY OPTION CARDS
+   ============================================ */
+.day-option {
+	padding: 20px 25px;
+	margin: 15px 0;
+	border: 2px solid #1a1a1a;
+	background: #fefdfb;
+	cursor: pointer;
+	transition: all 0.3s;
+	position: relative;
+}
+
+.day-option::before {
+	position: absolute;
+	left: -18px;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 1.6rem;
+	color: #1a1a1a;
+	opacity: 0;
+	transition: opacity 0.3s;
+}
+
+.day-option:hover {
+	background: #f9f7f2;
+	border-color: #000;
+}
+
+.day-option.selected {
+	background: #f4ebe0;
+	border-color: #000;
+	border-left-width: 5px;
+}
+
+.day-option.selected::before {
+	opacity: 1;
+}
+
+.day-option input[type="radio"] {
+	margin-right: 15px;
+	accent-color: #1a1a1a;
+}
+
+.day-option strong {
+	font-size: 1.1rem;
+	color: #1a1a1a;
+	letter-spacing: 0.5px;
+}
+
+/* ============================================
+   CHECKBOX STYLING
+   ============================================ */
+.form-check {
+	padding: 18px;
+	background: #f9f7f2;
+	border-left: 3px solid #1a1a1a;
+	margin-bottom: 20px;
+}
+
+.form-check-input {
+	accent-color: #1a1a1a;
+}
+
+.form-check-label {
+	font-family: 'Garamond', 'Georgia', serif;
+	color: #2c2416;
+	font-size: 1.05rem;
+	margin-left: 8px;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.btn-success,
+.btn-primary {
+	background: #1a1a1a;
+	border: none;
+	border-radius: 0;
+	font-family: 'Garamond', 'Georgia', serif;
+	font-size: 1.2rem;
+	font-weight: bold;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	padding: 15px 30px;
+	transition: all 0.3s;
+}
+
+.btn-success:hover,
+.btn-primary:hover {
+	background: #000;
+	box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* ============================================
+   ALERTS & MESSAGES
+   ============================================ */
+.alert-danger {
+	background: #f9e6e6;
+	border: 1px solid #8b1a1a;
+	border-left: 4px solid #8b1a1a;
+	color: #6b1414;
+	font-family: 'Garamond', 'Georgia', serif;
+	border-radius: 0;
+}
+
+.alert-warning {
+	background: #fef9e6;
+	border: 1px solid #c9a227;
+	border-left: 4px solid #c9a227;
+	color: #7d6519;
+	font-family: 'Garamond', 'Georgia', serif;
+	border-radius: 0;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+.hidden-section {
+	display: none;
+}
+
+.fade-in {
+	animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+	from { 
+		opacity: 0; 
+		transform: translateY(-15px);
+	}
+	to { 
+		opacity: 1; 
+		transform: translateY(0);
+	}
+}
+
+.loading-spinner {
+	display: inline-block;
+	width: 24px;
+	height: 24px;
+	border: 3px solid #f5f3ed;
+	border-top: 3px solid #1a1a1a;
+	border-radius: 50%;
+	animation: spin 1s linear infinite;
+	margin-left: 10px;
+}
+
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+
+/* ============================================
+   DECORATIVE ELEMENTS
+   ============================================ */
+.form-section::after {
+	content: '';
+	position: absolute;
+	top: 12px;
+	right: 12px;
+	width: 18px;
+	height: 18px;
+	background: radial-gradient(circle, #1a1a1a 2px, transparent 2px);
+	opacity: 0.25;
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+@media print {
+	body {
+		background: white;
+	}
+	
+	.container {
+		box-shadow: none;
+		border: none;
+		padding: 20px;
+	}
+	
+	.card-body,
+	.form-section {
+		page-break-inside: avoid;
+		border: 1px solid #1a1a1a;
+	}
+	
+	h1 {
+		border-bottom: 2px solid #1a1a1a;
+		padding-bottom: 10px;
+	}
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+	.container {
+		padding: 25px 20px;
+		margin-top: 15px;
+		margin-bottom: 15px;
+	}
+	
+	h1 {
+		font-size: 1.8rem;
+		letter-spacing: 2px;
+	}
+	
+	h2 {
+		font-size: 1.2rem;
+	}
+	
+	.form-section,
+	.card-body {
+		padding: 20px;
+	}
+	
+	.card-text {
+		font-size: 1.05rem;
+	}
+}

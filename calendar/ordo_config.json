@@ -1,0 +1,59 @@
+{
+  "matins": {
+    "display": "Matins",
+    "fields": [
+      "opening_hymn",
+      "chief_hymn",
+      "canticle",
+      "replace_psalm",
+      "prayers"
+    ],
+    "canticle_options": [
+      {"value": "te_deum", "label": "Te Deum"},
+      {"value": "benedictus", "label": "Benedictus"}
+    ],
+    "default_canticle": "te_deum",
+    "prayer_options": [
+      {"value": "default", "label": "Default (According to the Order)"},
+      {"value": "litany", "label": "Litany"},
+      {"value": "suffrages", "label": "Suffrages"},
+      {"value": "morning_suffrages", "label": "Morning Suffrages"},
+      {"value": "bidding", "label": "Bidding Prayer"}
+    ]
+  },
+  "vespers": {
+    "display": "Vespers",
+    "fields": [
+      "opening_hymn",
+      "chief_hymn",
+      "canticle",
+      "replace_psalm",
+      "prayers"
+    ],
+    "canticle_options": [
+      {"value": "magnificat", "label": "Magnificat"},
+      {"value": "nunc_dimittis", "label": "Nunc Dimittis"}
+    ],
+    "default_canticle": "magnificat",
+    "prayer_options": [
+      {"value": "default", "label": "Default (According to the Order)"},
+      {"value": "litany", "label": "Litany"},
+      {"value": "suffrages", "label": "Suffrages"},
+      {"value": "evening_suffrages", "label": "Evening Suffrages"},
+      {"value": "bidding", "label": "Bidding Prayer"}
+    ]
+  },
+  "chief_service": {
+    "display": "Chief Service",
+    "fields": [
+      "opening_hymn",
+      "chief_hymn",
+      "prayers"
+    ],
+    "prayer_options": [
+      {"value": "default", "label": "Default (According to the Order)"},
+      {"value": "litany", "label": "Litany"},
+      {"value": "bidding", "label": "Bidding Prayer"}
+    ]
+  }
+}
