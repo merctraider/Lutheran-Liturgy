@@ -11,7 +11,10 @@ class ServiceBuilder
         $hymns = [], 
         $replace_with_introit = true, 
         $prayers = 'default', 
-        $section_classes = [])
+        $section_classes = [],
+        $day_type = 'default'  
+        )
+        
     {
         $default_section_classes = array(
             "section_class" => "",
@@ -27,6 +30,24 @@ class ServiceBuilder
         // Get church calendar info
         $calendar = \Lutherald\ChurchYear::create_church_year($date);
         $day_info = $calendar->retrieve_day_info($date);
+
+        // Get day info based on day_type
+        if ($day_type === 'feast') {
+            // Get feast day information
+            $day_info = $calendar->get_festival($date);
+            $readings = []; 
+            foreach($day_info['readings'] as $r){
+                $readings[] = $r; 
+            }
+            $day_info['readings'] = $readings; 
+            // If no feast found, fall back to default
+            if ($day_info === false || empty($day_info)) {
+                $day_info = $calendar->retrieve_day_info($date);
+            }
+        } else {
+            // Default or ember day (both use retrieve_day_info)
+            $day_info = $calendar->retrieve_day_info($date);
+        }
         
         // Load hymnal data
         $hymnal = json_decode(file_get_contents(__DIR__ . '/tlh.json'), true);

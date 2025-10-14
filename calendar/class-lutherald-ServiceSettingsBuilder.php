@@ -33,35 +33,57 @@ class ServiceSettingsBuilder {
     public function get_day_options() {
         $options = [];
         
-        // Always include default day
+        // Get default day info
         $default_day = $this->calendar->retrieve_day_info($this->date);
-        $options[] = [
-            'type' => 'default',
-            'display' => $this->get_default_day_display(),
-            'value' => 'default',
-            'data' => $default_day
-        ];
         
-        // Check for feast day
+        // Check for feast day FIRST
         $feast = $this->calendar->get_festival($this->date);
+        
+        // If there's a feast, add it as an option
         if ($feast && !empty($feast)) {
             $options[] = [
                 'type' => 'feast',
-                'display' => $feast['name'] ?? 'Feast Day',
+                'display' => $feast['name'] ?? $feast['display'] ?? 'Feast Day',
                 'value' => 'feast',
                 'data' => $feast
             ];
         }
         
-        // Check for ember day
-        // Ember days are already registered in the calendar, so check if current day has ember day designation
-        if ($default_day && isset($default_day['display']) && 
-            (strpos($default_day['display'], 'Ember') !== false || 
-             strpos($default_day['display'], 'Rogation') !== false)) {
+        // Always include default day (unless it IS the feast)
+        $default_display = $this->get_default_day_display($default_day);
+        
+        // Only add default if it's different from feast or if there's no feast
+        if (!$feast || ($feast && $default_display !== ($feast['name'] ?? $feast['display'] ?? ''))) {
             $options[] = [
-                'type' => 'ember',
-                'display' => $default_day['display'],
-                'value' => 'ember',
+                'type' => 'default',
+                'display' => $default_display,
+                'value' => 'default',
+                'data' => $default_day
+            ];
+        }
+        
+        // Check if the default day is an ember/rogation day
+        if ($default_day && isset($default_day['display'])) {
+            $display_lower = strtolower($default_day['display']);
+            if (strpos($display_lower, 'ember') !== false || strpos($display_lower, 'rogation') !== false) {
+                // Only add as separate option if not already the default
+                if (count($options) > 1 || $options[0]['type'] !== 'default') {
+                    $options[] = [
+                        'type' => 'ember',
+                        'display' => $default_day['display'],
+                        'value' => 'ember',
+                        'data' => $default_day
+                    ];
+                }
+            }
+        }
+        
+        // If no options at all, add a basic default
+        if (empty($options)) {
+            $options[] = [
+                'type' => 'default',
+                'display' => $default_display,
+                'value' => 'default',
                 'data' => $default_day
             ];
         }
@@ -72,8 +94,10 @@ class ServiceSettingsBuilder {
     /**
      * Get a display name for the default day
      */
-    private function get_default_day_display() {
-        $day_info = $this->calendar->retrieve_day_info($this->date);
+    private function get_default_day_display($day_info = null) {
+        if (!$day_info) {
+            $day_info = $this->calendar->retrieve_day_info($this->date);
+        }
         
         if ($day_info && isset($day_info['display'])) {
             return $day_info['display'];

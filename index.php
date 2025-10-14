@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Service Builder</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css">
 	<link rel="stylesheet" href="missal-common.css">
-	
 </head>
+
 <body>
 	<div class="container mt-5">
 		<h1>Service Builder</h1>
 
 		<form id="service-form" method="GET" action="service.php">
-			
+
 			<!-- Section 1: Date Selection -->
 			<div class="form-section">
 				<h4>1. Select Date</h4>
@@ -76,7 +77,7 @@
 			let selectedDayType = null;
 			let selectedOrdo = null;
 			let hymnsData = null;
-			
+
 			// Load hymns data
 			$.getJSON('tlh.json', function(data) {
 				hymnsData = data;
@@ -97,7 +98,7 @@
 			// Date change handler
 			$('#date-input').change(function() {
 				selectedDate = $(this).val();
-				
+
 				if (!selectedDate) {
 					hideSection('day-type-section');
 					hideSection('order-section');
@@ -105,23 +106,56 @@
 					hideSection('submit-section');
 					return;
 				}
-				
+
 				// Reset downstream selections
 				selectedDayType = null;
 				selectedOrdo = null;
 				hideSection('order-section');
 				hideSection('settings-section');
 				hideSection('submit-section');
-				
+
 				// Load new day options
 				loadDayOptions(selectedDate);
+			});
+
+			$('#service-form').submit(function(e) {
+				e.preventDefault(); // Prevent normal form submission
+
+				// Gather all form data into an object
+				const formData = {
+					date: selectedDate,
+					day_type: selectedDayType,
+					order_of_service: selectedOrdo,
+					opening_hymn: $('select[name="opening_hymn"]').val(),
+					chief_hymn: $('select[name="chief_hymn"]').val(),
+					override_prayers: $('select[name="override_prayers"]').val()
+				};
+
+				// Add optional fields if they exist
+				if ($('select[name="canticle"]').length) {
+					formData.canticle = $('select[name="canticle"]').val();
+				}
+
+				if ($('input[name="replace_psalm"]').is(':checked')) {
+					formData.replace_psalm = true;
+				}
+
+				// ENCODING STEP: Convert to JSON then Base64
+				const jsonStr = JSON.stringify(formData);
+				const base64 = btoa(jsonStr) // Base64 encode
+					.replace(/\+/g, '-') // Make URL-safe
+					.replace(/\//g, '_') // Make URL-safe
+					.replace(/=/g, ''); // Remove padding
+
+				// Redirect to service with encoded parameter
+				window.location.href = 'service.php?s=' + base64;
 			});
 
 			// Load day options from API
 			function loadDayOptions(date) {
 				$('#day-options-container').html('<div class="text-center"><span class="loading-spinner"></span></div>');
 				showSection('day-type-section');
-				
+
 				$.get('api.php', {
 					action: 'check_date',
 					date: date
@@ -139,7 +173,7 @@
 			// Render day type options
 			function renderDayOptions(options) {
 				let html = '';
-				
+
 				options.forEach(function(option, index) {
 					html += `
 						<div class="day-option" data-day-type="${option.value}">
@@ -150,30 +184,30 @@
 						</div>
 					`;
 				});
-				
+
 				$('#day-options-container').html(html);
-				
+
 				// Select first option by default
 				if (options.length > 0) {
 					selectedDayType = options[0].value;
 					$(`.day-option[data-day-type="${selectedDayType}"]`).addClass('selected');
 					showSection('order-section');
 				}
-				
+
 				// Handle day type selection
 				$('.day-option').click(function() {
 					$('.day-option').removeClass('selected');
 					$(this).addClass('selected');
 					$(this).find('input[type="radio"]').prop('checked', true);
-					
+
 					selectedDayType = $(this).data('day-type');
-					
+
 					// Reset downstream selections
 					selectedOrdo = null;
 					$('#order-select').val('');
 					hideSection('settings-section');
 					hideSection('submit-section');
-					
+
 					// Show order section
 					showSection('order-section');
 				});
@@ -182,13 +216,13 @@
 			// Order selection handler
 			$('#order-select').change(function() {
 				selectedOrdo = $(this).val();
-				
+
 				if (!selectedOrdo) {
 					hideSection('settings-section');
 					hideSection('submit-section');
 					return;
 				}
-				
+
 				// Load settings fields
 				loadSettingsFields(selectedOrdo);
 			});
@@ -197,7 +231,7 @@
 			function loadSettingsFields(ordo) {
 				$('#settings-fields-container').html('<div class="text-center"><span class="loading-spinner"></span></div>');
 				showSection('settings-section');
-				
+
 				$.get('api.php', {
 					action: 'get_ordo_fields',
 					date: selectedDate,
@@ -219,9 +253,9 @@
 			// Render dynamic settings fields
 			function renderSettingsFields(config) {
 				let html = '';
-				
+
 				config.fields.forEach(function(field) {
-					switch(field) {
+					switch (field) {
 						case 'opening_hymn':
 							html += renderHymnField('opening_hymn', 'Opening Hymn', true);
 							break;
@@ -239,28 +273,28 @@
 							break;
 					}
 				});
-				
+
 				$('#settings-fields-container').html(html);
-				
+
 				// Initialize select2 on hymn selects
 				$('select.hymn').select2();
 			}
 
 			function renderHymnField(name, label, required) {
 				if (!hymnsData) return '<div class="alert alert-warning">Loading hymns...</div>';
-				
+
 				let html = `<div class="form-group">
 					<label>${label}:</label>
 					<select name="${name}" class="form-control hymn" ${required ? 'required' : ''}>`;
-				
+
 				if (!required) {
 					html += '<option value="default">Use Lectionary Hymn</option>';
 				}
-				
+
 				for (let key in hymnsData) {
 					html += `<option value="${key}">${hymnsData[key].title}</option>`;
 				}
-				
+
 				html += '</select></div>';
 				return html;
 			}
@@ -269,12 +303,12 @@
 				let html = `<div class="form-group">
 					<label>Canticle:</label>
 					<select name="canticle" class="form-control" required>`;
-				
+
 				options.forEach(function(option) {
 					let selected = option.value === defaultValue ? 'selected' : '';
 					html += `<option value="${option.value}" ${selected}>${option.label}</option>`;
 				});
-				
+
 				html += '</select></div>';
 				return html;
 			}
@@ -290,15 +324,16 @@
 				let html = `<div class="form-group">
 					<label>Prayers:</label>
 					<select name="override_prayers" class="form-control" required>`;
-				
+
 				options.forEach(function(option) {
 					html += `<option value="${option.value}">${option.label}</option>`;
 				});
-				
+
 				html += '</select></div>';
 				return html;
 			}
 		});
 	</script>
 </body>
+
 </html>
