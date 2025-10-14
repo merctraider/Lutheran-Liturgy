@@ -55,10 +55,14 @@ class ServiceBuilder
             'psalm_text' => self::getPsalmText($day_info, $order),
             
             // Lections
-            'epistle' => isset($day_info['epistle']) ? $day_info['epistle'] : null,
-            'epistle_text' => self::getEpistleText($day_info),
-            'gospel' => isset($day_info['gospel']) ? $day_info['gospel'] : null,
-            'gospel_text' => self::getGospelText($day_info),
+            'ot' => isset($day_info['readings'][2]) ? $day_info['readings'][2] : null,
+            'ot_text' => isset($day_info['readings'][2])? self::getReadingText($day_info['readings'][2]) : null,
+
+            'epistle' => isset($day_info['readings'][0]) ? $day_info['readings'][0] : null,
+            'epistle_text' => isset($day_info['readings'][0])?  self::getReadingText($day_info['readings'][0]): null,
+
+            'gospel' => isset($day_info['readings'][1]) ? $day_info['readings'][1] : null,
+            'gospel_text' => isset($day_info['readings'][1])? self::getReadingText($day_info['readings'][1] ) : null,
             
             // Collects
             'collect_of_day' => isset($day_info['collect']) ? $day_info['collect'] : null,
@@ -66,8 +70,7 @@ class ServiceBuilder
             // Gradual (for Chief Service)
             'gradual' => isset($day_info['gradual']) ? $day_info['gradual'] : null,
         ];
-
-        
+      
         
         // Render the template
         $engine = new TemplateEngine(__DIR__ . '/templates');
@@ -152,29 +155,12 @@ class ServiceBuilder
         
         return $output;
     }
-    
-    /**
-     * Get epistle text from BibleGateway
-     */
-    private static function getEpistleText($day_info)
-    {
-        if (!isset($day_info['epistle'])) {
-            return null;
+
+    private static function getReadingText($reading){
+        if(!isset($reading)){
+            return null; 
         }
-        
-        return BibleGateway::get_verse($day_info['epistle']);
-    }
-    
-    /**
-     * Get gospel text from BibleGateway
-     */
-    private static function getGospelText($day_info)
-    {
-        if (!isset($day_info['gospel'])) {
-            return null;
-        }
-        
-        return BibleGateway::get_verse($day_info['gospel']);
+        return BibleGateway::get_verse($reading);
     }
     
     /**

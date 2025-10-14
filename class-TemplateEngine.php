@@ -64,33 +64,194 @@ class TemplateEngine
 
     /**
      * Process {{ if condition }} ... {{ else }} ... {{ endif }} blocks
+     * Handles nested conditionals properly by processing from innermost to outermost
      */
     private function processConditionals($content)
     {
-        // Pattern to match if/else/endif blocks (nested support via recursion)
-        $pattern = '/\{\{\s*if\s+([^\}]+)\}\}(.*?)(?:\{\{\s*else\s*\}\}(.*?))?\{\{\s*endif\s*\}\}/s';
-        
-        // Keep processing until no more conditionals found (handles nesting)
-        $max_iterations = 10; // Prevent infinite loops
+        $max_iterations = 20; // Prevent infinite loops
         $iteration = 0;
         
-        while (preg_match($pattern, $content) && $iteration < $max_iterations) {
-            $content = preg_replace_callback($pattern, function($matches) {
-                $condition = trim($matches[1]);
-                $if_content = $matches[2];
-                $else_content = isset($matches[3]) ? $matches[3] : '';
-                
-                // Evaluate the condition
-                if ($this->evaluateCondition($condition)) {
-                    return $if_content;
-                } else {
-                    return $else_content;
-                }
-            }, $content);
+        // Keep processing until no more conditionals found (handles nesting)
+        while ($iteration < $max_iterations) {
+            // Find the innermost conditional (one without nested if/endif inside)
+            $processed = $this->processInnermostConditional($content);
+            
+            // If nothing changed, we're done
+            if ($processed === $content) {
+                break;
+            }
+            
+            $content = $processed;
             $iteration++;
         }
         
         return $content;
+    }
+    
+    /**
+     * Process the innermost conditional block
+     */
+    private function processInnermostConditional($content)
+    {
+        // Pattern to match if/else/endif - we'll find them manually to handle nesting
+        $if_pattern = '/\{\{\s*if\s+([^\}]+)\}\}/';
+        $else_pattern = '/\{\{\s*else\s*\}\}/';
+        $endif_pattern = '/\{\{\s*endif\s*\}\}/';
+        
+        // Find all if positions
+        preg_match_all($if_pattern, $content, $if_matches, PREG_OFFSET_CAPTURE);
+        
+        if (empty($if_matches[0])) {
+            return $content; // No conditionals found
+        }
+        
+        // Process from the last if (innermost) backwards
+        for ($i = count($if_matches[0]) - 1; $i >= 0; $i--) {
+            $if_pos = $if_matches[0][$i][1];
+            $if_full = $if_matches[0][$i][0];
+            $condition = trim($if_matches[1][$i][0]);
+            
+            // Find the matching endif for this if
+            $endif_pos = $this->findMatchingEndif($content, $if_pos);
+            
+            if ($endif_pos === false) {
+                continue; // No matching endif
+            }
+            
+            // Find else between if and endif (if it exists)
+            $else_pos = $this->findElseBetween($content, $if_pos + strlen($if_full), $endif_pos);
+            
+            // Extract content
+            $if_end = $if_pos + strlen($if_full);
+            
+            if ($else_pos !== false) {
+                // Has else block
+                $if_content = substr($content, $if_end, $else_pos - $if_end);
+                preg_match($else_pattern, substr($content, $else_pos), $else_match);
+                $else_full = $else_match[0];
+                $else_end = $else_pos + strlen($else_full);
+                $else_content = substr($content, $else_end, $endif_pos - $else_end);
+            } else {
+                // No else block
+                $if_content = substr($content, $if_end, $endif_pos - $if_end);
+                $else_content = '';
+            }
+            
+            // Check if this block contains nested if/endif
+            if ($this->hasNestedConditional($if_content) || $this->hasNestedConditional($else_content)) {
+                continue; // Skip this one, process inner ones first
+            }
+            
+            // Evaluate and replace
+            $result = $this->evaluateCondition($condition) ? $if_content : $else_content;
+            
+            // Find the endif tag
+            preg_match($endif_pattern, substr($content, $endif_pos), $endif_match);
+            $endif_full = $endif_match[0];
+            $endif_end = $endif_pos + strlen($endif_full);
+            
+            // Replace the entire conditional block
+            $before = substr($content, 0, $if_pos);
+            $after = substr($content, $endif_end);
+            
+            return $before . $result . $after;
+        }
+        
+        return $content;
+    }
+    
+    /**
+     * Find the matching endif for an if at given position
+     */
+    private function findMatchingEndif($content, $if_pos)
+    {
+        $depth = 1;
+        $pos = $if_pos;
+        
+        while ($depth > 0 && $pos < strlen($content)) {
+            // Find next if or endif
+            $next_if = strpos($content, '{{ if', $pos + 1);
+            $next_endif = strpos($content, '{{ endif', $pos + 1);
+            
+            if ($next_endif === false) {
+                return false; // No matching endif
+            }
+            
+            if ($next_if !== false && $next_if < $next_endif) {
+                // Found nested if before endif
+                $depth++;
+                $pos = $next_if;
+            } else {
+                // Found endif
+                $depth--;
+                $pos = $next_endif;
+                
+                if ($depth === 0) {
+                    return $pos;
+                }
+            }
+        }
+        
+        return false;
+    }
+    
+    /**
+     * Find else between two positions (not inside nested conditionals)
+     */
+    private function findElseBetween($content, $start, $end)
+    {
+        $depth = 0;
+        $pos = $start;
+        
+        while ($pos < $end) {
+            // Check for if, else, endif
+            $next_if = strpos($content, '{{ if', $pos);
+            $next_else = strpos($content, '{{ else', $pos);
+            $next_endif = strpos($content, '{{ endif', $pos);
+            
+            // Find the nearest one
+            $nearest = false;
+            $nearest_type = null;
+            
+            if ($next_if !== false && $next_if < $end && ($nearest === false || $next_if < $nearest)) {
+                $nearest = $next_if;
+                $nearest_type = 'if';
+            }
+            if ($next_else !== false && $next_else < $end && ($nearest === false || $next_else < $nearest)) {
+                $nearest = $next_else;
+                $nearest_type = 'else';
+            }
+            if ($next_endif !== false && $next_endif < $end && ($nearest === false || $next_endif < $nearest)) {
+                $nearest = $next_endif;
+                $nearest_type = 'endif';
+            }
+            
+            if ($nearest === false) {
+                break; // No more tags found
+            }
+            
+            if ($nearest_type === 'if') {
+                $depth++;
+                $pos = $nearest + 1;
+            } elseif ($nearest_type === 'endif') {
+                $depth--;
+                $pos = $nearest + 1;
+            } elseif ($nearest_type === 'else' && $depth === 0) {
+                return $nearest; // Found else at our level
+            } else {
+                $pos = $nearest + 1;
+            }
+        }
+        
+        return false;
+    }
+    
+    /**
+     * Check if content has nested conditionals
+     */
+    private function hasNestedConditional($content)
+    {
+        return strpos($content, '{{ if') !== false || strpos($content, '{{if') !== false;
     }
 
     /**

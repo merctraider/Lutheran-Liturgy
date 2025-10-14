@@ -4,6 +4,7 @@
 {{ if opening_hymn }}
 <div class="{{ section_class }}">
     <h3 class="{{ section_title_class }}">Opening Hymn</h3>
+    <p><em>¶ A Hymn of Invocation of the Holy Ghost or another Hymn may be sung.</em></p>
     <div class="{{ section_body_class }}">
         {{ opening_hymn }}
     </div>
@@ -12,10 +13,10 @@
 
 <!-- Versicles -->
 <div class="{{ section_class }}">
-    <h3 class="{{ section_title_class }}">Versicles</h3>
+    <h3 class="{{ section_title_class }}">The Versicles</h3>
     <div class="{{ section_body_class }}">
         {{ audio: matins-versicle.mp3 }}
-        <p><em>Then, all standing to the end of the Psalmody, shall be sung or said responsively the Versicles here following, with the Gloria Patri. During the Penitential Seasons the Alleluia shall be omitted.</em></p>
+        <p><em>¶ The Versicles with the Gloria Patri shall be sung or said, the Congregation standing until the end of the Venite. The Hallelujah shall be omitted in Advent and Lent.</em></p>
         
         <p>℣: O Lord, open Thou my lips.<br>
         ℟: <strong>And my mouth shall show forth Thy praise.</strong></p>
@@ -23,9 +24,10 @@
         <p>℣: Make haste, O God, to deliver me.<br>
         ℟: <strong>Make haste to help me, O Lord.</strong></p>
         
-        <p>Glory be to the Father and to the Son and to the Holy Ghost:<br>
+        <p><strong> Glory be to the Father and to the Son and to the Holy Ghost:<br>
         As it was in the beginning, is now, and ever shall be, world without end. Amen.<br>
-        Alleluia.</p>
+        Alleluia.</strong>
+        </p>
         
         {{ audio: matins-gloria-patri.mp3 }}
     </div>
@@ -129,15 +131,21 @@
     <div class="{{ section_body_class }}">
         {{ audio: matins-lection-response.mp3 }}
         <p><em>Then shall be read The Lection. After each Lesson may be sung or said:</em></p>
-        
+         
+        {{ if ot }}
+            <h4>{{ot}}</h4>
+            <p>{{ ot_text }}</p>
+        {{ endif }}
+
+
         {{ if epistle }}
-            <h4>Epistle</h4>
-            {{ epistle_text }}
+            <h4>{{epistle}}</h4>
+            <p>{{ epistle_text }}</p>
         {{ endif }}
         
         {{ if gospel }}
-            <h4>Gospel</h4>
-            {{ gospel_text }}
+            <h4>{{gospel}}</h4>
+            <p>{{ gospel_text }}</p>
         {{ endif }}
         
         <p>℣: But Thou, O Lord, have mercy upon us.<br>
@@ -171,9 +179,7 @@
             {{ prayers_override }}
         </div>
     </div>
-{{ endif }}
-
-{{ if prayers_override == "default" }}
+{{ else }}
     <!-- Kyrie -->
     <div class="{{ section_class }}">
         <h3 class="{{ section_title_class }}">Kyrie</h3>
@@ -234,7 +240,7 @@
             <p>℟: <strong>Amen.</strong></p>
         </div>
     </div>
-
+{{ endif }}
 
 <!-- Benedicamus -->
 <div class="{{ section_class }}">
@@ -274,4 +280,3 @@
         <p>At the close of the Service silent prayer should be offered.</p>
     </div>
 </div>
-{{endif}}
