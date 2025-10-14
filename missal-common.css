@@ -198,7 +198,7 @@ label {
 }
 
 .select2-results__option--highlighted {
-	background: var(--amber-100) !important;
+	background: var(--amber-900) !important;
 }
 
 /* ============================================
