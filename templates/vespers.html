@@ -1,0 +1,239 @@
+<h2>{{ day_info.display }}</h2>
+
+<!-- Opening Hymn -->
+{{ if opening_hymn }}
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Opening Hymn</h3>
+    <p><em>¶ A Hymn of Invocation of the Holy Ghost or another Hymn may be sung.</em></p>
+    <div class="{{ section_body_class }}">
+        {{ opening_hymn }}
+    </div>
+</div>
+{{ endif }}
+
+<!-- Versicles -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">The Versicles</h3>
+    <div class="{{ section_body_class }}">
+        {{ audio: matins-versicle.mp3 }}
+        <p><em>¶ The Versicles with the Gloria Patri shall be sung or said, the Congregation standing until the end of the Psalmody. The Hallelujah shall be omitted in Advent and Lent.</em></p>
+        
+        <p>℣: O Lord, open Thou my lips.<br>
+        ℟: <strong>And my mouth shall show forth Thy praise.</strong></p>
+        
+        <p>℣: Make haste, O God, to deliver me.<br>
+        ℟: <strong>Make haste to help me, O Lord.</strong></p>
+        
+        <p><strong>Glory be to the Father and to the Son and to the Holy Ghost:<br>
+        As it was in the beginning, is now, and ever shall be, world without end. Amen.<br>
+        Alleluia.</strong></p>
+        
+        {{ audio: matins-gloria-patri.mp3 }}
+    </div>
+</div>
+
+<!-- Psalmody -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">The Psalmody</h3>
+    <div class="{{ section_body_class }}">
+        {{ if replace_with_introit }}
+            <h4>Introit</h4>
+            <p>{{ introit }}</p>
+        {{ else }}
+            {{ if psalm }}
+                <h4>{{ psalm }}</h4>
+                {{ psalm_text }}
+            {{ endif }}
+        {{ endif }}
+        
+        <p><em>At the end of each Psalm the Gloria Patri shall be sung or said. An Antiphon may be used with each Psalm.</em></p>
+    </div>
+</div>
+
+<!-- Lection -->
+<div class="{{ section_class }}">
+    <p><em>¶ The Congregation shall be seated, and then shall follow</em></p>
+    <h3 class="{{ section_title_class }}">The Lection</h3>
+    <div class="{{ section_body_class }}">
+        {{ audio: matins-lection-response.mp3 }}
+        <p><em>Then shall be read The Lection. After each Lesson may be sung or said:</em></p>
+         <p>℣: But Thou, O Lord, have mercy upon us.<br>
+        ℟: <strong>Thanks be to Thee, O Lord!</strong></p>
+        {{ if ot }}
+            <h4>{{ ot }}</h4>
+            <p>{{ ot_text }}</p>
+        {{ endif }}
+
+        {{ if epistle }}
+            <h4>{{ epistle }}</h4>
+            <p>{{ epistle_text }}</p>
+        {{ endif }}
+        
+        {{ if gospel }}
+            <h4>{{ gospel }}</h4>
+            <p>{{ gospel_text }}</p>
+        {{ endif }}
+        
+       
+    </div>
+</div>
+
+<!-- Responsory or Hymn -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Responsory and Hymn</h3>
+    <div class="{{ section_body_class }}">
+        <p><em>¶ After the Lection a Responsory may be sung</em></p>
+
+        <p><em>Then, a hymn may be sung</em></p>
+        
+    </div>
+</div>
+
+<!-- Sermon -->
+<div class="{{ section_class }}">
+    <p><em>¶ Then may follow a brief catechetical instruction on a portion of the Small Catechism or</em></p>
+    <h3 class="{{ section_title_class }}">The Sermon</h3>
+    <div class="{{ section_body_class }}">
+        <p><em>¶ The Sermon being concluded, the Offerings may then be gathered.</em></p>
+    </div>
+</div>
+
+<!-- Hymn -->
+<div class="{{ section_class }}">
+    <p><em>¶ Then shall be sung</em></p>
+    <h3 class="{{ section_title_class }}">The Hymn</h3>
+    <div class="{{ section_body_class }}">
+        {{ if chief_hymn }}
+            {{ chief_hymn }}
+        {{ endif }}
+    </div>
+</div>
+
+<!-- Versicle -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Versicle</h3>
+    <div class="{{ section_body_class }}">
+        <p><em>¶ Then, all standing, may be sung or said this Versicle. On Feast Days a special Versicle may be used.</em></p>
+        <p>℣: Let my prayer be set before Thee as incense:<br>
+        ℟: <strong>And the lifting up of my hands as the evening sacrifice.</strong></p>
+    </div>
+</div>
+
+<!-- Canticle -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Canticle</h3>
+    <div class="{{ section_body_class }}">
+        <p><em>¶ Then shall be sung or said The Canticle. An Antiphon may be sung or said with the Canticle. The Magnificat or the Nunc Dimittis may be used.</em></p>
+        {{ canticle }}
+    </div>
+</div>
+
+<!-- Prayers -->
+{{ if prayers_override != "default" }}
+    <div class="{{ section_class }}">
+        <h3 class="{{ section_title_class }}">Prayers</h3>
+        <div class="{{ section_body_class }}">
+            {{ prayers_override }}
+        </div>
+    </div>
+{{ else }}
+    <!-- Kyrie -->
+    <div class="{{ section_class }}">
+        <h3 class="{{ section_title_class }}">Kyrie</h3>
+        <div class="{{ section_body_class }}">
+            {{ audio: matins-kyrie.mp3 }}
+            <p><em>All shall sing or say The Kyrie.</em></p>
+            <p>
+            Lord, have mercy upon us.<br>
+            Christ, have mercy upon us.<br>
+            Lord, have mercy upon us.
+            </p>
+        </div>
+    </div>
+
+    <!-- Lord's Prayer -->
+    <div class="{{ section_class }}">
+        <h3 class="{{ section_title_class }}">Lord's Prayer</h3>
+        <div class="{{ section_body_class }}">
+            <p><em>Then all shall sing or say The Lord's Prayer.</em></p>
+            <p>Our Father who art in heaven, hallowed be Thy name; Thy kingdom come; Thy will be done on earth as it is in heaven; give us this day our daily bread; and forgive us our trespasses as we forgive those who trespass against us; and lead us not into temptation; but deliver us from evil; for Thine is the kingdom and the power and the glory forever and ever. Amen.</p>
+        </div>
+    </div>
+
+    <!-- Salutation -->
+    <div class="{{ section_class }}">
+        <h3 class="{{ section_title_class }}">Salutation</h3>
+        <div class="{{ section_body_class }}">
+            {{ audio: matins-salutation.mp3 }}
+            <p><em>Then shall be sung or said The Salutation.</em></p>
+            <p>
+            ℣: The Lord be with you.<br>
+            ℟: <strong>And with thy spirit.</strong><br>
+            Let us pray.
+            </p>
+        </div>
+    </div>
+
+    <!-- Collect for the Day -->
+    <div class="{{ section_class }}">
+        <h3 class="{{ section_title_class }}">Collect for the Day</h3>
+        <div class="{{ section_body_class }}">
+            {{ audio: matins-collect-amen.mp3 }}
+            <p><em>Then shall be sung or said the Collect for the Day. The Collect for the Sunday is used throughout the week following until Friday, but on Saturday the Collect for the following Sunday is used. Then may be sung or said any other Collects. A Versicle may be used with each Collect. After each Collect the Congregation shall sing or say: Amen.</em></p>
+            
+            {{ if collect_of_day }}
+                <h4>Collect</h4>
+                <p>{{ collect_of_day }}</p>
+            {{ endif }}
+        </div>
+    </div>
+
+    <!-- Collect for Peace -->
+    <div class="{{ section_class }}">
+        <h3 class="{{ section_title_class }}">Collect for Peace</h3>
+        <div class="{{ section_body_class }}">
+            <p><em>Then shall be sung or said The Collect for Peace.</em></p>
+            <p>O God, from whom all holy desires, all good counsels, and all just works do proceed, give unto Thy servants that peace which the world cannot give, that our hearts may be set to obey Thy commandments, and also that we, being defended by Thee from the fear of our enemies, may pass our time in peace and quietness; through the merits of Jesus Christ, our Savior, who liveth and reigneth with Thee and the Holy Ghost, ever one God, world without end.</p>
+            <p>℟: <strong>Amen.</strong></p>
+        </div>
+    </div>
+{{ endif }}
+
+<!-- Benedicamus -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Benedicamus</h3>
+    <div class="{{ section_body_class }}">
+        {{ audio: matins-benedicamus.mp3 }}
+        <p><em>Then may be sung or said The Benedicamus.</em></p>
+        <p>
+        ℣: Bless we the Lord.<br>
+        ℟: <strong>Thanks be to God.</strong>
+        </p>
+    </div>
+</div>
+
+<!-- Closing Hymn or Benediction -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Closing Hymn or Benediction</h3>
+    <div class="{{ section_body_class }}">
+        <p><em>The Service may end with the Benedicamus, or a Closing Hymn may be sung, after which may be said The Benediction.</em></p>
+        
+        {{ if closing_hymn }}
+            {{ closing_hymn }}
+        {{ endif }}
+        
+        {{ audio: matins-benediction.mp3 }}
+        <p>
+        ℣: The grace of the Lord ✠ Jesus Christ, and the love of God, and the communion of the Holy Ghost, be with you all.<br>
+        ℟: <strong>Amen.</strong>
+        </p>
+    </div>
+</div>
+
+<!-- Silent Prayer -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Silent Prayer</h3>
+    <div class="{{ section_body_class }}">
+        <p>At the close of the Service silent prayer should be offered.</p>
+    </div>
+</div>

@@ -1,0 +1,380 @@
+<h2>{{ day_info.display }}</h2>
+
+<!-- Opening Hymn -->
+{{ if opening_hymn }}
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Opening Hymn</h3>
+    <p><em>¶ A Hymn of Invocation of the Holy Ghost may be sung.</em></p>
+    <div class="{{ section_body_class }}">
+        {{ opening_hymn }}
+    </div>
+</div>
+{{ endif }}
+
+<!-- Invocation -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Invocation</h3>
+    <div class="{{ section_body_class }}">
+        {{ audio: tlh-divine-service-1-amen-i.mp3 }}
+        <p><em>¶ The Congregation shall rise, and the Minister, facing the Altar, shall say:</em></p>
+        <p>In the name of ✠ the Father, and of the Son, and of the Holy Ghost.<br>
+        ℟: <strong>Amen.</strong></p>
+    </div>
+</div>
+
+<!-- Confession of Sins -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Confession of Sins</h3>
+    <div class="{{ section_body_class }}">
+        <p><em>¶ Then shall be said, as here followeth, The Confession of Sins.</em></p>
+        <p>Beloved in the Lord! Let us draw near with a true heart, and confess our sins unto God, our Father, beseeching Him in the name of our Lord Jesus Christ to grant us forgiveness.</p>
+        
+        {{ audio: tlh-divine-service-2-qui-facet-caelum.mp3 }}
+        <p><em>¶ Then, all kneeling or standing, shall be chanted or said:</em></p>
+        <p>℣: Our help is in the name of the Lord.<br>
+        ℟: <strong>Who made heaven and earth.</strong></p>
+        
+        {{ audio: tlh-divine-service-3-et-tu-remisisti.mp3 }}
+        <p>℣: I said, I will confess my transgressions unto the Lord.<br>
+        ℟: <strong>And Thou forgavest the iniquity of my sin.</strong></p>
+        
+        <h4>First Form of Confession</h4>
+        <p><em>Then shall the Congregation say with the Minister:</em></p>
+        <p>O almighty God, merciful Father, I, a poor, miserable sinner, confess unto Thee all my sins and iniquities with which I have ever offended Thee, and justly deserved Thy temporal and eternal punishment. But I am heartily sorry for them, and sincerely repent of them, and I pray Thee, of Thy boundless mercy and for the sake of the holy, innocent, bitter sufferings and death of Thy beloved Son, Jesus Christ, to be gracious and merciful to me, a poor, sinful being. Amen.</p>
+        
+        {{ audio: tlh-divine-service-4-amen-ii.mp3 }}
+        <p><em>Then the Minister, standing, shall say:</em></p>
+        <p>Upon this your confession, I, by virtue of my office, as a called and ordained servant of the Word, announce the grace of God unto all of you who do heartily repent of your sins, believe in Jesus Christ, and sincerely and earnestly intend by the help of God the Holy Ghost henceforth to amend your sinful lives, and in the stead and by the command of my Lord Jesus Christ I forgive you all your sins, in the name of ✠ the Father, and of the Son, and of the Holy Ghost.</p>
+        <p>℟: <strong>Amen.</strong></p>
+    </div>
+</div>
+
+<!-- Introit -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Introit</h3>
+    <div class="{{ section_body_class }}">
+        <p><em>¶ Then, all standing, shall be said or chanted The Introit. The Introit with the Gloria Patri may be chanted by the Choir; or the Introit may be chanted or said by the Minister, and the Gloria Patri chanted or said by the Congregation. Instead of the Introit a Psalm or Hymn may be used.</em></p>
+        {{ if introit }}
+            <p>{{ introit }}</p>
+        {{ endif }}
+    </div>
+</div>
+
+<!-- Gloria Patri -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Gloria Patri</h3>
+    <div class="{{ section_body_class }}">
+        {{ audio: tlh-divine-service-5-gloria-patri.mp3 }}
+        <p><strong>Glory be to the Father, and to the Son, and to the Holy Ghost: as it was in the beginning, is now, and ever shall be, even unto the ages of the ages. Amen.</strong></p>
+    </div>
+</div>
+
+<!-- Kyrie -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Kyrie</h3>
+    <div class="{{ section_body_class }}">
+        {{ audio: tlh-divine-service-6-kyrie.mp3 }}
+        <p><em>¶ Then shall be said or chanted by the Minister and Congregation</em></p>
+        <p>
+        Lord, have mercy upon us.<br>
+        Christ, have mercy upon us.<br>
+        Lord, have mercy upon us.
+        </p>
+    </div>
+</div>
+
+<!-- Gloria in Excelsis -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Gloria in Excelsis</h3>
+    <div class="{{ section_body_class }}">
+        {{ audio: tlh-divine-service-7-gloria-in-excelsis.mp3 }}
+        <p><em>¶ Then may be sung the hymn "All Glory Be to God on High" or another suitable Hymn of Praise, or there shall be said or chanted</em></p>
+        <p>℣: Glory be to God on high!</p>
+        <p>℟: <strong>And on earth peace, good will toward men. We praise Thee, we bless Thee, we worship Thee, we glorify Thee, we give thanks to Thee for Thy great glory. O Lord God, heavenly King, God the Father Almighty.</strong></p>
+        <p><strong>O Lord, the only-begotten Son, Jesus Christ; O Lord God, Lamb of God, Son of the Father, that takest away the sin of the world, have mercy upon us. Thou that takest away the sin of the world, receive our prayer. Thou that sittest at the right hand of God the Father, have mercy upon us.</strong></p>
+        <p><strong>For Thou only art holy; Thou only art the Lord; Thou only, O Christ, with the Holy Ghost, art most high in the glory of God the Father. Amen.</strong></p>
+    </div>
+</div>
+
+<!-- Salutation -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Salutation</h3>
+    <div class="{{ section_body_class }}">
+        {{ audio: tlh-divine-service-8-et-cum-spiritus.mp3 }}
+        <p>℣: The Lord be with you.<br>
+        ℟: <strong>And with thy spirit.</strong></p>
+        <p>℣: Let us pray.</p>
+    </div>
+</div>
+
+<!-- Collect -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Collect</h3>
+    <div class="{{ section_body_class }}">
+        {{ audio: tlh-divine-service-9-amen-iii.mp3 }}
+        <p><em>¶ Then shall the minister chant or say The Collect.</em></p>
+        {{ if collect_of_day }}
+            <p>{{ collect_of_day }}</p>
+        {{ endif }}
+        <p>℟: <strong>Amen.</strong></p>
+    </div>
+</div>
+
+<!-- Lection (Epistle) -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Lection</h3>
+    <div class="{{ section_body_class }}">
+        <p><em>¶ Then shall the Minister read the Epistle for the Day. Other Scripture Lessons may be read before the Epistle, but the Epistle and Gospel for the Day shall always be read.</em></p>
+        
+        {{ if ot }}
+            <h4>{{ ot }}</h4>
+            <p>{{ ot_text }}</p>
+        {{ endif }}
+
+        {{ if epistle }}
+            <h4>The Epistle</h4>
+            <p><em>The Epistle for {{ day_info.display }} is written in {{ epistle }}</em></p>
+            <p>{{ epistle_text }}</p>
+            <p>Here endeth the Epistle.</p>
+        {{ endif }}
+    </div>
+</div>
+
+<!-- Gradual -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Gradual</h3>
+    <div class="{{ section_body_class }}">
+        {{ if gradual }}
+            <p>{{ gradual }}</p>
+        {{ endif }}
+    </div>
+</div>
+
+<!-- Alleluia -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">The Triple Hallelujah</h3>
+    <div class="{{ section_body_class }}">
+        <p><em>¶ Then shall be chanted or said, except in the Passion Season</em></p>
+        {{audio: tlh-divine-service-11-triple-hallelujah-a.mp3}}
+        <p><strong>Hallelujah! Hallelujah! Hallelujah!</strong></p>
+    </div>
+</div>
+
+<!-- Gospel -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Gospel</h3>
+    <div class="{{ section_body_class }}">
+        <p><em>¶ Then shall the Minister read The Gospel.</em></p>
+        {{ if gospel }}
+            <p><em>The Holy Gospel is written in {{ gospel }}</em></p>
+            {{audio: tlh-divine-service-13-gospel-acclamation.mp3}}
+            <p>℟: <strong>Glory be to Thee, O Lord.</strong></p>
+            <p>{{ gospel_text }}</p>
+            {{audio: tlh-divine-service-14-gospel-response.mp3}}
+            <p>Here endeth the Gospel.</p>
+            <p>℟: <strong>Praise be to Thee, O Christ.</strong></p>
+        {{ endif }}
+    </div>
+</div>
+
+<!-- Nicene Creed -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Nicene Creed</h3>
+    <div class="{{ section_body_class }}">
+        <p><em>¶ Then shall all stand and say The Nicene Creed, or The Apostles' Creed.</em></p>
+        <p>I believe in one God, the Father Almighty, Maker of heaven and earth and of all things visible and invisible.</p>
+        <p>And in one Lord Jesus Christ, the only-begotten Son of God, begotten of His Father before all worlds, God of God, Light of Light, Very God of Very God, Begotten, not made, Being of one substance with the Father, By whom all things were made; Who for us men and for our salvation came down from heaven And was incarnate by the Holy Ghost of the Virgin Mary And was made man; And was crucified also for us under Pontius Pilate. He suffered and was buried; And the third day He rose again according to the Scriptures; And ascended into heaven, And sitteth on the right hand of the Father; And He shall come again with glory to judge both the quick and the dead; Whose kingdom shall have no end.</p>
+        <p>And I believe in the Holy Ghost, The Lord and Giver of life, Who proceedeth from the Father and the Son, Who with the Father and the Son together is worshiped and glorified, Who spake by the Prophets. And I believe on holy Christian and Apostolic Church. I acknowledge one Baptism for the remission of sins; and I look for the resurrection of the dead, and the life of the world to come. Amen.</p>
+    </div>
+</div>
+
+<!-- Sermon -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">The Sermon</h3>
+    <div class="{{ section_body_class }}">
+        <p><em>¶ Then may a Hymn be sung, and the Minister shall go into the pulpit. After the Hymn shall follow The Sermon.</em></p>
+        {{ if chief_hymn }}
+            {{ chief_hymn }}
+        {{ endif }}
+        <p><em>¶ The Sermon ended, the Congregation shall rise, and the Minister shall say:</em></p>
+        <p>The peace of God, which passeth all understanding, keep your hearts and minds through Christ Jesus.</p>
+    </div>
+</div>
+
+<!-- Offertory -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Offertory</h3>
+    <div class="{{ section_body_class }}">
+        {{ audio: tlh-divine-service-15-offertory.mp3 }}
+        <p><em>¶ The Offertory shall then be chanted. One of the Offertories here following, or any other suitable Offertory, may be used.</em></p>
+        <p><strong>Create in me a clean heart, O God: and renew a right spirit within me.<br>
+        Cast me not away from Thy presence: and take not Thy Holy Spirit from me.<br>
+        Restore unto me the joy of Thy salvation: and uphold me with Thy free Spirit. Amen.</strong></p>
+    </div>
+</div>
+
+<!-- Collection -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Collection</h3>
+    <div class="{{ section_body_class }}">
+        <p><em>¶ The Congregation shall be seated, and the Offerings shall be gathered and brought to the Minister, who shall place them on the Altar.</em></p>
+    </div>
+</div>
+
+<!-- Prayers -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Prayers</h3>
+    <div class="{{ section_body_class }}">
+        <p><em>¶ Then shall the Minister make mention of any special petitions, intercessions, or thanksgivings which may have been requested. He may also make mention of the death of any member of the Congregation.</em></p>
+        <p><em>¶ Then shall follow the General Prayer. The prayer here following may be used, or, if there be no Communion, the Litany, or a selection from the Collects and Prayers, or any other suitable prayer.</em></p>
+    </div>
+</div>
+
+<!-- Lord's Prayer -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Lord's Prayer</h3>
+    <div class="{{ section_body_class }}">
+        {{ audio: tlh-divine-service-20-lord_s-prayer-doxology.mp3 }}
+        <p><em>¶ Then shall the Minister, and the Congregation with him, say</em></p>
+        <p>Our Father, who art in heaven; hallowed be Thy name; Thy kingdom come; Thy will be done on earth as it is in heaven; Give us this day our daily bread; and forgive us our trespasses, as we forgive those who trespass against us; and lead us not into temptation; but deliver us from evil. For Thine is the kingdom and the power and the glory forever and ever. Amen.</p>
+    </div>
+</div>
+
+<!-- Communion Service Note -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Communion Service</h3>
+    <div class="{{ section_body_class }}">
+        <p><em>¶ If there be no Communion, a Doxology may be sung, and the Service shall conclude with the Benediction.</em></p>
+        <p><em>¶ While the Hymn is sung, the Minister shall go to the Altar, make ready the Communion vessels, and prepare for the administration of the Holy Communion. The Hymn ended, the Congregation shall rise.</em></p>
+    </div>
+</div>
+
+<!-- Preface -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Preface</h3>
+    <div class="{{ section_body_class }}">
+        {{ audio: tlh-divine-service-16-preface-i.mp3 }}
+        <p>℣: The Lord be with you.<br>
+        ℟: <strong>And with thy spirit.</strong></p>
+        
+        {{ audio: tlh-divine-service-17-preface-ii.mp3 }}
+        <p>℣: Lift up your hearts.<br>
+        ℟: <strong>We lift them up unto the Lord.</strong></p>
+        
+        {{ audio: tlh-divine-service-18-preface-iii.mp3 }}
+        <p>℣: Let us give thanks unto the Lord, our God.<br>
+        ℟: <strong>It is meet and right so to do.</strong></p>
+        
+        <p>It is truly meet, right, and salutary that we should at all times and in all places give thanks unto Thee, O Lord, Holy Father, Almighty, Everlasting God:</p>
+    </div>
+</div>
+
+<!-- Proper Preface -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Proper Preface</h3>
+    <div class="{{ section_body_class }}">
+        <p><em>¶ Here shall follow the Proper Preface, according to the time, if there be any specially appointed, or else immediately shall follow,</em></p>
+        <p>Therefore with angels and archangels and with all the company of heaven we laud and magnify Thy glorious name, evermore praising Thee and saying:</p>
+    </div>
+</div>
+
+<!-- Sanctus -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Sanctus</h3>
+    <div class="{{ section_body_class }}">
+        {{ audio: tlh-divine-service-19-sanctus.mp3 }}
+        <p><strong>Holy, holy, holy, Lord God of Sabaoth! Heaven and earth are full of Thy glory. Hosanna in the highest!<br>
+        Blessed is He that cometh in the name of the Lord.<br>
+        Hosanna in the highest!</strong></p>
+    </div>
+</div>
+
+<!-- Words of Institution -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Words of Institution</h3>
+    <div class="{{ section_body_class }}">
+        <p><em>¶ Then the Minister, turning to the Altar, shall chant or say:</em></p>
+        <p>Our Lord Jesus Christ, the same night in which He was betrayed, took bread; <em>(Here he shall take the Plate with the Bread in his hand.)</em> and when He had given thanks, He brake it and gave it to His disciples, saying, Take, eat; this is My body, which is given for you. This do in remembrance of Me.</p>
+        <p>After the same manner also He took the cup <em>(Here he shall take the Cup in his hand.)</em> when He had supped, and when He had given thanks, He gave it to them, saying, Drink ye all of it; this cup is the new testament in My blood, which is shed for you for the remission of sins. This do, as oft as ye drink it, in remembrance of Me.</p>
+    </div>
+</div>
+
+<!-- Pax Domini -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Pax Domini</h3>
+    <div class="{{ section_body_class }}">
+        <p>℣: The peace of the Lord be with you always.<br>
+        ℟: <strong>Amen.</strong></p>
+    </div>
+</div>
+
+<!-- Distribution -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Distribution</h3>
+    <div class="{{ section_body_class }}">
+        <p><em>¶ The Minister shall distribute the Holy Communion to the communicants.</em></p>
+    </div>
+</div>
+
+<!-- Nunc Dimittis -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Nunc Dimittis</h3>
+    <div class="{{ section_body_class }}">
+        {{ audio: tlh-divine-service-23-nunc-dimittis.mp3 }}
+        <p><em>¶ Then, all standing, the Congregation may chant or say</em></p>
+        <p><strong>Lord, now lettest Thou Thy servant depart in peace according to Thy Word;<br>
+        For mine eyes have seen Thy salvation, which Thou hast prepared before the face of all people.<br>
+        A light to lighten the Gentiles; and the glory of Thy people Israel.<br>
+        Glory be to the Father and to the Son and to the Holy Ghost;<br>
+        As it was in the beginning, is now, and ever shall be, even unto the ages of the ages. Amen.</strong></p>
+    </div>
+</div>
+
+<!-- Thanksgiving -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Thanksgiving</h3>
+    <div class="{{ section_body_class }}">
+        {{ audio: tlh-divine-service-24-thanksgiving.mp3 }}
+        <p><em>¶ Then shall be chanted or said</em></p>
+        <p>℣: O give thanks unto the Lord, for He is good.<br>
+        ℟: <strong>And His mercy endureth forever.</strong></p>
+        <p>We give thanks to Thee, Almighty God, that Thou hast refreshed us through this salutary gift; and we beseech Thee that of Thy mercy Thou wouldst strengthen us through the same in faith toward Thee and in fervent love toward one another; through Jesus Christ, Thy dear Son, our Lord, who liveth and reigneth with Thee and the Holy Ghost, ever one God, even unto the ages of the ages.</p>
+        <p>℟: <strong>Amen.</strong></p>
+    </div>
+</div>
+
+<!-- Benedicamus -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Benedicamus</h3>
+    <div class="{{ section_body_class }}">
+        {{ audio: tlh-divine-service-26-salutation-(et-cum-spiritus).mp3 }}
+        <p><em>¶ Then may be chanted or said</em></p>
+        <p>℣: The Lord be with you.<br>
+        ℟: <strong>And with thy spirit.</strong></p>
+        
+        {{ audio: tlh-divine-service-27-benedicamus.mp3 }}
+        <p>℣: Bless we the Lord.<br>
+        ℟: <strong>Thanks be to God.</strong></p>
+    </div>
+</div>
+
+<!-- Benediction -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Benediction</h3>
+    <div class="{{ section_body_class }}">
+        {{ audio: tlh-divine-service-28-benediction.mp3 }}
+        <p><em>¶ Then shall the Minister say the words 2 Cor. 13:14, or</em></p>
+        <p>The Lord bless thee and keep thee.<br>
+        The Lord make His face shine upon thee and be gracious unto thee.<br>
+        The Lord lift up His countenance upon thee and give thee peace.</p>
+        <p>℟: <strong>Amen.</strong></p>
+    </div>
+</div>
+
+<!-- Silent Prayer -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Silent Prayer</h3>
+    <div class="{{ section_body_class }}">
+        <p>After the Benediction, the Congregation should offer silent prayer.</p>
+    </div>
+</div>
