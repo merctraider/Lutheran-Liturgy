@@ -44,7 +44,7 @@
         
         {{ audio: tlh-divine-service-4-amen-ii.mp3 }}
         <p><em>Then the Minister, standing, shall say:</em></p>
-        <p>Upon this your confession, I, by virtue of my office, as a called and ordained servant of the Word, announce the grace of God unto all of you who do heartily repent of your sins, believe in Jesus Christ, and sincerely and earnestly intend by the help of God the Holy Ghost henceforth to amend your sinful lives, and in the stead and by the command of my Lord Jesus Christ I forgive you all your sins, in the name of ✠ the Father, and of the Son, and of the Holy Ghost.</p>
+        <p>Upon this your confession, I, by virtue of my office, as a called and ordained servant of the Word, announce the grace of God unto all of you who do heartily repent of your sins, believe in Jesus Christ, and sincerely and earnestly purpose by the assistance of God the Holy Ghost henceforth to amend your sinful lives, and in the stead and by the command of my Lord Jesus Christ I forgive you all your sins, in the name of ✠ the Father, and of the Son, and of the Holy Ghost.</p>
         <p>℟: <strong>Amen.</strong></p>
     </div>
 </div>
@@ -58,16 +58,14 @@
             <p>{{ introit }}</p>
         {{ endif }}
     </div>
-</div>
-
-<!-- Gloria Patri -->
-<div class="{{ section_class }}">
     <h3 class="{{ section_title_class }}">Gloria Patri</h3>
     <div class="{{ section_body_class }}">
         {{ audio: tlh-divine-service-5-gloria-patri.mp3 }}
-        <p><strong>Glory be to the Father, and to the Son, and to the Holy Ghost: as it was in the beginning, is now, and ever shall be, even unto the ages of the ages. Amen.</strong></p>
+        <p><strong>Glory be to the Father, and to the Son, and to the Holy Ghost: as it was in the beginning, is now, and ever shall be, world without end. Amen.</strong></p>
     </div>
 </div>
+
+
 
 <!-- Kyrie -->
 <div class="{{ section_class }}">
@@ -132,7 +130,7 @@
         {{ endif }}
 
         {{ if epistle }}
-            <h4>The Epistle</h4>
+            <h4>The Epistle: {{epistle}}</h4>
             <p><em>The Epistle for {{ day_info.display }} is written in {{ epistle }}</em></p>
             <p>{{ epistle_text }}</p>
             <p>Here endeth the Epistle.</p>
@@ -227,6 +225,61 @@
     <div class="{{ section_body_class }}">
         <p><em>¶ Then shall the Minister make mention of any special petitions, intercessions, or thanksgivings which may have been requested. He may also make mention of the death of any member of the Congregation.</em></p>
         <p><em>¶ Then shall follow the General Prayer. The prayer here following may be used, or, if there be no Communion, the Litany, or a selection from the Collects and Prayers, or any other suitable prayer.</em></p>
+        <p>Almighty and most merciful God, the Father of our Lord Jesus Christ, we give Thee thanks for all Thy goodness and tender mercies, especially for the gift of Thy dear Son and for the revelation of Thy will and grace; and we beseech Thee so to implant Thy Word in us that in good and honest hearts we may keep it and bring forth fruit by patient continuance in well doing.</p>
+<p>Most heartily we beseech Thee so to rule and govern Thy Church
+Universal, with all its pastors and ministers, that we may be preserved in the
+pure doctrine of Thy saving Word, whereby faith toward Thee may be
+strengthened, charity increased in us toward all mankind, and Thy kingdom
+extended. Send forth laborers into Thy harvest, and sustain those whom
+Thou hast sent, that the Word of Reconciliation may be proclaimed to all
+people and the Gospel preached in all the world.
+</p>
+<p>Grant also health and prosperity to all that are in authority, especially to
+{{ if country == 'singapore' }}
+the President of the Republic of Singapore, the Prime Minister, our Members of Parliament, our Judges and Magistrates
+{{ else }}
+the President and Congress of the United States, the Governor and
+Legislature of this commonwealth, and to all our Judges and Magistrates,
+{{ endif }}
+    
+and endue them with grace to rule after Thy good pleasure, to the
+maintenance of righteousness and to the hindrance and punishment of
+wickedness, that we may lead a quiet and peaceable life in all godliness and
+honesty.
+</p>
+<p>May it please Thee also to turn the hearts of our enemies and adversaries
+that they may cease their enmity and be inclined to walk with us in
+meekness and in peace.
+</p>
+<p>All who are in trouble, want, sickness, anguish of labor, peril of death, or
+any other adversity, especially those who are in suffering for Thy name’s
+and for Thy truth’s sake, comfort, O God. with Thy Holy Spirit, that they
+may receive and acknowledge their afflictions as the manifestation of Thy
+fatherly will</p>
+<p>And although we have deserved Thy righteous wrath and manifold
+punishments, yet, we entreat Thee, O most merciful Father, remember not
+the sins of our youth nor our many transgressions, but out of Thine unspeakable goodness, grace, and mercy defend us from all harm and
+danger of body and soul. Preserve us from false and pernicious doctrine,
+from war and bloodshed, from plague and pestilence, from all calamity by
+fire and water, from hail and tempest, from failure of harvest and from
+famine, from anguish of heart and despair of Thy mercy, and from an evil
+death. And in every time of trouble show Thyself a very present Help, the
+Savior of all men, and especially of them that believe.</p>
+<p>
+    Cause all needful fruits of the earth to prosper, that we may enjoy them
+in due season. Give success to the Christian training of the young, to all
+lawful occupations on land and sea, and to all pure arts and useful
+knowledge; and crown them with Thy blessing.
+</p>
+<p>
+    Receive, O God, our bodies and souls and all our talents, together with
+the offerings we bring before Thee, for Thou hast purchased us to be Thine
+own, that we may live unto Thee.
+
+</p>
+<p><em>Here special Supplications, Intercessions, and Prayers may be made</em></p>
+<p>These and whatsoever other things Thou wouldst have us ask of Thee, O God, grant unto us for the sake of the bitter sufferings and death of Jesus Christ, Thine only Son, our Lord and Savior, who liveth and reigneth with Thee and the Holy Ghost, ever one God, world without end. Amen.</p>
+    
     </div>
 </div>
 
@@ -240,6 +293,17 @@
     </div>
 </div>
 
+{{ if post_prayer_hymn }}
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">The Hymn</h3>
+    <p><em>¶ Then may a Hymn be sung</em></p>
+    <div class="{{ section_body_class }}">
+        {{ post_prayer_hymn }}
+    </div>
+</div>
+{{ endif }}
+
+
 <!-- Communion Service Note -->
 <div class="{{ section_class }}">
     <h3 class="{{ section_title_class }}">Communion Service</h3>
@@ -248,7 +312,16 @@
         <p><em>¶ While the Hymn is sung, the Minister shall go to the Altar, make ready the Communion vessels, and prepare for the administration of the Holy Communion. The Hymn ended, the Congregation shall rise.</em></p>
     </div>
 </div>
-
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">The Exhortation</h3>
+    <div class="{{ section_body_class }}">
+        <p>Dearly beloved: Forasmuch as we purpose to come to the Holy Supper of our, Lord Jesus Christ, it becometh us diligently to examine ourselves, as St. Paul exhorteth us. For this holy Sacrament hath been instituted for the special comfort and strengthening of those who humbly confess their sins and hunger and thirst after righteousness.</p>
+        <p>But if we thus examine ourselves, we shall find nothing in us but sin and death, from which we can in no wise set ourselves free. Therefore our Lord Jesus Christ hath had mercy upon us and hath taken upon Himself our nature, that so He might fulfill for us the whole will and Law of God and for us and for our deliverance suffer death and all that we by our sins have deserved. And to the end that we should the more confidently believe this and be strengthened by our faith in a cheerful obedience to His holy will, He hath instituted the holy Sacrament of His supper, in which He feedeth us with His body and giveth us to drink of His blood.</p>
+        <p>Therefore, whoso eateth of this bread and drinketh of this cup, firmly believing the words of Christ, dwelleth in Christ, and Christ in him, and hath eternal life.</p>
+        <p>We should do this also in remembrance of Him, showing His death, that He was delivered for our offenses and raised again for our justification, and rendering unto Him most hearty thanks for the same, take up our cross and follow Him, and, according to His commandment, love one another even as He hath loved us. For we are all one bread and one body, even as we are all partakers of this one bread and drink of this one cup.</p>
+    
+    </div>
+</div>
 <!-- Preface -->
 <div class="{{ section_class }}">
     <h3 class="{{ section_title_class }}">Preface</h3>
@@ -289,9 +362,20 @@
     </div>
 </div>
 
+
+<!-- Lord's Prayer -->
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">Lord's Prayer</h3>
+    <div class="{{ section_body_class }}">
+        {{ audio: tlh-divine-service-20-lord_s-prayer-doxology.mp3 }}
+        <p><em>¶ Then shall the Minister, and the Congregation with him, say</em></p>
+        <p>Our Father, who art in heaven; hallowed be Thy name; Thy kingdom come; Thy will be done on earth as it is in heaven; Give us this day our daily bread; and forgive us our trespasses, as we forgive those who trespass against us; and lead us not into temptation; but deliver us from evil. For Thine is the kingdom and the power and the glory forever and ever. Amen.</p>
+    </div>
+</div>
+
 <!-- Words of Institution -->
 <div class="{{ section_class }}">
-    <h3 class="{{ section_title_class }}">Words of Institution</h3>
+    <h3 class="{{ section_title_class }}">The Verba Domini</h3>
     <div class="{{ section_body_class }}">
         <p><em>¶ Then the Minister, turning to the Altar, shall chant or say:</em></p>
         <p>Our Lord Jesus Christ, the same night in which He was betrayed, took bread; <em>(Here he shall take the Plate with the Bread in his hand.)</em> and when He had given thanks, He brake it and gave it to His disciples, saying, Take, eat; this is My body, which is given for you. This do in remembrance of Me.</p>
@@ -308,11 +392,26 @@
     </div>
 </div>
 
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">The Agnus Dei</h3>
+    <div class="{{ section_body_class }}">
+        {{ audio:tlh-divine-service-22-agnus-dei.mp3 }}
+        <p>O Christ. Thou Lamb of God, that takest away the sin of the world, have mercy upon us.</p>
+        <p>O Christ. Thou Lamb of God, that takest away the sin of the world, have mercy upon us.</p>
+        <p>O Christ. Thou Lamb of God, that takest away the sin of the world, grant us Thy peace.</p>
+        <p>Amen.</p>
+    </div>
+</div>
+
 <!-- Distribution -->
 <div class="{{ section_class }}">
     <h3 class="{{ section_title_class }}">Distribution</h3>
     <div class="{{ section_body_class }}">
         <p><em>¶ The Minister shall distribute the Holy Communion to the communicants.</em></p>
+        <p><em>During the Distribution the Congregation may sing one or more hymns</em></p>
+        {{ if communion_hymn }}
+                {{ communion_hymn }}
+        {{ endif }}
     </div>
 </div>
 
@@ -326,7 +425,7 @@
         For mine eyes have seen Thy salvation, which Thou hast prepared before the face of all people.<br>
         A light to lighten the Gentiles; and the glory of Thy people Israel.<br>
         Glory be to the Father and to the Son and to the Holy Ghost;<br>
-        As it was in the beginning, is now, and ever shall be, even unto the ages of the ages. Amen.</strong></p>
+        As it was in the beginning, is now, and ever shall be, world without end. Amen.</strong></p>
     </div>
 </div>
 
@@ -342,6 +441,17 @@
         <p>℟: <strong>Amen.</strong></p>
     </div>
 </div>
+
+
+{{ if post_communion_hymn }}
+<div class="{{ section_class }}">
+    <h3 class="{{ section_title_class }}">The Hymn</h3>
+    <p><em>¶ Then may a Hymn be sung</em></p>
+    <div class="{{ section_body_class }}">
+        {{ post_communion_hymn }}
+    </div>
+</div>
+{{ endif }}
 
 <!-- Benedicamus -->
 <div class="{{ section_class }}">
@@ -367,7 +477,7 @@
         <p>The Lord bless thee and keep thee.<br>
         The Lord make His face shine upon thee and be gracious unto thee.<br>
         The Lord lift up His countenance upon thee and give thee peace.</p>
-        <p>℟: <strong>Amen.</strong></p>
+        <p>℟: <strong>Amen. Amen. Amen.</strong></p>
     </div>
 </div>
 
