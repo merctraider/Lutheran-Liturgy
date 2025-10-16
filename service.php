@@ -11,26 +11,22 @@ if (!$validation['valid']) {
     die('Missing required parameters: ' . implode(', ', $validation['missing']));
 }
 
-// Extract settings
-$date = $settings['date'];
-$order_of_service = $settings['order_of_service'];
-$opening_hymn = $settings['opening_hymn'];
-$chief_hymn = $settings['chief_hymn'] ?? 'default';
-$canticle = $settings['canticle'] ?? 'magnificat';
-$replace_psalm = $settings['replace_psalm'] ?? false;
-$prayers = $settings['override_prayers'];
-$day_type = $settings['day_type'] ?? 'default';
+// Prepare title
+$title = ucfirst(str_replace('_', ' ', $settings['order_of_service'])) . ' for ' . date_format(date_create($settings['date']), 'M d Y');
 
-$title = ucfirst(str_replace('_', ' ', $order_of_service)) . ' for ' . date_format(date_create($date), 'M d Y');
-
+// Prepare section classes
 $section_classes = [
     'section_class' => "card-body",
     'section_title_class' => 'card-title',
     'section_body_class' => 'card-text'
 ];
 
+// Add section classes to settings
+$settings['section_classes'] = $section_classes;
+
+// Build the service - just pass settings directly!
 require_once 'class-ServiceBuilder.php'; 
-$service = ServiceBuilder::BuildService(new \DateTime($date), $order_of_service, $canticle, [$opening_hymn, $chief_hymn], $replace_psalm, $prayers, $section_classes, $day_type);
+$service = ServiceBuilder::BuildService($settings);
 
 // Generate shareable URL with encoded parameters
 $shareableURL = ServiceURLHelper::generateURL($settings, $_SERVER['PHP_SELF']);
@@ -64,102 +60,58 @@ $shareableURL = ServiceURLHelper::generateURL($settings, $_SERVER['PHP_SELF']);
             text-align: center;
         }
         
+        .share-section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+        
         .share-url {
-            font-family: 'Courier New', monospace;
-            background: #fefdfb;
-            padding: 10px;
-            border: 1px solid #d4c5a9;
-            display: inline-block;
-            margin: 10px 0;
-            word-break: break-all;
+            font-family: monospace;
             font-size: 0.9rem;
+            padding: 8px 12px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            word-break: break-all;
         }
         
-        .copy-btn {
-            background: #1a1a1a;
-            color: #fefdfb;
-            border: none;
-            padding: 8px 20px;
-            font-family: 'Garamond', 'Georgia', serif;
-            cursor: pointer;
-            margin-left: 10px;
-            transition: all 0.3s;
-        }
-        
-        .copy-btn:hover {
-            background: #000;
-        }
-        
-        .copy-btn.copied {
-            background: #2d5016;
-        }
-        
-        /* Print styles */
-        @media print {
-            .container {
-                box-shadow: none;
-                border: none;
-            }
-            
-            .card-body {
-                page-break-inside: avoid;
-            }
-            
-            .share-section {
-                display: none;
-            }
+        .copy-button {
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="container mt-5 mx-auto">
-        <div class="my-3">
-            <h1 class="card-body-centered"><?php echo $title ?></h1>
-            
-            <!-- Shareable URL Section -->
-            <div class="share-section card-body-centered">
-                <p><strong>Share this service:</strong></p>
-                <button class="copy-btn" onclick="copyURL()">Copy Link</button>
-            </div>
-            
-            <div class="card-body-centered">
-                <?php echo $service ?>
-            </div>
+    <div class="container mt-4">
+        
+        
+        <!-- Service Content -->
+        <?php echo $service; ?>
+
+        <!-- Share URL Section -->
+        <div class="share-section">
+            <h3>Share This Service</h3>
+            <div class="share-url" id="shareUrl"><?php echo htmlspecialchars($shareableURL); ?></div>
+            <button class="btn btn-sm btn-primary copy-button" onclick="copyShareURL()">Copy URL</button>
         </div>
     </div>
-
-    <!-- Bootstrap scripts -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     
     <script>
-        function copyURL() {
+        function copyShareURL() {
             const urlText = document.getElementById('shareUrl').textContent;
-            const btn = event.target;
-            
-            // Create temporary input
-            const tempInput = document.createElement('input');
-            tempInput.value = urlText;
-            document.body.appendChild(tempInput);
-            
-            // Select and copy
-            tempInput.select();
-            tempInput.setSelectionRange(0, 99999); // For mobile
-            document.execCommand('copy');
-            
-            // Remove temporary input
-            document.body.removeChild(tempInput);
-            
-            // Show feedback
-            const originalText = btn.textContent;
-            btn.textContent = 'Copied!';
-            btn.classList.add('copied');
-            
-            setTimeout(() => {
-                btn.textContent = originalText;
-                btn.classList.remove('copied');
-            }, 2000);
+            navigator.clipboard.writeText(urlText).then(function() {
+                const btn = document.querySelector('.copy-button');
+                const originalText = btn.textContent;
+                btn.textContent = 'Copied!';
+                btn.classList.add('btn-success');
+                btn.classList.remove('btn-primary');
+                
+                setTimeout(function() {
+                    btn.textContent = originalText;
+                    btn.classList.add('btn-primary');
+                    btn.classList.remove('btn-success');
+                }, 2000);
+            });
         }
     </script>
 </body>

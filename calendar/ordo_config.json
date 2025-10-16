@@ -2,58 +2,112 @@
   "matins": {
     "display": "Matins",
     "fields": [
-      "opening_hymn",
-      "chief_hymn",
-      "canticle",
-      "replace_psalm",
-      "prayers"
-    ],
-    "canticle_options": [
-      {"value": "te_deum", "label": "Te Deum"},
-      {"value": "benedictus", "label": "Benedictus"}
-    ],
-    "default_canticle": "te_deum",
-    "prayer_options": [
-      {"value": "default", "label": "Default (According to the Order)"},
-      {"value": "litany", "label": "Litany"},
-      {"value": "suffrages", "label": "Suffrages"},
-      {"value": "morning_suffrages", "label": "Morning Suffrages"},
-      {"value": "bidding", "label": "Bidding Prayer"}
+      {
+        "name": "opening_hymn",
+        "type": "hymn_select",
+        "label": "Opening Hymn",
+        "required": true
+      },
+      {
+        "name": "chief_hymn",
+        "type": "hymn_select",
+        "label": "Chief Hymn",
+        "required": false
+      },
+      {
+        "name": "canticle",
+        "type": "select",
+        "label": "Canticle",
+        "required": true,
+        "options": [
+          {"value": "te_deum", "label": "Te Deum"},
+          {"value": "benedictus", "label": "Benedictus"}
+        ],
+        "default": "te_deum"
+      },
+      {
+        "name": "replace_psalm",
+        "type": "checkbox",
+        "label": "Replace Psalm with Introit",
+        "required": false
+      },
+      {
+        "name": "prayers",
+        "type": "select",
+        "label": "Prayers",
+        "required": true,
+        "options": [
+          {"value": "default", "label": "Default (According to the Order)"},
+          {"value": "litany", "label": "Litany"},
+          {"value": "suffrages", "label": "Suffrages"},
+          {"value": "morning_suffrages", "label": "Morning Suffrages"},
+          {"value": "bidding", "label": "Bidding Prayer"}
+        ]
+      }
     ]
   },
   "vespers": {
     "display": "Vespers",
     "fields": [
-      "opening_hymn",
-      "chief_hymn",
-      "canticle",
-      "replace_psalm",
-      "prayers"
-    ],
-    "canticle_options": [
-      {"value": "magnificat", "label": "Magnificat"},
-      {"value": "nunc_dimittis", "label": "Nunc Dimittis"}
-    ],
-    "default_canticle": "magnificat",
-    "prayer_options": [
-      {"value": "default", "label": "Default (According to the Order)"},
-      {"value": "litany", "label": "Litany"},
-      {"value": "suffrages", "label": "Suffrages"},
-      {"value": "evening_suffrages", "label": "Evening Suffrages"},
-      {"value": "bidding", "label": "Bidding Prayer"}
+      {
+        "name": "opening_hymn",
+        "type": "hymn_select",
+        "label": "Opening Hymn",
+        "required": true
+      },
+      {
+        "name": "chief_hymn",
+        "type": "hymn_select",
+        "label": "Chief Hymn",
+        "required": false
+      },
+      {
+        "name": "canticle",
+        "type": "select",
+        "label": "Canticle",
+        "required": true,
+        "options": [
+          {"value": "magnificat", "label": "Magnificat"},
+          {"value": "nunc_dimittis", "label": "Nunc Dimittis"}
+        ],
+        "default": "magnificat"
+      },
+      {
+        "name": "replace_psalm",
+        "type": "checkbox",
+        "label": "Replace Psalm with Introit",
+        "required": false
+      },
+      {
+        "name": "prayers",
+        "type": "select",
+        "label": "Prayers",
+        "required": true,
+        "options": [
+          {"value": "default", "label": "Default (According to the Order)"},
+          {"value": "litany", "label": "Litany"},
+          {"value": "suffrages", "label": "Suffrages"},
+          {"value": "evening_suffrages", "label": "Evening Suffrages"},
+          {"value": "bidding", "label": "Bidding Prayer"}
+        ]
+      }
     ]
   },
   "chief_service": {
     "display": "Chief Service",
     "fields": [
-      "opening_hymn",
-      "chief_hymn",
-      "prayers"
-    ],
-    "prayer_options": [
-      {"value": "default", "label": "Default (According to the Order)"},
-      {"value": "litany", "label": "Litany"},
-      {"value": "bidding", "label": "Bidding Prayer"}
+      {
+        "name": "opening_hymn",
+        "type": "hymn_select",
+        "label": "Opening Hymn",
+        "required": true
+      },
+      {
+        "name": "chief_hymn",
+        "type": "hymn_select",
+        "label": "Chief Hymn",
+        "required": false
+      }
     ]
   }
 }

@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css">
 	<link rel="stylesheet" href="missal-common.css">
+	<script src="js/field-renderer.js"></script>
 </head>
 
 <body>
@@ -252,32 +253,13 @@
 
 			// Render dynamic settings fields
 			function renderSettingsFields(config) {
-				let html = '';
-
-				config.fields.forEach(function(field) {
-					switch (field) {
-						case 'opening_hymn':
-							html += renderHymnField('opening_hymn', 'Opening Hymn', true);
-							break;
-						case 'chief_hymn':
-							html += renderHymnField('chief_hymn', 'Chief Hymn', false);
-							break;
-						case 'canticle':
-							html += renderCanticleField(config.canticle_options, config.default_canticle);
-							break;
-						case 'replace_psalm':
-							html += renderReplacePsalmField();
-							break;
-						case 'prayers':
-							html += renderPrayersField(config.prayer_options);
-							break;
-					}
-				});
+				// Use the new renderFieldsFromConfig function from field-renderer.js
+				const html = renderFieldsFromConfig(config, hymnsData);
 
 				$('#settings-fields-container').html(html);
 
-				// Initialize select2 on hymn selects
-				$('select.hymn').select2();
+				// Initialize any widgets (select2, etc.)
+				initializeFieldWidgets();
 			}
 
 			function renderHymnField(name, label, required) {

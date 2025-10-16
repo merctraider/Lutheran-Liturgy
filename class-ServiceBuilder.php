@@ -4,24 +4,57 @@ use Lutherald\BibleGateway;
 
 class ServiceBuilder
 {
-    public static function BuildService(
-        $date, 
-        $order, 
-        $canticle, 
-        $hymns = [], 
-        $replace_with_introit = true, 
-        $prayers = 'default', 
-        $section_classes = [],
-        $day_type = 'default'  
-        )
-        
+    /**
+     * Build a service using array-based configuration
+     * 
+     * @param array $config Service configuration array with keys:
+     *   - date: DateTime|string (required)
+     *   - order OR order_of_service: string (required) - Order of service type
+     *   - canticle: string (optional, default: 'magnificat')
+     *   - hymns OR opening_hymn/chief_hymn: array or individual hymns
+     *   - replace_with_introit OR replace_psalm: bool (optional, default: true)
+     *   - prayers OR override_prayers: string (optional, default: 'default')
+     *   - section_classes: array (optional) - CSS classes for sections
+     *   - day_type: string (optional, default: 'default') - Day type: 'default', 'feast', or 'ember'
+     * 
+     * @return string Rendered service HTML
+     */
+    public static function BuildService(array $config)
     {
-        $default_section_classes = array(
+        // Normalize settings keys (support both form field names and ServiceBuilder names)
+        $config = self::normalizeConfig($config);
+        
+        // Extract and validate required parameters
+        if (!isset($config['date']) || !isset($config['order'])) {
+            throw new \InvalidArgumentException('Missing required parameters: date and order');
+        }
+        
+        // Set defaults for optional parameters
+        $defaults = [
+            'canticle' => 'magnificat',
+            'hymns' => [],
+            'replace_with_introit' => true,
+            'prayers' => 'default',
+            'section_classes' => [],
+            'day_type' => 'default'
+        ];
+        
+        // Merge with defaults
+        $config = array_merge($defaults, $config);
+        
+        // Process date
+        $date = $config['date'];
+        if (is_string($date)) {
+            $date = new \DateTime($date);
+        }
+        
+        // Process section classes
+        $default_section_classes = [
             "section_class" => "",
             "section_title_class" => "",
             "section_body_class" => ""
-        );
-        $section_classes = array_merge($default_section_classes, $section_classes);
+        ];
+        $section_classes = array_merge($default_section_classes, $config['section_classes']);
         
         require_once __DIR__ . '/calendar/class-lutherald-ChurchYear.php';
         require_once __DIR__ . '/class-lutherald-BibleGateway.php'; 
@@ -29,10 +62,9 @@ class ServiceBuilder
         
         // Get church calendar info
         $calendar = \Lutherald\ChurchYear::create_church_year($date);
-        $day_info = $calendar->retrieve_day_info($date);
 
         // Get day info based on day_type
-        if ($day_type === 'feast') {
+        if ($config['day_type'] === 'feast') {
             // Get feast day information
             $day_info = $calendar->get_festival($date);
             $readings = []; 
@@ -55,10 +87,10 @@ class ServiceBuilder
         // Prepare context data for template
         $context = [
             'day_info' => $day_info,
-            'order' => $order,
-            'canticle' => $canticle,
-            'replace_with_introit' => $replace_with_introit,
-            'prayers_override' => $prayers,
+            'order' => $config['order'],
+            'canticle' => $config['canticle'],
+            'replace_with_introit' => $config['replace_with_introit'],
+            'prayers_override' => $config['prayers'],
             
             // Section CSS classes
             'section_class' => $section_classes['section_class'],
@@ -66,14 +98,14 @@ class ServiceBuilder
             'section_body_class' => $section_classes['section_body_class'],
             
             // Hymns
-            'opening_hymn' => self::prepareHymn($hymns[0], $hymnal),
-            'chief_hymn' => self::prepareChiefHymn($hymns[1], $day_info, $hymnal),
-            'closing_hymn' => isset($hymns[2])? self::prepareHymn($hymns[0], $hymnal) : null,
+            'opening_hymn' => self::prepareHymn($config['hymns'][0] ?? null, $hymnal),
+            'chief_hymn' => self::prepareChiefHymn($config['hymns'][1] ?? null, $day_info, $hymnal),
+            'closing_hymn' => isset($config['hymns'][2]) ? self::prepareHymn($config['hymns'][2], $hymnal) : null,
             
             // Psalmody
             'introit' => isset($day_info['introit']) ? $day_info['introit'] : null,
-            'psalm' => self::getPsalmReference($day_info, $order),
-            'psalm_text' => self::getPsalmText($day_info, $order),
+            'psalm' => self::getPsalmReference($day_info, $config['order']),
+            'psalm_text' => self::getPsalmText($day_info, $config['order']),
             
             // Lections
             'ot' => isset($day_info['readings'][2]) ? $day_info['readings'][2] : null,
@@ -102,9 +134,69 @@ class ServiceBuilder
             $context['prayers_override'] = $engine->render('prayers/' . $context['prayers_override'], $context);
         }
         
-        return $engine->render($order, $context);
+        return $engine->render($config['order'], $context);
     }
 
+    /**
+     * Normalize configuration keys from form field names to ServiceBuilder names
+     * This allows passing the settings array directly without manual mapping
+     */
+    private static function normalizeConfig(array $config) {
+        $normalized = [];
+        
+        // Map form field names to ServiceBuilder keys
+        $keyMap = [
+            'order_of_service' => 'order',
+            'override_prayers' => 'prayers',
+            'replace_psalm' => 'replace_with_introit'
+        ];
+        
+        foreach ($config as $key => $value) {
+            // Use mapped key if it exists, otherwise use original key
+            $normalizedKey = $keyMap[$key] ?? $key;
+            $normalized[$normalizedKey] = $value;
+        }
+        
+        // Build hymns array from individual hymn fields if not already an array
+        if (!isset($normalized['hymns']) || !is_array($normalized['hymns'])) {
+            $normalized['hymns'] = [
+                $normalized['opening_hymn'] ?? null,
+                $normalized['chief_hymn'] ?? null,
+                $normalized['closing_hymn'] ?? null
+            ];
+        }
+        
+        return $normalized;
+    }
+
+    /**
+     * LEGACY METHOD - For backward compatibility
+     * Build a service using individual parameters (deprecated)
+     * 
+     * @deprecated Use BuildService(array $config) instead
+     */
+    public static function BuildServiceLegacy(
+        $date, 
+        $order, 
+        $canticle, 
+        $hymns = [], 
+        $replace_with_introit = true, 
+        $prayers = 'default', 
+        $section_classes = [],
+        $day_type = 'default'  
+    ) {
+        // Convert to array format and call new method
+        return self::BuildService([
+            'date' => $date,
+            'order' => $order,
+            'canticle' => $canticle,
+            'hymns' => $hymns,
+            'replace_with_introit' => $replace_with_introit,
+            'prayers' => $prayers,
+            'section_classes' => $section_classes,
+            'day_type' => $day_type
+        ]);
+    }
     
     /**
      * Prepare hymn HTML

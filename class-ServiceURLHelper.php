@@ -102,7 +102,7 @@ class ServiceURLHelper {
      * @return array ['valid' => bool, 'missing' => array]
      */
     public static function validateSettings($settings) {
-        $required = ['date', 'order_of_service', 'opening_hymn', 'override_prayers'];
+        $required = ['date', 'order_of_service'];
         $missing = [];
         
         foreach ($required as $field) {
