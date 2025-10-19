@@ -23,6 +23,7 @@ class ServiceBuilder
     {
         // Normalize settings keys (support both form field names and ServiceBuilder names)
         $config = self::normalizeConfig($config);
+      
         
         // Extract and validate required parameters
         if (!isset($config['date']) || !isset($config['order'])) {
@@ -98,9 +99,9 @@ class ServiceBuilder
             'section_body_class' => $section_classes['section_body_class'],
             
             // Hymns
-            'opening_hymn' => self::prepareHymn($config['hymns'][0] ?? null, $hymnal),
-            'chief_hymn' => self::prepareChiefHymn($config['hymns'][1] ?? null, $day_info, $hymnal),
-            'closing_hymn' => isset($config['hymns'][2]) ? self::prepareHymn($config['hymns'][2], $hymnal) : null,
+            'opening_hymn' => self::prepareHymn($config['opening_hymn'] ?? null, $hymnal),
+            'chief_hymn' => self::prepareChiefHymn($config['chief_hymn'] ?? null, $day_info, $hymnal),
+            'closing_hymn' => self::prepareHymn($config['closing_hymn']?? null, $hymnal),
             
             // Psalmody
             'introit' => isset($day_info['introit']) ? $day_info['introit'] : null,
@@ -140,6 +141,7 @@ class ServiceBuilder
     /**
      * Normalize configuration keys from form field names to ServiceBuilder names
      * This allows passing the settings array directly without manual mapping
+     * Dynamically builds arrays based on field types from ordo_config.json
      */
     private static function normalizeConfig(array $config) {
         $normalized = [];
@@ -157,16 +159,23 @@ class ServiceBuilder
             $normalized[$normalizedKey] = $value;
         }
         
-        // Build hymns array from individual hymn fields if not already an array
-        if (!isset($normalized['hymns']) || !is_array($normalized['hymns'])) {
-            $normalized['hymns'] = [
-                $normalized['opening_hymn'] ?? null,
-                $normalized['chief_hymn'] ?? null,
-                $normalized['closing_hymn'] ?? null
-            ];
-        }
+        
         
         return $normalized;
+    }
+    
+    /**
+     * Load ordo configuration from JSON file
+     */
+    private static function loadOrdoConfig() {
+        static $config = null;
+        
+        if ($config === null) {
+            $json = file_get_contents(__DIR__ . '/calendar/ordo_config.json');
+            $config = json_decode($json, true);
+        }
+        
+        return $config;
     }
 
     /**

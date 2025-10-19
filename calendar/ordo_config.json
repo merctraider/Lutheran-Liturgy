@@ -6,12 +6,18 @@
         "name": "opening_hymn",
         "type": "hymn_select",
         "label": "Opening Hymn",
-        "required": true
+        "required": false
       },
       {
         "name": "chief_hymn",
         "type": "hymn_select",
         "label": "Chief Hymn",
+        "required": true
+      },
+      {
+        "name": "closing_hymn",
+        "type": "hymn_select",
+        "label": "Closing Hymn",
         "required": false
       },
       {
@@ -53,12 +59,18 @@
         "name": "opening_hymn",
         "type": "hymn_select",
         "label": "Opening Hymn",
-        "required": true
+        "required": false
       },
       {
         "name": "chief_hymn",
         "type": "hymn_select",
         "label": "Chief Hymn",
+        "required": true
+      },
+      {
+        "name": "closing_hymn",
+        "type": "hymn_select",
+        "label": "Closing Hymn",
         "required": false
       },
       {
@@ -97,15 +109,49 @@
     "display": "Chief Service",
     "fields": [
       {
+        "name": "responsive_psalm",
+        "type": "select",
+        "label": "Add Responsive Psalm after Old Testament Reading",
+        "required": true,
+        "options": [
+          {"value": "default", "label": "Default (No responsive psalm)"},
+         {"value": "matins", "label": "Use Psalm from Matins"},
+         {"value": "vespers", "label": "Use Psalm from Vespers"}
+        ]
+      },
+      {
         "name": "opening_hymn",
         "type": "hymn_select",
         "label": "Opening Hymn",
-        "required": true
+        "required": false
       },
       {
         "name": "chief_hymn",
         "type": "hymn_select",
         "label": "Chief Hymn",
+        "required": true
+      },
+      {
+        "name": "post_prayer_hymn",
+        "type": "hymn_select",
+        "label": "Post Prayer Hymn",
+        "required": false
+      },
+      {
+        "name": "communion_hymn",
+        "type": "hymn_select",
+        "label": "Communion Hymn",
+        "required": false
+      },
+      {
+        "name": "post_communion_hymn",
+        "type": "hymn_select",
+        "label": "Post-Communion Hymn",
+        "required": false
+      },{
+        "name": "closing_hymn",
+        "type": "hymn_select",
+        "label": "Closing Hymn",
         "required": false
       }
     ]

@@ -122,28 +122,60 @@
 			$('#service-form').submit(function(e) {
 				e.preventDefault(); // Prevent normal form submission
 
-				// Gather all form data into an object
+				// Start with basic required fields
 				const formData = {
 					date: selectedDate,
 					day_type: selectedDayType,
-					order_of_service: selectedOrdo,
-					opening_hymn: $('select[name="opening_hymn"]').val(),
-					chief_hymn: $('select[name="chief_hymn"]').val(),
-					override_prayers: $('select[name="override_prayers"]').val()
+					order_of_service: selectedOrdo
 				};
 
-				// Add optional fields if they exist
-				if ($('select[name="canticle"]').length) {
-					formData.canticle = $('select[name="canticle"]').val();
+				// Dynamically collect all form inputs
+				// This handles any field without hardcoding field names
+				$(this).find('input, select, textarea').each(function() {
+					const $field = $(this);
+					const name = $field.attr('name');
+
+					// Skip if no name attribute
+					if (!name) return;
+
+					// Skip already-collected fields
+					if (name === 'date' || name === 'day_type' || name === 'order_of_service') {
+						return;
+					}
+
+					// Handle different input types
+					if ($field.attr('type') === 'checkbox') {
+						// Only include if checked
+						if ($field.is(':checked')) {
+							formData[name] = true;
+						}
+					} else if ($field.attr('type') === 'radio') {
+						// Only include if checked
+						if ($field.is(':checked')) {
+							formData[name] = $field.val();
+						}
+					} else {
+						// Text, select, textarea, etc.
+						const value = $field.val();
+						if (value !== null && value !== '') {
+							formData[name] = value;
+						}
+					}
+				});
+
+				// Normalize field names for backward compatibility
+				// Handle legacy 'override_prayers' → 'prayers'
+				if (formData.override_prayers && !formData.prayers) {
+					formData.prayers = formData.override_prayers;
+					delete formData.override_prayers;
 				}
 
-				if ($('input[name="replace_psalm"]').is(':checked')) {
-					formData.replace_psalm = true;
-				}
+				// Debug: log what we're sending
+				console.log('Form data:', formData);
 
-				// ENCODING STEP: Convert to JSON then Base64
+				// ENCODING STEP: Convert to JSON then Base64 (URL-safe)
 				const jsonStr = JSON.stringify(formData);
-				const base64 = btoa(jsonStr) // Base64 encode
+				const base64 = btoa(jsonStr)
 					.replace(/\+/g, '-') // Make URL-safe
 					.replace(/\//g, '_') // Make URL-safe
 					.replace(/=/g, ''); // Remove padding
@@ -269,7 +301,7 @@
 					<label>${label}:</label>
 					<select name="${name}" class="form-control hymn" ${required ? 'required' : ''}>`;
 
-				if (!required) {
+				if (required) {
 					html += '<option value="default">Use Lectionary Hymn</option>';
 				}
 

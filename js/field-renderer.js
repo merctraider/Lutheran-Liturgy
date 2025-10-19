@@ -17,9 +17,11 @@ const FieldRenderers = {
             <label>${fieldConfig.label}:</label>
             <select name="${fieldConfig.name}" class="form-control hymn" ${fieldConfig.required ? 'required' : ''}>`;
 
-        // Add default option if not required
-        if (!fieldConfig.required) {
+        // Add default option if required
+        if (fieldConfig.required) {
             html += '<option value="default">Use Lectionary Hymn</option>';
+        } else{
+            html += '<option value="default">Skip</option>';
         }
 
         // Add all hymns
