@@ -20,6 +20,7 @@ class BibleGateway{
     }
 
     public static function get_verse($lookup){
+        if($lookup == null) return null; 
         $output = '';
         //Check if book belongs to the apocrypha
         if(self::is_apocrypha($lookup)){

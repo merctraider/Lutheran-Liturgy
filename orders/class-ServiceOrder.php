@@ -160,20 +160,24 @@ abstract class ServiceOrder
     
     protected function getReadings()
     {
+        $readings = $this->day_info['readings'];
+        
+
+        
         return [
-            'ot' => $this->day_info['readings'][2] ?? null,
-            'ot_text' => isset($this->day_info['readings'][2]) 
+            'ot' => $readings[2] ?? null,
+            'ot_text' => isset($readings[2]) 
                 ? $this->getReadingText($this->day_info['readings'][2]) 
                 : null,
             
-            'epistle' => $this->day_info['readings'][0] ?? null,
-            'epistle_text' => isset($this->day_info['readings'][0]) 
-                ? $this->getReadingText($this->day_info['readings'][0]) 
+            'epistle' => $readings[0] ?? null,
+            'epistle_text' => isset($readings[0]) 
+                ? $this->getReadingText($readings[0]) 
                 : null,
             
-            'gospel' => $this->day_info['readings'][1] ?? null,
-            'gospel_text' => isset($this->day_info['readings'][1]) 
-                ? $this->getReadingText($this->day_info['readings'][1]) 
+            'gospel' => $readings[1] ?? null,
+            'gospel_text' => isset($readings[1]) 
+                ? $this->getReadingText($readings[1]) 
                 : null,
         ];
     }

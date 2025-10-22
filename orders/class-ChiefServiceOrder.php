@@ -31,7 +31,8 @@ class ChiefServiceOrder extends ServiceOrder
             ],
             $this->getSectionClasses(),
             $this->getHymns(),
-            $this->getReadings()
+            $this->getReadings(),
+            $this->getOTResponsory()
         );
     }
     
@@ -45,6 +46,25 @@ class ChiefServiceOrder extends ServiceOrder
             'post_communion_hymn'=>  $this->prepareHymn($this->settings['post_communion_hymn']) ,
             'closing_hymn' => $this->prepareHymn($this->settings['closing_hymn']) ,
         ];
+    }
+
+    private function getOTResponsory(){
+
+        $responsive_psalm_settings = $this->settings['responsive_psalm']; 
+        if($responsive_psalm_settings !== 'matins' && $responsive_psalm_settings !=='vespers'){
+            return []; 
+        }
+
+         $day_info = $this->day_info; 
+         
+
+         $psalm_ref = $day_info['psalm'][$responsive_psalm_settings] ?? null;
+        $responsory_text = $this->getPsalmText($psalm_ref);
+       
+        return [
+            'ot_responsory' => $psalm_ref?? false, 
+            'ot_responsory_text' => $responsory_text
+        ]; 
     }
     
     private function getProperPreface()

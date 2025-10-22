@@ -27,6 +27,7 @@ class ServiceBuilder
             }
         }
         $settings = self::normalizeConfig($settings); 
+        
         // Parse date
         $date = $settings['date'];
         if (is_string($date)) {
