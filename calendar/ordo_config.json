@@ -120,6 +120,17 @@
         ]
       },
       {
+        "name": "creed",
+        "type": "select",
+        "label": "Creed",
+        "required": true,
+        "options": [
+          {"value": "nicene", "label": "Nicene Creed"},
+         {"value": "apostles", "label": "Apostles' Creed"},
+         {"value": "athanasian", "label": "Athanasian Creed"}
+        ]
+      },
+      {
         "name": "proper_preface",
         "type": "select",
         "label": "Set Proper Preface",

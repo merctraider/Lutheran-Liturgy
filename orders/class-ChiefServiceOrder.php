@@ -15,6 +15,7 @@ class ChiefServiceOrder extends ServiceOrder
             'include_communion' => true,
             'proper_preface' => 'default',
             'chief_hymn' => 'default',
+            'creed' => 'nicene'
         ];
     }
     
@@ -28,12 +29,22 @@ class ChiefServiceOrder extends ServiceOrder
                 'gradual' => $this->day_info['gradual'] ?? null,
                 'proper_preface' => $this->getProperPreface(),
                 'introit' => $this->day_info['introit'] ?? null,
+                'creed' => $this->settings['creed']?? 'nicene',
             ],
             $this->getSectionClasses(),
             $this->getHymns(),
             $this->getReadings(),
-            $this->getOTResponsory()
+            $this->getOTResponsory(),
         );
+    }
+
+    public function postProcessContext(&$context){
+        if (isset($context['creed'])) {
+            $context['creed'] = $this->engine->render(
+                'creeds/' . $context['creed'], 
+                $context
+            );
+        }
     }
     
     protected function getHymns()
