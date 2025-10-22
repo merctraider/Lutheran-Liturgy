@@ -120,6 +120,25 @@
         ]
       },
       {
+        "name": "proper_preface",
+        "type": "select",
+        "label": "Set Proper Preface",
+        "required": true,
+        "options": [
+          {"value": "default", "label": "None"},
+         {"value": "advent", "label": "Advent"},
+         {"value": "christmas", "label": "Christmas"},
+         {"value": "epiphany", "label": "Epiphany"},
+         {"value": "lent", "label": "Lent"},
+         {"value": "easter", "label": "Easter"},
+         {"value": "ascension", "label": "Ascension"},
+         {"value": "pentecost", "label": "Pentecost"},
+         {"value": "trinity", "label": "Trinity"},
+         {"value": "apostles", "label": "Apostles"}
+        ]
+      },
+      
+      {
         "name": "opening_hymn",
         "type": "hymn_select",
         "label": "Opening Hymn",
