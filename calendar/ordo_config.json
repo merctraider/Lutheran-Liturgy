@@ -148,6 +148,20 @@
          {"value": "apostles", "label": "Apostles"}
         ]
       },
+
+      {
+        "name": "country",
+        "type": "select",
+        "label": "Country (for General Prayer)",
+        "required": true,
+        "options": [
+          {"value": "singapore", "label": "Singapore"},
+          {"value": "philippines", "label": "Philippines"},
+          {"value": "commonwealth", "label": "British Commonwealth"},
+          {"value": "usa", "label": "United States"}
+        ],
+        "default": "philippines"
+      },
       
       {
         "name": "opening_hymn",

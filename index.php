@@ -226,6 +226,9 @@
 					$(`.day-option[data-day-type="${selectedDayType}"]`).addClass('selected');
 					showSection('order-section');
 				}
+				// Reset downstream selections
+				selectedOrdo = null;
+				$('#order-select').val('');
 
 				// Handle day type selection
 				$('.day-option').click(function() {
@@ -235,14 +238,14 @@
 
 					selectedDayType = $(this).data('day-type');
 
-					// Reset downstream selections
-					selectedOrdo = null;
-					$('#order-select').val('');
+					
 					hideSection('settings-section');
 					hideSection('submit-section');
 
 					// Show order section
 					showSection('order-section');
+					
+					
 				});
 			}
 

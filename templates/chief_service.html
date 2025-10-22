@@ -250,9 +250,18 @@ people and the Gospel preached in all the world.
 <p>Grant also health and prosperity to all that are in authority, especially to
 {{ if country == 'singapore' }}
 the President of the Republic of Singapore, the Prime Minister, our Members of Parliament, our Judges and Magistrates
-{{ else }}
-the President and Congress of the United States, the Governor and
-Legislature of this commonwealth, and to all our Judges and Magistrates,
+{{ endif }}
+
+{{ if country == 'philippines' }}
+the President and Congress of the Republic of the Philippines, our Judges and Magistrates
+{{ endif }}
+
+{{ if country == 'commonwealth' }}
+His Majesty the King of the British Commonwealth of Nations, the Governor-General and the Prime Minister of our Dominion, as well as the Premier of our Province, and all Governments and Parliaments, and all Judges and Magistrates
+{{ endif }}
+
+{{ if country == 'usa' }}
+the President and Congress of the United States, the Governor and Legislature of this commonwealth, and to all our Judges and Magistrates,
 {{ endif }}
     
 and endue them with grace to rule after Thy good pleasure, to the

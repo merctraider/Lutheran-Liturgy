@@ -30,6 +30,7 @@ class ChiefServiceOrder extends ServiceOrder
                 'proper_preface' => $this->getProperPreface(),
                 'introit' => $this->day_info['introit'] ?? null,
                 'creed' => $this->settings['creed']?? 'nicene',
+                'country' => $this->settings['country']
             ],
             $this->getSectionClasses(),
             $this->getHymns(),

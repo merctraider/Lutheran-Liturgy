@@ -20,7 +20,7 @@ const FieldRenderers = {
         // Add default option if required
         if (fieldConfig.required) {
             html += '<option value="default">Use Lectionary Hymn</option>';
-        } else{
+        } else {
             html += '<option value="default">Skip</option>';
         }
 
@@ -103,23 +103,54 @@ const FieldRenderers = {
 };
 
 /**
- * Render all fields from configuration
+ * Render all fields from configuration, separating hymns into a subsection
  */
 function renderFieldsFromConfig(config, hymnsData) {
     let html = '';
+    let hymnFields = [];
+    let otherFields = [];
 
+    // Separate hymn fields from other fields
     config.fields.forEach(function(fieldConfig) {
-        // Get the renderer for this field type
-        const renderer = FieldRenderers[fieldConfig.type];
-
-        if (renderer) {
-            // Render the field
-            html += renderer(fieldConfig, hymnsData);
+        if (fieldConfig.type === 'hymn_select') {
+            hymnFields.push(fieldConfig);
         } else {
-            console.error(`Unknown field type: ${fieldConfig.type}`);
-            html += `<div class="alert alert-warning">Unknown field type: ${fieldConfig.type}</div>`;
+            otherFields.push(fieldConfig);
         }
     });
+
+    // Render non-hymn fields first
+    if (otherFields.length > 0) {
+        otherFields.forEach(function(fieldConfig) {
+            const renderer = FieldRenderers[fieldConfig.type];
+
+            if (renderer) {
+                html += renderer(fieldConfig, hymnsData);
+            } else {
+                console.error(`Unknown field type: ${fieldConfig.type}`);
+                html += `<div class="alert alert-warning">Unknown field type: ${fieldConfig.type}</div>`;
+            }
+        });
+    }
+
+    // Render hymn fields in a separate subsection
+    if (hymnFields.length > 0) {
+        html += '<div class="hymn-subsection mt-4">';
+        html += '<h4>Hymns</h4>';
+        
+        hymnFields.forEach(function(fieldConfig) {
+            const renderer = FieldRenderers[fieldConfig.type];
+
+            if (renderer) {
+                html += renderer(fieldConfig, hymnsData);
+            } else {
+                console.error(`Unknown field type: ${fieldConfig.type}`);
+                html += `<div class="alert alert-warning">Unknown field type: ${fieldConfig.type}</div>`;
+            }
+        });
+        
+        html += '</div>';
+    }
 
     return html;
 }
