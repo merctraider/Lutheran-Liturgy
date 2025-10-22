@@ -41,9 +41,19 @@ const FieldRenderers = {
             <label>${fieldConfig.label}:</label>
             <select name="${fieldConfig.name}" class="form-control" ${fieldConfig.required ? 'required' : ''}>`;
 
+        let countryCode = localStorage.getItem('userCountry');
+        if(!countryCode){
+            autoDetectCountry(); 
+        }
+        
+
         // Add options
         fieldConfig.options.forEach(function(option) {
             let selected = option.value === fieldConfig.default ? 'selected' : '';
+            if(fieldConfig.name == 'country' && countryCode){
+                selected = countryCode; 
+            }
+
             html += `<option value="${option.value}" ${selected}>${option.label}</option>`;
         });
 
@@ -162,6 +172,68 @@ function initializeFieldWidgets() {
     // Initialize select2 on hymn selects
     $('select.hymn').select2();
 
+    autoDetectCountry();
+
     // Add any other widget initializations here
     // For example: datepickers, color pickers, etc.
+}
+
+/**
+ * Auto-detect user's country and set it as default for country select
+ */
+async function autoDetectCountry() {
+
+
+    try {
+        // Check cache first
+        let countryCode = localStorage.getItem('userCountry');
+
+        if (!countryCode) {
+            // Fetch from Cloudflare
+            const response = await fetch('https://www.cloudflare.com/cdn-cgi/trace');
+            const text = await response.text();
+
+            const countryLine = text.split('\n').find(line => line.startsWith('loc='));
+            countryCode = countryLine ? countryLine.split('=')[1] : null;
+
+
+
+            // Map country codes to select values
+            const countryMap = {
+                'PH': 'philippines',
+                'SG': 'singapore',
+                'US': 'usa',
+                // Commonwealth Realms (all 15 countries)
+                'GB': 'commonwealth',  // United Kingdom
+                'AU': 'commonwealth',  // Australia
+                'CA': 'commonwealth',  // Canada
+                'NZ': 'commonwealth',  // New Zealand
+                'JM': 'commonwealth',  // Jamaica
+                'BS': 'commonwealth',  // The Bahamas
+                'GD': 'commonwealth',  // Grenada
+                'PG': 'commonwealth',  // Papua New Guinea
+                'SB': 'commonwealth',  // Solomon Islands
+                'TV': 'commonwealth',  // Tuvalu
+                'LC': 'commonwealth',  // Saint Lucia
+                'VC': 'commonwealth',  // Saint Vincent and the Grenadines
+                'BZ': 'commonwealth',  // Belize
+                'AG': 'commonwealth',  // Antigua and Barbuda
+                'KN': 'commonwealth'   // Saint Kitts and Nevis
+            };
+            let mapped = 'usa'; 
+            if (countryCode) {
+                mapped = countryMap[countryCode];
+            }
+
+
+            // Cache it
+            if (mapped) {
+                localStorage.setItem('userCountry',mapped);
+            }
+        }
+
+
+    } catch (error) {
+        console.log('Could not auto-detect country, using default');
+    }
 }
