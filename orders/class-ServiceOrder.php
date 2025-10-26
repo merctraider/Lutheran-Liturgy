@@ -122,7 +122,7 @@ abstract class ServiceOrder
         $url = isset($hymn_data['audiofile']) ? $hymn_data['audiofile'] : ''; 
 
         // Check if hymn dir exists
-        if (is_dir(__DIR__ . '/hymns') && !empty($url)) {
+        if (is_dir(__DIR__ . '/../hymns') && !empty($url)) {
             $hymn_file = basename($url);
             $url = "/hymns/$hymn_file";
             $output .= '<audio src="' . htmlspecialchars($url) . '" controls></audio>';
