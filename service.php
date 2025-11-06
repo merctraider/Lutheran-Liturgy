@@ -113,9 +113,9 @@ $bulletinURL = ServiceURLHelper::generateURL($settings, '/bulletin.php');
 
         <!-- Bulletin Generation Section -->
         <div class="bulletin-section">
-            <h3>Generate Bulletin</h3>
-            <p>Create a print-friendly bulletin for this service</p>
-            <a href="<?php echo htmlspecialchars($bulletinURL); ?>" class="btn btn-primary bulletin-button" target="_blank">Generate Bulletin</a>
+            <h3>Download Bulletin</h3>
+            <p>Download the complete order of service as a Word document (.docx)</p>
+            <a href="<?php echo htmlspecialchars($bulletinURL); ?>" class="btn btn-primary bulletin-button" download>Download Bulletin (.docx)</a>
         </div>
 
         <!-- Share URL Section -->

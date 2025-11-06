@@ -1,0 +1,10 @@
+{
+    "name": "lutherald/liturgy",
+    "description": "Lutheran Liturgy Service Generator",
+    "require": {
+        "phpoffice/phpword": "^1.2"
+    },
+    "config": {
+        "optimize-autoloader": true
+    }
+}

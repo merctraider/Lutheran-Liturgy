@@ -1,11 +1,14 @@
 <?php
+// Include composer autoloader
+require_once __DIR__ . '/vendor/autoload.php';
+
 // Include necessary files
 require_once 'class-ServiceURLHelper.php';
 require_once 'class-ServiceBuilder.php';
-require_once 'class-TemplateEngine.php';
-require_once 'class-lutherald-BibleGateway.php';
-require_once 'calendar/class-lutherald-ChurchYear.php';
-require_once 'orders/class-ServiceOrder.php';
+
+use PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\IOFactory;
+use PhpOffice\PhpWord\Shared\Html;
 
 // Get settings from request (supports both encoded and legacy GET params)
 $settings = ServiceURLHelper::getSettingsFromRequest();
@@ -16,284 +19,200 @@ if (!$validation['valid']) {
     die('Missing required parameters: ' . implode(', ', $validation['missing']));
 }
 
-// Parse date
+// Prepare section classes for plain rendering (no Bootstrap classes)
+$section_classes = [
+    'section_class' => "",
+    'section_title_class' => "",
+    'section_body_class' => ""
+];
+
+// Add section classes to settings
+$settings['section_classes'] = $section_classes;
+
+// Build the full service
+$service_html = ServiceBuilder::BuildService($settings);
+
+// Parse date for filename
 $date = $settings['date'];
 if (is_string($date)) {
     $date = new \DateTime($date);
 }
 
-// Get day type
-$day_type = $settings['day_type'] ?? 'default';
+// Prepare filename
+$order_name = str_replace('_', '-', $settings['order_of_service']);
+$filename = 'bulletin-' . $order_name . '-' . $date->format('Y-m-d') . '.docx';
 
-// Get church calendar info
-$calendar = \Lutherald\ChurchYear::create_church_year($date);
+// Create new PHPWord document
+$phpWord = new PhpWord();
 
-// Get day info based on day type
-switch ($day_type) {
-    case 'feast':
-        $day_info = $calendar->get_festival($date);
-        if ($day_info && isset($day_info['readings'])) {
-            $readings = [];
-            foreach ($day_info['readings'] as $r) {
-                $readings[] = $r;
-            }
-            $day_info['readings'] = $readings;
-        }
-        if (!$day_info || empty($day_info)) {
-            $day_info = $calendar->retrieve_day_info($date);
-        }
-        break;
-    case 'ember':
-    case 'default':
-    default:
-        $day_info = $calendar->retrieve_day_info($date);
-        break;
+// Set document properties
+$properties = $phpWord->getDocInfo();
+$properties->setCreator('Lutheran Liturgy Generator');
+$properties->setTitle('Service Bulletin - ' . $date->format('F j, Y'));
+
+// Define styles
+$phpWord->addFontStyle('heading1', array('name' => 'Garamond', 'size' => 18, 'bold' => true, 'color' => '000000'));
+$phpWord->addFontStyle('heading2', array('name' => 'Garamond', 'size' => 14, 'bold' => true, 'color' => '000000'));
+$phpWord->addFontStyle('heading3', array('name' => 'Garamond', 'size' => 12, 'bold' => true, 'color' => '000000'));
+$phpWord->addFontStyle('bodyText', array('name' => 'Garamond', 'size' => 11, 'color' => '000000'));
+$phpWord->addFontStyle('italic', array('name' => 'Garamond', 'size' => 11, 'italic' => true, 'color' => '666666'));
+$phpWord->addFontStyle('bold', array('name' => 'Garamond', 'size' => 11, 'bold' => true, 'color' => '000000'));
+
+$phpWord->addParagraphStyle('center', array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 120));
+$phpWord->addParagraphStyle('normal', array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::LEFT, 'spaceAfter' => 120, 'spaceBefore' => 0));
+$phpWord->addParagraphStyle('indented', array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::LEFT, 'indentation' => array('left' => 360), 'spaceAfter' => 120));
+
+// Add section to document
+$section = $phpWord->addSection(array(
+    'marginTop' => 720,    // 0.5 inch
+    'marginBottom' => 720,
+    'marginLeft' => 720,
+    'marginRight' => 720
+));
+
+// Function to clean HTML and add to Word document
+function processHtmlToWord($html, $section, $phpWord) {
+    // Remove audio tags
+    $html = preg_replace('/<audio[^>]*>.*?<\/audio>/is', '', $html);
+    $html = preg_replace('/\{\{\s*audio:\s*[^}]+\}\}/', '', $html);
+
+    // Load HTML into DOM
+    $dom = new DOMDocument();
+    libxml_use_internal_errors(true);
+    $dom->loadHTML('<?xml encoding="UTF-8">' . $html);
+    libxml_clear_errors();
+
+    // Process DOM nodes
+    processNode($dom->documentElement, $section, $phpWord);
 }
 
-// Load hymnal data
-$hymnal = json_decode(file_get_contents(__DIR__ . '/tlh.json'), true);
+function processNode($node, $section, $phpWord, $parentStyle = null) {
+    if ($node->nodeType === XML_TEXT_NODE) {
+        $text = trim($node->nodeValue);
+        if (!empty($text)) {
+            $textRun = $section->addTextRun('normal');
 
-// Prepare bulletin data
-$bulletin_data = [
-    'date' => $date->format('l, F j, Y'),
-    'day_name' => $day_info['display'] ?? '',
-    'order_of_service' => ucfirst(str_replace('_', ' ', $settings['order_of_service'])),
-    'season_color' => $day_info['color'] ?? '',
-];
+            // Apply parent style if available
+            if ($parentStyle) {
+                $textRun->addText($text, $parentStyle);
+            } else {
+                $textRun->addText($text, 'bodyText');
+            }
+        }
+        return;
+    }
 
-// Extract hymn information
-$hymn_fields = ['opening_hymn', 'closing_hymn', 'gradual_hymn', 'sermon_hymn',
-                'offertory_hymn', 'distribution_hymn', 'communion_hymn'];
-$bulletin_data['hymns'] = [];
-foreach ($hymn_fields as $field) {
-    if (!empty($settings[$field])) {
-        $hymn_key = $settings[$field];
-        if (isset($hymnal[$hymn_key])) {
-            $hymn_title = $hymnal[$hymn_key]['title'] ?? "Hymn $hymn_key";
-            $label = ucwords(str_replace('_', ' ', $field));
-            $bulletin_data['hymns'][] = [
-                'label' => $label,
-                'number' => $hymn_key,
-                'title' => $hymn_title
-            ];
+    if ($node->nodeType !== XML_ELEMENT_NODE) {
+        return;
+    }
+
+    $nodeName = strtolower($node->nodeName);
+
+    switch ($nodeName) {
+        case 'h1':
+            $text = trim($node->textContent);
+            if (!empty($text)) {
+                $section->addText($text, 'heading1', 'center');
+            }
+            break;
+
+        case 'h2':
+            $text = trim($node->textContent);
+            if (!empty($text)) {
+                $section->addText($text, 'heading1', 'center');
+            }
+            break;
+
+        case 'h3':
+            $text = trim($node->textContent);
+            if (!empty($text)) {
+                $section->addText($text, 'heading2', 'normal');
+            }
+            break;
+
+        case 'h4':
+            $text = trim($node->textContent);
+            if (!empty($text)) {
+                $section->addText($text, 'heading3', 'normal');
+            }
+            break;
+
+        case 'p':
+            $textRun = $section->addTextRun('normal');
+            processInlineNodes($node, $textRun);
+            break;
+
+        case 'div':
+            // Process children
+            foreach ($node->childNodes as $child) {
+                processNode($child, $section, $phpWord, $parentStyle);
+            }
+            break;
+
+        case 'br':
+            $section->addTextBreak();
+            break;
+
+        default:
+            // Process children for unknown elements
+            foreach ($node->childNodes as $child) {
+                processNode($child, $section, $phpWord, $parentStyle);
+            }
+            break;
+    }
+}
+
+function processInlineNodes($node, $textRun) {
+    foreach ($node->childNodes as $child) {
+        if ($child->nodeType === XML_TEXT_NODE) {
+            $text = $child->nodeValue;
+            if (!empty($text)) {
+                $textRun->addText($text, 'bodyText');
+            }
+        } elseif ($child->nodeType === XML_ELEMENT_NODE) {
+            $childName = strtolower($child->nodeName);
+
+            switch ($childName) {
+                case 'em':
+                case 'i':
+                    $text = trim($child->textContent);
+                    if (!empty($text)) {
+                        $textRun->addText($text, 'italic');
+                    }
+                    break;
+
+                case 'strong':
+                case 'b':
+                    $text = trim($child->textContent);
+                    if (!empty($text)) {
+                        $textRun->addText($text, 'bold');
+                    }
+                    break;
+
+                case 'br':
+                    $textRun->addTextBreak();
+                    break;
+
+                default:
+                    // Recursively process
+                    processInlineNodes($child, $textRun);
+                    break;
+            }
         }
     }
 }
 
-// Extract readings
-if (isset($day_info['readings']) && is_array($day_info['readings'])) {
-    $bulletin_data['readings'] = [];
-    foreach ($day_info['readings'] as $reading) {
-        if (is_array($reading) && isset($reading['citation'])) {
-            $bulletin_data['readings'][] = [
-                'type' => $reading['type'] ?? 'Reading',
-                'citation' => $reading['citation']
-            ];
-        }
-    }
-}
+// Process the service HTML into the Word document
+processHtmlToWord($service_html, $section, $phpWord);
 
-// Extract introit/psalm
-if (!empty($day_info['introit'])) {
-    $bulletin_data['introit'] = $day_info['introit'];
-}
+// Save document
+$objWriter = IOFactory::createWriter($phpWord, 'Word2007');
 
-// Extract collect
-if (!empty($day_info['collect'])) {
-    $bulletin_data['collect'] = $day_info['collect'];
-}
+// Set headers for download
+header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+header('Content-Disposition: attachment; filename="' . $filename . '"');
+header('Cache-Control: max-age=0');
 
-// Extract creed (for Chief Service)
-if (!empty($settings['creed'])) {
-    $bulletin_data['creed'] = ucwords(str_replace('_', ' ', $settings['creed']));
-}
-
-// Prepare title
-$title = 'Bulletin - ' . ucfirst(str_replace('_', ' ', $settings['order_of_service'])) . ' for ' . $date->format('M d Y');
-
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $title ?></title>
-
-    <style>
-        /* Print-friendly bulletin styles */
-        body {
-            font-family: 'Garamond', 'Georgia', serif;
-            font-size: 12pt;
-            line-height: 1.5;
-            max-width: 8.5in;
-            margin: 0 auto;
-            padding: 0.5in;
-            color: #000;
-            background: #fff;
-        }
-
-        .bulletin-header {
-            text-align: center;
-            margin-bottom: 1.5em;
-            border-bottom: 2px solid #000;
-            padding-bottom: 0.5em;
-        }
-
-        .bulletin-header h1 {
-            font-size: 20pt;
-            margin: 0.2em 0;
-            font-weight: bold;
-        }
-
-        .bulletin-header .date {
-            font-size: 14pt;
-            margin: 0.5em 0;
-        }
-
-        .bulletin-header .day-name {
-            font-size: 16pt;
-            font-style: italic;
-            margin: 0.3em 0;
-        }
-
-        .bulletin-section {
-            margin: 1em 0;
-            page-break-inside: avoid;
-        }
-
-        .bulletin-section h2 {
-            font-size: 14pt;
-            font-weight: bold;
-            margin: 0.5em 0 0.3em 0;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .bulletin-section ul {
-            list-style: none;
-            padding: 0;
-            margin: 0.3em 0;
-        }
-
-        .bulletin-section li {
-            margin: 0.3em 0;
-            padding-left: 1em;
-            text-indent: -1em;
-        }
-
-        .hymn-item {
-            margin: 0.4em 0;
-        }
-
-        .hymn-number {
-            font-weight: bold;
-            display: inline-block;
-            min-width: 3em;
-        }
-
-        .reading-item {
-            margin: 0.3em 0;
-        }
-
-        .reading-type {
-            font-weight: bold;
-            margin-right: 0.5em;
-        }
-
-        .collect-text {
-            font-style: italic;
-            margin: 0.5em 0;
-            text-align: justify;
-        }
-
-        @media print {
-            body {
-                margin: 0;
-                padding: 0.5in;
-            }
-
-            .no-print {
-                display: none;
-            }
-
-            @page {
-                margin: 0.5in;
-            }
-        }
-
-        .no-print {
-            text-align: center;
-            margin: 2em 0;
-            padding: 1em;
-            background: #f0f0f0;
-            border: 1px solid #ccc;
-        }
-
-        .no-print button {
-            padding: 10px 20px;
-            font-size: 14pt;
-            cursor: pointer;
-            margin: 0 5px;
-        }
-    </style>
-</head>
-<body>
-    <div class="bulletin-header">
-        <h1><?php echo htmlspecialchars($bulletin_data['day_name']); ?></h1>
-        <div class="date"><?php echo htmlspecialchars($bulletin_data['date']); ?></div>
-        <div class="day-name"><?php echo htmlspecialchars($bulletin_data['order_of_service']); ?></div>
-    </div>
-
-    <?php if (!empty($bulletin_data['hymns'])): ?>
-    <div class="bulletin-section">
-        <h2>Hymns</h2>
-        <?php foreach ($bulletin_data['hymns'] as $hymn): ?>
-        <div class="hymn-item">
-            <span class="hymn-number"><?php echo htmlspecialchars($hymn['number']); ?></span>
-            <span class="hymn-title"><?php echo htmlspecialchars($hymn['title']); ?></span>
-            <em>(<?php echo htmlspecialchars($hymn['label']); ?>)</em>
-        </div>
-        <?php endforeach; ?>
-    </div>
-    <?php endif; ?>
-
-    <?php if (!empty($bulletin_data['readings'])): ?>
-    <div class="bulletin-section">
-        <h2>Scripture Readings</h2>
-        <?php foreach ($bulletin_data['readings'] as $reading): ?>
-        <div class="reading-item">
-            <span class="reading-type"><?php echo htmlspecialchars($reading['type']); ?>:</span>
-            <span class="reading-citation"><?php echo htmlspecialchars($reading['citation']); ?></span>
-        </div>
-        <?php endforeach; ?>
-    </div>
-    <?php endif; ?>
-
-    <?php if (!empty($bulletin_data['introit'])): ?>
-    <div class="bulletin-section">
-        <h2>Introit / Psalm</h2>
-        <div><?php echo htmlspecialchars($bulletin_data['introit']); ?></div>
-    </div>
-    <?php endif; ?>
-
-    <?php if (!empty($bulletin_data['creed'])): ?>
-    <div class="bulletin-section">
-        <h2>Creed</h2>
-        <div><?php echo htmlspecialchars($bulletin_data['creed']); ?></div>
-    </div>
-    <?php endif; ?>
-
-    <?php if (!empty($bulletin_data['collect'])): ?>
-    <div class="bulletin-section">
-        <h2>Collect</h2>
-        <div class="collect-text"><?php echo $bulletin_data['collect']; ?></div>
-    </div>
-    <?php endif; ?>
-
-    <div class="no-print">
-        <button onclick="window.print()">Print Bulletin</button>
-        <button onclick="history.back()">Back to Service</button>
-    </div>
-</body>
-</html>
+// Save to output
+$objWriter->save('php://output');
+exit;
