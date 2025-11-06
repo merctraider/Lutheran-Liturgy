@@ -30,6 +30,9 @@ $service = ServiceBuilder::BuildService($settings);
 
 // Generate shareable URL with encoded parameters
 $shareableURL = ServiceURLHelper::generateURL($settings, $_SERVER['PHP_SELF']);
+
+// Generate bulletin URL with same parameters
+$bulletinURL = ServiceURLHelper::generateURL($settings, '/bulletin.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,13 +62,13 @@ $shareableURL = ServiceURLHelper::generateURL($settings, $_SERVER['PHP_SELF']);
             border-left: 3px solid #1a1a1a;
             text-align: center;
         }
-        
+
         .share-section h3 {
             font-size: 1.1rem;
             margin-bottom: 10px;
             color: #1a1a1a;
         }
-        
+
         .share-url {
             font-family: monospace;
             font-size: 0.9rem;
@@ -75,9 +78,29 @@ $shareableURL = ServiceURLHelper::generateURL($settings, $_SERVER['PHP_SELF']);
             border-radius: 3px;
             word-break: break-all;
         }
-        
+
         .copy-button {
             margin-top: 10px;
+        }
+
+        /* Bulletin section */
+        .bulletin-section {
+            background: #f0f8ff;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            border-left: 3px solid #0066cc;
+            text-align: center;
+        }
+
+        .bulletin-section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+
+        .bulletin-button {
+            font-size: 1rem;
+            padding: 10px 20px;
         }
     </style>
 </head>
@@ -87,6 +110,13 @@ $shareableURL = ServiceURLHelper::generateURL($settings, $_SERVER['PHP_SELF']);
         
         <!-- Service Content -->
         <?php echo $service; ?>
+
+        <!-- Bulletin Generation Section -->
+        <div class="bulletin-section">
+            <h3>Generate Bulletin</h3>
+            <p>Create a print-friendly bulletin for this service</p>
+            <a href="<?php echo htmlspecialchars($bulletinURL); ?>" class="btn btn-primary bulletin-button" target="_blank">Generate Bulletin</a>
+        </div>
 
         <!-- Share URL Section -->
         <div class="share-section">
