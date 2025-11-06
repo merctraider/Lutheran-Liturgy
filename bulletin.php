@@ -11,21 +11,11 @@
  *   - show_rubrics: boolean (default: true) - Include liturgical instructions in red italic
  *   - church_name: string - Church name to display at top of bulletin
  *   - display_date: string - Custom date display (doesn't affect liturgical calculations)
- *
- * Example URL:
- *   bulletin.php?s=[encoded_settings]&show_rubrics=true&church_name=St.%20Paul%20Lutheran&display_date=Third%20Sunday%20in%20Advent
+ *   - generate: boolean - If true, generate the document; otherwise show form
  */
-
-// Include composer autoloader
-require_once __DIR__ . '/vendor/autoload.php';
 
 // Include necessary files
 require_once 'class-ServiceURLHelper.php';
-require_once 'class-ServiceBuilder.php';
-
-use PhpOffice\PhpWord\PhpWord;
-use PhpOffice\PhpWord\IOFactory;
-use PhpOffice\PhpWord\Shared\Html;
 
 // Get settings from request (supports both encoded and legacy GET params)
 $settings = ServiceURLHelper::getSettingsFromRequest();
@@ -36,8 +26,194 @@ if (!$validation['valid']) {
     die('Missing required parameters: ' . implode(', ', $validation['missing']));
 }
 
+// Check if we should generate the document or show the form
+$generate = isset($_GET['generate']) && $_GET['generate'] === 'true';
+
+if (!$generate) {
+    // Show the form
+    $current_url = $_SERVER['REQUEST_URI'];
+
+    // Parse date for display
+    $date = $settings['date'];
+    if (is_string($date)) {
+        $date = new \DateTime($date);
+    }
+    $default_date = $date->format('l, F j, Y');
+
+    ?>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bulletin Options</title>
+
+        <!-- Bootstrap stylesheet -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+                background: #f5f5f5;
+                padding: 20px;
+            }
+
+            .container {
+                max-width: 700px;
+                margin: 40px auto;
+                background: white;
+                padding: 40px;
+                border-radius: 8px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+
+            h1 {
+                font-size: 28px;
+                margin-bottom: 10px;
+                color: #1a1a1a;
+            }
+
+            .subtitle {
+                color: #666;
+                margin-bottom: 30px;
+                font-size: 14px;
+            }
+
+            .form-group {
+                margin-bottom: 20px;
+            }
+
+            label {
+                font-weight: 600;
+                margin-bottom: 8px;
+                display: block;
+                color: #333;
+            }
+
+            .form-control {
+                border-radius: 4px;
+                border: 1px solid #ddd;
+                padding: 10px 12px;
+            }
+
+            .form-check {
+                padding-left: 0;
+                margin-bottom: 20px;
+            }
+
+            .form-check-input {
+                margin-right: 8px;
+            }
+
+            .btn-primary {
+                background: #0066cc;
+                border: none;
+                padding: 12px 30px;
+                font-size: 16px;
+                border-radius: 4px;
+                cursor: pointer;
+                width: 100%;
+            }
+
+            .btn-primary:hover {
+                background: #0052a3;
+            }
+
+            .help-text {
+                font-size: 13px;
+                color: #666;
+                margin-top: 5px;
+            }
+
+            .back-link {
+                display: inline-block;
+                margin-bottom: 20px;
+                color: #0066cc;
+                text-decoration: none;
+            }
+
+            .back-link:hover {
+                text-decoration: underline;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <a href="javascript:history.back()" class="back-link">← Back to Service</a>
+
+            <h1>Bulletin Options</h1>
+            <p class="subtitle">Configure your bulletin before downloading</p>
+
+            <form method="GET" action="">
+                <!-- Preserve encoded settings -->
+                <?php if (isset($_GET['s'])): ?>
+                    <input type="hidden" name="s" value="<?php echo htmlspecialchars($_GET['s']); ?>">
+                <?php endif; ?>
+
+                <!-- Preserve all other settings for backward compatibility -->
+                <?php
+                foreach ($_GET as $key => $value) {
+                    if ($key !== 's' && $key !== 'generate' && $key !== 'church_name' && $key !== 'display_date' && $key !== 'show_rubrics') {
+                        echo '<input type="hidden" name="' . htmlspecialchars($key) . '" value="' . htmlspecialchars($value) . '">';
+                    }
+                }
+                ?>
+
+                <input type="hidden" name="generate" value="true">
+
+                <div class="form-group">
+                    <label for="church_name">Church Name</label>
+                    <input type="text"
+                           class="form-control"
+                           id="church_name"
+                           name="church_name"
+                           placeholder="e.g., St. Paul Lutheran Church">
+                    <div class="help-text">Optional: Appears as a heading at the top of the bulletin</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="display_date">Date Display</label>
+                    <input type="text"
+                           class="form-control"
+                           id="display_date"
+                           name="display_date"
+                           placeholder="<?php echo htmlspecialchars($default_date); ?>">
+                    <div class="help-text">Optional: Custom date text (e.g., "Third Sunday in Advent"). Defaults to "<?php echo htmlspecialchars($default_date); ?>"</div>
+                </div>
+
+                <div class="form-check">
+                    <label>
+                        <input type="checkbox"
+                               class="form-check-input"
+                               id="show_rubrics"
+                               name="show_rubrics"
+                               value="true"
+                               checked>
+                        Include rubrics (liturgical instructions in red)
+                    </label>
+                    <div class="help-text">Uncheck to generate a "propers only" bulletin without instructions</div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Generate Bulletin (.docx)</button>
+            </form>
+        </div>
+    </body>
+    </html>
+    <?php
+    exit;
+}
+
+// If we get here, we're generating the document
+require_once __DIR__ . '/vendor/autoload.php';
+require_once 'class-ServiceBuilder.php';
+
+use PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\IOFactory;
+use PhpOffice\PhpWord\Shared\Html;
+
 // Get optional bulletin parameters
-$show_rubrics = isset($_GET['show_rubrics']) ? filter_var($_GET['show_rubrics'], FILTER_VALIDATE_BOOLEAN) : true;
+$show_rubrics = isset($_GET['show_rubrics']) && $_GET['show_rubrics'] === 'true';
 $church_name = isset($_GET['church_name']) ? trim($_GET['church_name']) : '';
 $display_date = isset($_GET['display_date']) ? trim($_GET['display_date']) : '';
 

@@ -114,29 +114,8 @@ $bulletinURL = ServiceURLHelper::generateURL($settings, '/bulletin.php');
         <!-- Bulletin Generation Section -->
         <div class="bulletin-section">
             <h3>Download Bulletin</h3>
-            <p>Download the complete order of service as a Word document (.docx)</p>
-
-            <!-- Bulletin Options -->
-            <div class="bulletin-options" style="margin: 15px 0; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto;">
-                <div class="form-group" style="margin-bottom: 10px;">
-                    <label for="church_name" style="display: block; font-weight: bold; margin-bottom: 5px;">Church Name (optional):</label>
-                    <input type="text" id="church_name" class="form-control" placeholder="e.g., St. Paul Lutheran Church" style="width: 100%;">
-                </div>
-
-                <div class="form-group" style="margin-bottom: 10px;">
-                    <label for="display_date" style="display: block; font-weight: bold; margin-bottom: 5px;">Custom Date Display (optional):</label>
-                    <input type="text" id="display_date" class="form-control" placeholder="e.g., Third Sunday in Advent" style="width: 100%;">
-                </div>
-
-                <div class="form-check" style="margin-bottom: 15px;">
-                    <input type="checkbox" id="show_rubrics" class="form-check-input" checked>
-                    <label for="show_rubrics" class="form-check-label" style="font-weight: normal;">
-                        Include rubrics (liturgical instructions in red)
-                    </label>
-                </div>
-            </div>
-
-            <button class="btn btn-primary bulletin-button" onclick="downloadBulletin()">Download Bulletin (.docx)</button>
+            <p>Generate a downloadable bulletin with the complete order of service as a Word document (.docx)</p>
+            <a href="<?php echo htmlspecialchars($bulletinURL); ?>" class="btn btn-primary bulletin-button">Configure & Download Bulletin</a>
         </div>
 
         <!-- Share URL Section -->
@@ -163,37 +142,6 @@ $bulletinURL = ServiceURLHelper::generateURL($settings, '/bulletin.php');
                     btn.classList.remove('btn-success');
                 }, 2000);
             });
-        }
-
-        function downloadBulletin() {
-            // Get base bulletin URL
-            const baseURL = '<?php echo htmlspecialchars($bulletinURL); ?>';
-
-            // Get optional parameters
-            const churchName = document.getElementById('church_name').value.trim();
-            const displayDate = document.getElementById('display_date').value.trim();
-            const showRubrics = document.getElementById('show_rubrics').checked;
-
-            // Build URL with parameters
-            let url = baseURL;
-            const params = [];
-
-            if (churchName) {
-                params.push('church_name=' + encodeURIComponent(churchName));
-            }
-            if (displayDate) {
-                params.push('display_date=' + encodeURIComponent(displayDate));
-            }
-            if (!showRubrics) {
-                params.push('show_rubrics=false');
-            }
-
-            if (params.length > 0) {
-                url += (url.includes('?') ? '&' : '?') + params.join('&');
-            }
-
-            // Open URL to trigger download
-            window.location.href = url;
         }
     </script>
 </body>
