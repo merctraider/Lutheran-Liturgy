@@ -55,7 +55,7 @@ $phpWord->addFontStyle('heading1', array('name' => 'Garamond', 'size' => 18, 'bo
 $phpWord->addFontStyle('heading2', array('name' => 'Garamond', 'size' => 14, 'bold' => true, 'color' => '000000'));
 $phpWord->addFontStyle('heading3', array('name' => 'Garamond', 'size' => 12, 'bold' => true, 'color' => '000000'));
 $phpWord->addFontStyle('bodyText', array('name' => 'Garamond', 'size' => 11, 'color' => '000000'));
-$phpWord->addFontStyle('italic', array('name' => 'Garamond', 'size' => 11, 'italic' => true, 'color' => '666666'));
+$phpWord->addFontStyle('rubric', array('name' => 'Garamond', 'size' => 11, 'italic' => true, 'color' => 'CC0000'));
 $phpWord->addFontStyle('bold', array('name' => 'Garamond', 'size' => 11, 'bold' => true, 'color' => '000000'));
 
 $phpWord->addParagraphStyle('center', array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 120));
@@ -177,7 +177,7 @@ function processInlineNodes($node, $textRun) {
                 case 'i':
                     $text = trim($child->textContent);
                     if (!empty($text)) {
-                        $textRun->addText($text, 'italic');
+                        $textRun->addText($text, 'rubric');
                     }
                     break;
 
