@@ -168,7 +168,7 @@ if (!$generate) {
                            class="form-control"
                            id="church_name"
                            name="church_name"
-                           placeholder="e.g., St. Paul Lutheran Church">
+                           placeholder="e.g., Annunciation Lutheran Mission ">
                     <div class="help-text">Optional: Appears as a heading at the top of the bulletin</div>
                 </div>
 
@@ -252,12 +252,12 @@ $properties->setCreator('Lutheran Liturgy Generator');
 $properties->setTitle('Service Bulletin - ' . $date->format('F j, Y'));
 
 // Define styles
-$phpWord->addFontStyle('heading1', array('name' => 'Garamond', 'size' => 18, 'bold' => true, 'color' => '000000'));
-$phpWord->addFontStyle('heading2', array('name' => 'Garamond', 'size' => 14, 'bold' => true, 'color' => '000000'));
-$phpWord->addFontStyle('heading3', array('name' => 'Garamond', 'size' => 12, 'bold' => true, 'color' => '000000'));
-$phpWord->addFontStyle('bodyText', array('name' => 'Garamond', 'size' => 11, 'color' => '000000'));
-$phpWord->addFontStyle('rubric', array('name' => 'Garamond', 'size' => 11, 'italic' => true, 'color' => 'CC0000'));
-$phpWord->addFontStyle('bold', array('name' => 'Garamond', 'size' => 11, 'bold' => true, 'color' => '000000'));
+$phpWord->addFontStyle('heading1', array('name' => 'Garamond', 'size' => 20, 'bold' => true, 'color' => '000000'));
+$phpWord->addFontStyle('heading2', array('name' => 'Garamond', 'size' => 18, 'bold' => true, 'color' => '000000'));
+$phpWord->addFontStyle('heading3', array('name' => 'Garamond', 'size' => 16, 'bold' => true, 'color' => '000000'));
+$phpWord->addFontStyle('bodyText', array('name' => 'Garamond', 'size' => 16, 'color' => '000000'));
+$phpWord->addFontStyle('rubric', array('name' => 'Garamond', 'size' => 16, 'italic' => true, 'color' => 'CC0000'));
+$phpWord->addFontStyle('bold', array('name' => 'Garamond', 'size' => 16, 'bold' => true, 'color' => '000000'));
 
 $phpWord->addParagraphStyle('center', array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 120));
 $phpWord->addParagraphStyle('normal', array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::LEFT, 'spaceAfter' => 120, 'spaceBefore' => 0));
