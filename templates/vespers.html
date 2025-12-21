@@ -185,6 +185,10 @@
                 <h4>Collect</h4>
                 <p>{{ collect_of_day }}</p>
             {{ endif }}
+
+            {{ foreach additional_collects as collect }}
+                <p>{{ collect }}</p>
+            {{ endforeach }}
         </div>
     </div>
 

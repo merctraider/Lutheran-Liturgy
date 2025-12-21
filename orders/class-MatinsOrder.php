@@ -28,6 +28,7 @@ class MatinsOrder extends ServiceOrder
                 'replace_with_introit' => $this->settings['replace_psalm'],
                 'prayers_override' => $this->settings['prayers'],
                 'collect_of_day' => $this->day_info['collect'] ?? null,
+                'additional_collects' => $this->getAdditionalCollects(),
             ],
             $this->getSectionClasses(),
             $this->getHymns(),

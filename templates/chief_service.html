@@ -114,6 +114,11 @@
         {{ if collect_of_day }}
             <p>{{ collect_of_day }}</p>
         {{ endif }}
+
+        {{ foreach additional_collects as collect }}
+            <p>{{ collect }}</p>
+        {{ endforeach }}
+
         <p>℟: <strong>Amen.</strong></p>
     </div>
 </div>

@@ -26,6 +26,7 @@ class ChiefServiceOrder extends ServiceOrder
                 'day_info' => $this->day_info,
                 'order' => 'chief_service',
                 'collect_of_day' => $this->day_info['collect'] ?? null,
+                'additional_collects' => $this->getAdditionalCollects(),
                 'gradual' => $this->day_info['gradual'] ?? null,
                 'proper_preface' => $this->getProperPreface(),
                 'introit' => $this->day_info['introit'] ?? null,

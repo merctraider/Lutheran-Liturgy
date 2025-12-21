@@ -49,6 +49,13 @@
           {"value": "morning_suffrages", "label": "Morning Suffrages"},
           {"value": "bidding", "label": "Bidding Prayer"}
         ]
+      },
+      {
+        "name": "additional_collects",
+        "type": "select2",
+        "label": "Additional Collects",
+        "required": false,
+        "multiple": true
       }
     ]
   },
@@ -102,6 +109,13 @@
           {"value": "evening_suffrages", "label": "Evening Suffrages"},
           {"value": "bidding", "label": "Bidding Prayer"}
         ]
+      },
+      {
+        "name": "additional_collects",
+        "type": "select2",
+        "label": "Additional Collects",
+        "required": false,
+        "multiple": true
       }
     ]
   },
@@ -162,7 +176,14 @@
         ],
         "default": "philippines"
       },
-      
+      {
+        "name": "additional_collects",
+        "type": "select2",
+        "label": "Additional Collects",
+        "required": false,
+        "multiple": true
+      },
+
       {
         "name": "opening_hymn",
         "type": "hymn_select",
