@@ -185,10 +185,16 @@ abstract class ServiceOrder
     protected function getPsalmody()
     {
         $psalm_ref = $this->day_info['psalm'][$this->settings['order_of_service']] ?? null;
-        
+
+        // Format psalm reference for display (handle both string and array)
+        $psalm_display = $psalm_ref;
+        if (is_array($psalm_ref)) {
+            $psalm_display = implode(', ', $psalm_ref);
+        }
+
         return [
             'introit' => $this->day_info['introit'] ?? null,
-            'psalm' => $psalm_ref,
+            'psalm' => $psalm_display,
             'psalm_text' => $psalm_ref ? $this->getPsalmText($psalm_ref) : null,
         ];
     }
