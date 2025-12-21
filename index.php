@@ -78,10 +78,16 @@
 			let selectedDayType = null;
 			let selectedOrdo = null;
 			let hymnsData = null;
+			let collectsData = null;
 
 			// Load hymns data
 			$.getJSON('tlh.json', function(data) {
 				hymnsData = data;
+			});
+
+			// Load collects data
+			$.getJSON('calendar/collects.json', function(data) {
+				collectsData = data;
 			});
 
 			// Helper function to show section with animation
@@ -289,7 +295,7 @@
 			// Render dynamic settings fields
 			function renderSettingsFields(config) {
 				// Use the new renderFieldsFromConfig function from field-renderer.js
-				const html = renderFieldsFromConfig(config, hymnsData);
+				const html = renderFieldsFromConfig(config, hymnsData, collectsData);
 
 				$('#settings-fields-container').html(html);
 

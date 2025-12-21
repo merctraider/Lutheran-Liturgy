@@ -103,19 +103,62 @@ const FieldRenderers = {
     number: function(fieldConfig) {
         return `<div class="form-group">
             <label>${fieldConfig.label}:</label>
-            <input type="number" name="${fieldConfig.name}" class="form-control" 
+            <input type="number" name="${fieldConfig.name}" class="form-control"
                    ${fieldConfig.required ? 'required' : ''}
                    ${fieldConfig.min !== undefined ? `min="${fieldConfig.min}"` : ''}
                    ${fieldConfig.max !== undefined ? `max="${fieldConfig.max}"` : ''}
                    ${fieldConfig.step !== undefined ? `step="${fieldConfig.step}"` : ''}>
         </div>`;
+    },
+
+    /**
+     * Render a select2 multi-select dropdown for collects
+     */
+    select2: function(fieldConfig, collectsData) {
+        if (!collectsData) {
+            return '<div class="alert alert-warning">Loading collects...</div>';
+        }
+
+        // Helper function to get first N words from text
+        const getFirstWords = (text, n) => {
+            const words = text.split(/\s+/);
+            return words.slice(0, n).join(' ') + (words.length > n ? '...' : '');
+        };
+
+        // Group collects by theme
+        const groupedCollects = {};
+        collectsData.collects.forEach(collect => {
+            if (!groupedCollects[collect.theme]) {
+                groupedCollects[collect.theme] = [];
+            }
+            groupedCollects[collect.theme].push(collect);
+        });
+
+        let html = `<div class="form-group">
+            <label>${fieldConfig.label}:</label>
+            <select name="${fieldConfig.name}" class="form-control collect-select2"
+                    ${fieldConfig.multiple ? 'multiple' : ''}
+                    ${fieldConfig.required ? 'required' : ''}>`;
+
+        // Add optgroups for each theme
+        for (let theme in groupedCollects) {
+            html += `<optgroup label="${theme}">`;
+            groupedCollects[theme].forEach(collect => {
+                const label = `${collect.id}. ${getFirstWords(collect.text, 5)}`;
+                html += `<option value="${collect.id}">${label}</option>`;
+            });
+            html += '</optgroup>';
+        }
+
+        html += '</select></div>';
+        return html;
     }
 };
 
 /**
  * Render all fields from configuration, separating hymns into a subsection
  */
-function renderFieldsFromConfig(config, hymnsData) {
+function renderFieldsFromConfig(config, hymnsData, collectsData) {
     let html = '';
     let hymnFields = [];
     let otherFields = [];
@@ -135,7 +178,12 @@ function renderFieldsFromConfig(config, hymnsData) {
             const renderer = FieldRenderers[fieldConfig.type];
 
             if (renderer) {
-                html += renderer(fieldConfig, hymnsData);
+                // Pass appropriate data based on field type
+                if (fieldConfig.type === 'select2') {
+                    html += renderer(fieldConfig, collectsData);
+                } else {
+                    html += renderer(fieldConfig, hymnsData);
+                }
             } else {
                 console.error(`Unknown field type: ${fieldConfig.type}`);
                 html += `<div class="alert alert-warning">Unknown field type: ${fieldConfig.type}</div>`;
@@ -147,7 +195,7 @@ function renderFieldsFromConfig(config, hymnsData) {
     if (hymnFields.length > 0) {
         html += '<div class="hymn-subsection mt-4">';
         html += '<h4>Hymns</h4>';
-        
+
         hymnFields.forEach(function(fieldConfig) {
             const renderer = FieldRenderers[fieldConfig.type];
 
@@ -158,7 +206,7 @@ function renderFieldsFromConfig(config, hymnsData) {
                 html += `<div class="alert alert-warning">Unknown field type: ${fieldConfig.type}</div>`;
             }
         });
-        
+
         html += '</div>';
     }
 
@@ -171,6 +219,12 @@ function renderFieldsFromConfig(config, hymnsData) {
 function initializeFieldWidgets() {
     // Initialize select2 on hymn selects
     $('select.hymn').select2();
+
+    // Initialize select2 on collect multi-selects
+    $('select.collect-select2').select2({
+        placeholder: 'Select collects...',
+        allowClear: true
+    });
 
     autoDetectCountry();
 

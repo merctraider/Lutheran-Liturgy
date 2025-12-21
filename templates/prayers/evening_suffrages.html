@@ -33,7 +33,12 @@
     <p>{{ collect_of_day }}</p>
     <p>℟: <strong>Amen.</strong></p>
     {{ endif }}
-    
+
+    {{ foreach additional_collects as collect }}
+    <p>{{ collect }}</p>
+    <p>℟: <strong>Amen.</strong></p>
+    {{ endforeach }}
+
     <p>We thank Thee, heavenly Father, through Jesus Christ, Thy dear Son, that Thou hast kept us this day; and we pray Thee that Thou wouldst graciously forgive us all our sins where we have done wrong, and graciously keep us this night. For into Thy hands we commend ourselves, our bodies and souls, and all things. Let Thy holy angel be with us that the wicked Foe may have no power over us. Amen.</p>
     
     <p><em>Then may be said or chanted the Benedicamus</em></p>

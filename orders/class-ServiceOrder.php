@@ -195,8 +195,50 @@ abstract class ServiceOrder
     
     protected function getPsalmText($psalm_ref)
     {
-         
+
 
         return $this->getReadingText($psalm_ref);
+    }
+
+    /**
+     * Get additional collects based on selected IDs
+     */
+    protected function getAdditionalCollects()
+    {
+        // Check if additional_collects is set and not empty
+        if (!isset($this->settings['additional_collects']) || empty($this->settings['additional_collects'])) {
+            return [];
+        }
+
+        // Load collects.json
+        $collects_file = __DIR__ . '/../calendar/collects.json';
+        if (!file_exists($collects_file)) {
+            return [];
+        }
+
+        $collects_json = file_get_contents($collects_file);
+        $collects_data = json_decode($collects_json, true);
+
+        if (!isset($collects_data['collects'])) {
+            return [];
+        }
+
+        // Parse the selected IDs (might be comma-separated string)
+        $selected_ids = $this->settings['additional_collects'];
+        if (is_string($selected_ids)) {
+            $selected_ids = array_map('trim', explode(',', $selected_ids));
+        } else if (!is_array($selected_ids)) {
+            $selected_ids = [$selected_ids];
+        }
+
+        // Filter collects by selected IDs
+        $additional_collects = [];
+        foreach ($collects_data['collects'] as $collect) {
+            if (in_array((string)$collect['id'], $selected_ids)) {
+                $additional_collects[] = $collect['text'];
+            }
+        }
+
+        return $additional_collects;
     }
 }
