@@ -21,23 +21,6 @@ class BibleGateway{
 
     public static function get_verse($lookup){
         if($lookup == null) return null;
-
-        // Handle array input - fetch each reference and combine them
-        if(is_array($lookup)){
-            $combined_output = '';
-            foreach($lookup as $index => $ref){
-                $verse_output = self::get_verse($ref);
-                if($verse_output){
-                    // Add spacing between multiple psalms
-                    if($index > 0){
-                        $combined_output .= '<br><br>';
-                    }
-                    $combined_output .= $verse_output;
-                }
-            }
-            return $combined_output;
-        }
-
         $output = '';
         //Check if book belongs to the apocrypha
         if(self::is_apocrypha($lookup)){
@@ -79,17 +62,7 @@ class BibleGateway{
     }
     
     public static function is_apocrypha($lookup){
-        // Handle array input - check if any element is apocrypha
-        if(is_array($lookup)){
-            foreach($lookup as $ref){
-                if(self::is_apocrypha($ref)){
-                    return true;
-                }
-            }
-            return false;
-        }
 
-        // Handle string input
         foreach(self::$apocryphal_books as $book){
 
             if(\strpos($lookup, $book) !== false){

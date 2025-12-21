@@ -201,8 +201,23 @@ abstract class ServiceOrder
     
     protected function getPsalmText($psalm_ref)
     {
+        // Handle array of psalm references (e.g., Christmas Day has multiple psalms)
+        if (is_array($psalm_ref)) {
+            $combined_output = '';
+            foreach ($psalm_ref as $index => $ref) {
+                $psalm_text = $this->getReadingText($ref);
+                if ($psalm_text) {
+                    // Add spacing between multiple psalms
+                    if ($index > 0) {
+                        $combined_output .= '<br><br>';
+                    }
+                    $combined_output .= $psalm_text;
+                }
+            }
+            return $combined_output;
+        }
 
-
+        // Handle single psalm reference (normal case)
         return $this->getReadingText($psalm_ref);
     }
 
