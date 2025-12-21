@@ -211,6 +211,8 @@ abstract class ServiceOrder
                     if ($index > 0) {
                         $combined_output .= '<br><br>';
                     }
+                    // Add heading before each psalm
+                    $combined_output .= '<h4>' . htmlspecialchars($ref) . '</h4>';
                     $combined_output .= $psalm_text;
                 }
             }
