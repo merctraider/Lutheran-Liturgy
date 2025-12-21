@@ -231,11 +231,14 @@ abstract class ServiceOrder
             $selected_ids = [$selected_ids];
         }
 
-        // Filter collects by selected IDs
+        // Filter collects by selected IDs, preserving theme information
         $additional_collects = [];
         foreach ($collects_data['collects'] as $collect) {
             if (in_array((string)$collect['id'], $selected_ids)) {
-                $additional_collects[] = $collect['text'];
+                $additional_collects[] = [
+                    'theme' => $collect['theme'],
+                    'text' => $collect['text']
+                ];
             }
         }
 

@@ -36,7 +36,8 @@
     {{ endif }}
 
     {{ foreach additional_collects as collect }}
-    <p>{{ collect }}</p>
+    <h5>{{ collect.theme }}</h5>
+    <p>{{ collect.text }}</p>
     <p>℟: <strong>Amen.</strong></p>
     {{ endforeach }}
 
