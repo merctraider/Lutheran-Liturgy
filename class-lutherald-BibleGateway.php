@@ -20,7 +20,7 @@ class BibleGateway{
     }
 
     public static function get_verse($lookup){
-        if($lookup == null) return null; 
+        if($lookup == null) return null;
         $output = '';
         //Check if book belongs to the apocrypha
         if(self::is_apocrypha($lookup)){
@@ -29,19 +29,19 @@ class BibleGateway{
         } else {
             $ver = self::$version;
         }
-        
+
         $lookup = \urlencode($lookup);
-        $psalm = false; 
+        $psalm = false;
 
         if(strpos($lookup, 'Psalm') !== false){
-            $psalm = true; 
+            $psalm = true;
         }
 
-        
+
         $url = "http://www.biblegateway.com/passage/?search=$lookup&version=$ver";
         require_once  dirname(__FILE__) .'/simple_html_dom.php';
         $content = file_get_html($url);
-        
+
         $passage_html = $content->find('div.passage-text', 0);
         foreach($passage_html->find('p') as $verse){
             foreach($verse->find('sup') as $footnote){
@@ -53,25 +53,25 @@ class BibleGateway{
             } else {
                 $output .= $verse->plaintext;
             }
-            
+
         }
         return $output;
-        
-        return false;      
-        
+
+        return false;
+
     }
     
     public static function is_apocrypha($lookup){
-        
+
         foreach(self::$apocryphal_books as $book){
 
             if(\strpos($lookup, $book) !== false){
-                return true; 
+                return true;
             }
         }
-        
 
-        return false; 
+
+        return false;
     }
 
     public static function get_devotions($date){

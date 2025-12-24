@@ -185,18 +185,41 @@ abstract class ServiceOrder
     protected function getPsalmody()
     {
         $psalm_ref = $this->day_info['psalm'][$this->settings['order_of_service']] ?? null;
-        
+
+        // Format psalm reference for display (handle both string and array)
+        $psalm_display = $psalm_ref;
+        if (is_array($psalm_ref)) {
+            $psalm_display = implode(', ', $psalm_ref);
+        }
+
         return [
             'introit' => $this->day_info['introit'] ?? null,
-            'psalm' => $psalm_ref,
+            'psalm' => $psalm_display,
             'psalm_text' => $psalm_ref ? $this->getPsalmText($psalm_ref) : null,
         ];
     }
     
     protected function getPsalmText($psalm_ref)
     {
+        // Handle array of psalm references (e.g., Christmas Day has multiple psalms)
+        if (is_array($psalm_ref)) {
+            $combined_output = '';
+            foreach ($psalm_ref as $index => $ref) {
+                $psalm_text = $this->getReadingText($ref);
+                if ($psalm_text) {
+                    // Add spacing between multiple psalms
+                    if ($index > 0) {
+                        $combined_output .= '<br><br>';
+                    }
+                    // Add heading before each psalm
+                    $combined_output .= '<h4>' . htmlspecialchars($ref) . '</h4>';
+                    $combined_output .= $psalm_text;
+                }
+            }
+            return $combined_output;
+        }
 
-
+        // Handle single psalm reference (normal case)
         return $this->getReadingText($psalm_ref);
     }
 
