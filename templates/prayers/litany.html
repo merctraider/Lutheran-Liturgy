@@ -42,3 +42,18 @@
 <p>O Lord, <br><strong>Have mercy upon us.</strong></p>
 <p>O Christ, <br><strong>Have mercy upon us.</strong></p>
 <p><strong>Lord, have mercy upon us. Amen.</strong></p>
+
+
+<p><strong>Our Father who art in heaven; Hallowed be Thy name; Thy kingdom come; Thy will be done on earth as it is in heaven; Give us this day our daily bread; And forgive us our trespasses, as we forgive those who trespass against us; And lead us not into temptation; But deliver us from evil. Amen.</strong></p>
+    
+
+{{ if collect_of_day }}
+    <h4>Collect for the Day</h4>
+    <p>{{ collect_of_day }}</p>
+    <p>℟: <strong>Amen.</strong></p>
+    {{ endif }}
+
+    {{ foreach additional_collects as collect }}
+    <p>{{ collect }}</p>
+    <p>℟: <strong>Amen.</strong></p>
+    {{ endforeach }}
